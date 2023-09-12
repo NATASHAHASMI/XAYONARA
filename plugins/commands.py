@@ -61,13 +61,13 @@ async def start(client, message):
         current_time = datetime.now(pytz.timezone(TIMEZONE))
         curr_time = current_time.hour        
         if curr_time < 12:
-            gtxt = "ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ" 
+            gtxt = "<b>ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ ☕</b>" 
         elif curr_time < 15:
-            gtxt = "ɢᴏᴏᴅ ᴀғᴛᴇʀɴᴏᴏɴ" 
+            gtxt = "<b>ɢᴏᴏᴅ ᴀғᴛᴇʀɴᴏᴏɴ 😈</b>" 
         elif curr_time < 20:
-            gtxt = "ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ"
+            gtxt = "<b>ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ 🌇</b>"
         else:
-            gtxt = "good night 🥱"
+            gtxt = "<b>ɢᴏᴏᴅ ɴɪɢʜᴛ 🥱</b>"
         m=await message.reply_sticker("CAACAgIAAxkBAAEKRaVk_u5GkCDzoXBT0BsBIf45XCHddgACQhAAAjPFKUmQDtQRpypKgjAE") 
         await asyncio.sleep(1)
         await m.delete()
