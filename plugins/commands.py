@@ -62,9 +62,9 @@ async def start(client, message):
         curr_time = current_time.hour        
         if curr_time < 12:
             gtxt = "<b>ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ ☕</b>" 
-        elif curr_time < 18:
+        elif curr_time < 17:
             gtxt = "<b>ɢᴏᴏᴅ ᴀғᴛᴇʀɴᴏᴏɴ 😈</b>" 
-        elif curr_time < 20:
+        elif curr_time < 21:
             gtxt = "<b>ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ 🌇</b>"
         else:
             gtxt = "<b>ɢᴏᴏᴅ ɴɪɢʜᴛ 🥱</b>"
