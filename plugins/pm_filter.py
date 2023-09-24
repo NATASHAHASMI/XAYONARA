@@ -1351,7 +1351,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('⛓️ Cᴏɴɴᴇᴄᴛɪᴏɴ', callback_data='coct'),
             InlineKeyboardButton('💎 Exᴛʀᴀ Mᴏᴅs', callback_data='extra')
         ], [
-            InlineKeyboardButton('🏴‍☠️ Hᴏᴍᴇ', callback_data='restart'),
+            InlineKeyboardButton('🏴‍☠️ Hᴏᴍᴇ', callback_data='start'),
             InlineKeyboardButton('⏳ Sᴛᴀᴛᴜs', callback_data='stats')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
@@ -1370,7 +1370,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ', url=GRP_LNK),
             InlineKeyboardButton('Oᴡɴᴇʀ', url="https://t.me/xayoonara")
         ],[
-            InlineKeyboardButton('🏴‍☠️ Hᴏᴍᴇ', callback_data='restart'),
+            InlineKeyboardButton('🏴‍☠️ Hᴏᴍᴇ', callback_data='start'),
             InlineKeyboardButton('🚫 Cʟᴏsᴇ', callback_data='close_data')
         ]]
         await client.edit_message_media(
