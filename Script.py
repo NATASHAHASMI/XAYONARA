@@ -1,5 +1,5 @@
 class script(object):
-    START_TXT = """<b><i>ʜᴇʏ 😎.</i></b> <b>{}</b> {} <b><i>\nɪ ᴀᴍ ᴘᴏᴡᴇʀꜰᴜʟʟ ᴍᴏᴠɪᴇꜱ & ꜱᴇʀɪᴇꜱ ᴘʀᴏᴠɪᴅᴇʀ ʙᴏᴛ ᴊᴜꜱᴛ ꜱᴇɴᴅ ᴍᴇ ᴀɴʏ ᴍᴏᴠɪᴇꜱ & ꜱᴇʀɪᴇꜱ ɴᴀᴍᴇ.</i></b>
+    START_TXT = """<b><i>ʜᴇʏ 😎.</i></b> <b>{}</b> {gtxt} <b><i>\nɪ ᴀᴍ ᴘᴏᴡᴇʀꜰᴜʟʟ ᴍᴏᴠɪᴇꜱ & ꜱᴇʀɪᴇꜱ ᴘʀᴏᴠɪᴅᴇʀ ʙᴏᴛ ᴊᴜꜱᴛ ꜱᴇɴᴅ ᴍᴇ ᴀɴʏ ᴍᴏᴠɪᴇꜱ & ꜱᴇʀɪᴇꜱ ɴᴀᴍᴇ.</i></b>
 
 <spoiler><b>🔋 ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ - <a href='https://t.me/xayoonara'>xᴀʏᴏɴᴀʀᴀ</a></b></spoiler>"""
 
@@ -11,7 +11,7 @@ class script(object):
 Hᴇʀᴇ Is Tʜᴇ Hᴇʟᴘ Fᴏʀ Mʏ Cᴏᴍᴍᴀɴᴅs.</b>"""
 
     ABOUT_TXT = """<b>
- 🤖 ᴍʏ ɴᴀᴍᴇ : {}
+ 🤖 ᴍʏ ɴᴀᴍᴇ : {gtxt}
  👨‍💻 ᴄʀᴇᴀᴛᴏʀ : <a href='https://t.me/XAYOONARA'>𝑿𝑨𝒀𝑶𝑵𝑨𝑹𝑨</a>
  📚 ʟɪʙʀᴀʀʏ : <a href='https://docs.pyrogram.org/'>ᴘʏʀᴏɢʀᴀᴍ</a>
  📝 ʟᴀɴɢᴜᴀɢᴇ : <a href='https://www.python.org/download/releases/3.0/'>ᴘʏᴛʜᴏɴ 3</a>
