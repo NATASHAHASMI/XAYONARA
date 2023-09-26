@@ -1570,9 +1570,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
             )
             reply_markup = InlineKeyboardMarkup(btn)
             await query.message.edit_text(
-                text=(script.DISCLAIMER_TXT.format(query.from_user.mention),
-                reply_markup=reply_markup,
-                parse_mode=enums.ParseMode.HTML  
+            text=script.DISCLAIMER_TXT.format(query.from_user.mention, temp.U_NAME, temp.B_NAME),
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
             )
     elif query.data.startswith("setgs"):
         ident, set_type, status, grp_id = query.data.split("#")
