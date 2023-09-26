@@ -1281,7 +1281,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
     elif query.data == "sinfo":
         await query.answer(text=script.SINFO, show_alert=True)
 
-        elif query.data == "start":
+    elif query.data == "start":
         buttons = [[
                     InlineKeyboardButton('⤬ Jᴏɪɴ Oᴜʀ Mᴀɪɴ Gʀᴏᴜᴘ ⤬', url=f'https://t.me//MYFLiiX_2')
                 ],[
@@ -1299,7 +1299,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
             query.message.chat.id, 
             query.message.id, 
             InputMediaPhoto(random.choice(PICS))
-
         )
         await query.message.edit_text(
             text=script.GSTART_TXT.format(query.from_user.mention, gtxt, temp.U_NAME, temp.B_NAME),
