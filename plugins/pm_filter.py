@@ -1368,11 +1368,12 @@ async def cb_handler(client: Client, query: CallbackQuery):
         )
     elif query.data == "about":
         buttons = [[
+            InlineKeyboardButton('‼️ ᴅɪꜱᴄʟᴀɪᴍᴇʀ ‼️', callback_data='disclaimer')
+        ], [
             InlineKeyboardButton('Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ', url=GRP_LNK),
             InlineKeyboardButton('Oᴡɴᴇʀ', url="https://t.me/xayoonara")
         ],[
-            InlineKeyboardButton('🏴‍☠️ Hᴏᴍᴇ', callback_data='start'),
-            InlineKeyboardButton('🚫 Cʟᴏsᴇ', callback_data='close_data')
+            InlineKeyboardButton('🏴‍☠️ Hᴏᴍᴇ', callback_data='start')
         ]]
         await client.edit_message_media(
             query.message.chat.id, 
@@ -1558,10 +1559,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 reply_markup=reply_markup,
                 parse_mode=enums.ParseMode.HTML
             )
-    elif query.data == "tele":
+    elif query.data == "disclaimer":
             btn = [[
-                    InlineKeyboardButton("⟸ Bᴀᴄᴋ", callback_data="help"),
-                    InlineKeyboardButton("Cᴏɴᴛᴀᴄᴛ", url="telegram.me/xayoonara")
+                    InlineKeyboardButton("⟸ Bᴀᴄᴋ", callback_data="about")
                   ]]
             await client.edit_message_media(
                 query.message.chat.id, 
@@ -1570,9 +1570,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
             )
             reply_markup = InlineKeyboardMarkup(btn)
             await query.message.edit_text(
-                text=(script.TELE_TXT),
+                text=(script.DISCLAIMER_TXT),
                 reply_markup=reply_markup,
-                parse_mode=enums.ParseMode.HTML 
+                parse_mode=enums.ParseMode.HTML  
             )
     elif query.data.startswith("setgs"):
         ident, set_type, status, grp_id = query.data.split("#")
