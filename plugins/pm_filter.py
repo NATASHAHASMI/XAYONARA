@@ -1281,6 +1281,30 @@ async def cb_handler(client: Client, query: CallbackQuery):
     elif query.data == "sinfo":
         await query.answer(text=script.SINFO, show_alert=True)
 
+        elif query.data == "start":
+        buttons = [[
+                    InlineKeyboardButton('⤬ Jᴏɪɴ Oᴜʀ Mᴀɪɴ Gʀᴏᴜᴘ ⤬', url=f'https://t.me//MYFLiiX_2')
+                ],[
+                    InlineKeyboardButton('🗡️ ᴜᴘᴅᴀᴛᴇ 🗡️', url="https://t.me//MYFLiiX_2"),
+                    InlineKeyboardButton('✨ ᴍᴏᴠɪᴇ ɢʀᴏᴜᴘ ✨', url="https://t.me//MYFLiiX_2")
+                ],[
+                    InlineKeyboardButton('⚡ ʜᴇʟᴘ ⚡', callback_data='help'),
+                    InlineKeyboardButton('🤝 ᴀʙᴏᴜᴛ 🤝', callback_data='about')
+                ],[
+                    InlineKeyboardButton('💰 Pʀᴇᴍɪᴜᴍ Pʟᴀɴ 💸', callback_data="shortlink_info")
+                  ]]
+
+        reply_markup = InlineKeyboardMarkup(buttons)
+        await client.edit_message_media(
+            query.message.chat.id, 
+            query.message.id, 
+            InputMediaPhoto(random.choice(PICS))
+
+        )
+        await query.message.edit_text(
+            text=script.GSTART_TXT.format(query.from_user.mention, gtxt, temp.U_NAME, temp.B_NAME),
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
         )
         await query.answer(MSG_ALRT)
 
