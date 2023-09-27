@@ -1315,7 +1315,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
-        m=await query.message.reply(sticker="CAACAgUAAxkBAAEKHAJk504563prYQMfO9NO51-p7xo1VAACgAMAAuMV0FVUQzIP1OspYjAE")
+        m=await query.message.reply_sticker(sticker="CAACAgUAAxkBAAEKHAJk504563prYQMfO9NO51-p7xo1VAACgAMAAuMV0FVUQzIP1OspYjAE")
         await asyncio.sleep(3)
         await m.delete()
 
