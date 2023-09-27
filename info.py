@@ -60,7 +60,7 @@ GRP_LNK = environ.get('GRP_LNK', 'https://t.me/MYFLIIX_2')
 CHNL_LNK = environ.get('CHNL_LNK', 'https://t.me/MYFLiiX')
 TUTORIAL = environ.get('TUTORIAL', 'https://t.me/MYFLiiX/774')
 IS_TUTORIAL = bool(environ.get('IS_TUTORIAL', True))
-MSG_ALRT = environ.get('MSG_ALRT', 'Hello Nanbha and Nanbis ❤️')
+MSG_ALRT = environ.get('MSG_ALRT', '🔋 ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ - xᴀʏᴏɴᴀʀᴀ')
 LOG_CHANNEL = int(environ.get('LOG_CHANNEL', ' -1001859057505'))
 SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'myfliix')
 P_TTI_SHOW_OFF = is_enabled((environ.get('P_TTI_SHOW_OFF', "False")), False)
@@ -80,9 +80,9 @@ MELCOW_NEW_USERS = is_enabled((environ.get('MELCOW_NEW_USERS', "True")), True)
 PROTECT_CONTENT = is_enabled((environ.get('PROTECT_CONTENT', "False")), False)
 PUBLIC_FILE_STORE = is_enabled((environ.get('PUBLIC_FILE_STORE', "True")), True)
 
-LANGUAGES = ["malayalam", "mal", "tamil", "tam" ,"english", "eng", "hindi", "hin", "telugu", "tel", "kannada", "kan"]
+LANGUAGES = ["Malyalam", "Mal", "Tamil", "Tam" ,"English", "Eng", "Hindi", "Hin", "Telgu", "Tel", "Kannada", "Kan"]
 
-SEASONS = ["season 1" , "season 2" , "season 3" , "season 4", "season 5" , "season 6" , "season 7" , "season 8" , "season 9" , "season 10"]
+SEASONS = ["SEASON 1" , "SEASON 2" , "SEASON 3" , "SEASON 4", "SEASON 5" , "SEASON 6" , "SEASON 7" , "SEASON 8" , "SEASON 9" , "SEASON 10"]
 
 
 
