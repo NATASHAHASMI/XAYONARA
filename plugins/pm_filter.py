@@ -1295,7 +1295,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                   ]]
 
         reply_markup = InlineKeyboardMarkup(buttons)
-              current_time = datetime.now(pytz.timezone(TIMEZONE))
+        current_time = datetime.now(pytz.timezone(TIMEZONE))
         curr_time = current_time.hour        
         if curr_time < 12:
             gtxt = "<b>ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ ☕</b>" 
