@@ -172,7 +172,7 @@ async def start(client, message):
                                 InlineKeyboardButton('⚔️ ꜱᴜᴘᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ ⚔️', url=f'https://t.me/MYFLiiX_2'),
                             ],
                             [
-                                InlineKeyboardButton('🚀 ꜰᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ / ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ 🖥️', callback_data=f'generate_stream_link:{file_id}') #Don't change anything without contacting me @LazyDeveloperr
+                                InlineKeyboardButton("🚀 ꜰᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ 🚀", url=lazy_download) #Don't change anything without contacting me @LazyDeveloperr
                             ]
                         ]
                     )
@@ -190,7 +190,7 @@ async def start(client, message):
                          [
                           InlineKeyboardButton('⚔️ ꜱᴜᴘᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ ⚔️', url=f'https://t.me/MYFLiiX_2'),
                          ],[ 
-                            InlineKeyboardButton('🚀 ꜰᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ / ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ 🖥️', callback_data=f'generate_stream_link:{file_id}') #Don't change anything without contacting me @LazyDeveloperr
+                            InlineKeyboardButton("🚀 ꜰᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ 🚀", url=lazy_download) #Don't change anything without contacting me @LazyDeveloperr
                             ]
                         ]
                     )
@@ -347,7 +347,7 @@ async def start(client, message):
                       InlineKeyboardButton('⚔️ ꜱᴜᴘᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ ⚔️', url=f'https://t.me/MYFLiiX_2'),
                      ],
                      [
-                        InlineKeyboardButton('🚀 ꜰᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ / ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ 🖥️', callback_data=f'generate_stream_link:{file_id}') #Don't change anything without contacting me @LazyDeveloperr
+                        InlineKeyboardButton("🚀 ꜰᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ 🚀", url=lazy_download) #Don't change anything without contacting me @LazyDeveloperr
 
                      ]
                     ]
@@ -410,7 +410,7 @@ async def start(client, message):
                       InlineKeyboardButton('⚔️ ꜱᴜᴘᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ ⚔️', url=f'https://t.me/MYFLiiX_2'),
                      ],
                      [
-                        InlineKeyboardButton('🚀 ꜰᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ / ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ 🖥️', callback_data=f'generate_stream_link:{file_id}') #Don't change anything without contacting me @LazyDeveloperr
+                        InlineKeyboardButton("🚀 ꜰᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ 🚀", url=lazy_download) #Don't change anything without contacting me @LazyDeveloperr
                      ]
                     ]
                 )
@@ -470,7 +470,7 @@ async def start(client, message):
               InlineKeyboardButton('⚔️ ꜱᴜᴘᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ ⚔️', url=f'https://t.me/MYFLiiX_2'),
              ],
              [
-              InlineKeyboardButton('🚀 ꜰᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ / ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ 🖥️', callback_data=f'generate_stream_link:{file_id}') #Don't change anything without contacting me @LazyDeveloperr
+              InlineKeyboardButton("🚀 ꜰᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ 🚀", url=lazy_download) #Don't change anything without contacting me @LazyDeveloperr
              ]
             ]
         )
