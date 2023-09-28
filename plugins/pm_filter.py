@@ -1308,8 +1308,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
-        m=await query.message.reply_sticker(sticker="CAACAgQAAxkBAAEKaAdlFWeRtYQgKh6nOEx2geTK6swLnAACmwIAAuHFEyUWCNAEfNs5hzAE")
-        await asyncio.sleep(3)
+        m=await query.message.reply_sticker(sticker="CAACAgUAAxkBAAEKaDhlFYIZMDBz9T4D31AqVKi_CFjBQAACMAkAAu27qVSWPRdiIgvqqjAE")
+        await asyncio.sleep(1)
         await m.delete()
 
     elif query.data == "filters":
@@ -1371,6 +1371,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
+        m=await query.message.reply_sticker(sticker="CAACAgUAAxkBAAEKaDZlFYHa-SnwXVCLJcQ7cP07ijf2XAACeQsAAhIxsVRmXq7T9PhtUjAE")
+        await asyncio.sleep(1)
+        await m.delete()
     elif query.data == "about":
         buttons = [[
             InlineKeyboardButton('‼️ ᴅɪꜱᴄʟᴀɪᴍᴇʀ ‼️', callback_data='disclaimer')
@@ -1392,7 +1395,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             parse_mode=enums.ParseMode.HTML
         )
         m=await query.message.reply_sticker(sticker="CAACAgIAAxkBAAEKaAVlFWU-rsx8dxaTuiBtT3Iu9JOVfgACdhEAAsMAASlJLbkjGWa6DogwBA")
-        await asyncio.sleep(3)
+        await asyncio.sleep(1)
         await m.delete()
         
     elif query.data == "manuelfilter":
@@ -1471,6 +1474,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
+        m=await query.message.reply_sticker(sticker="CAACAgUAAxkBAAEKaDplFYL1gGELRfytVVtSQebIWeKEcAACrgkAAi-NsVR8MC45RpFmQzAE")
+        await asyncio.sleep(1)
+        await m.delete()
     
     elif query.data == "extra":
         buttons = [[
@@ -1504,6 +1510,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
+        m=await query.message.reply_sticker(sticker="CAACAgUAAxkBAAEKaEhlFYPz4BM8qMJKmV8X3k-QqjIDGAAC3QsAAh2GsFTkzy8qCOUMzjAE")
+        await asyncio.sleep(1)
+        await m.delete()
    
     elif query.data == "stats":
         buttons = [[
@@ -1587,8 +1596,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
             )
-            m=await query.message.reply_sticker(sticker="CAACAgIAAxkBAAEKaAVlFWU-rsx8dxaTuiBtT3Iu9JOVfgACdhEAAsMAASlJLbkjGWa6DogwBA")
-            await asyncio.sleep(3)
+            m=await query.message.reply_sticker(sticker="CAACAgQAAxkBAAEKG-Nk50URpkgyBkQ2iBpUVnnZqC7GpwACbg8AAuHqsVDaMQeY6CcRojAE")
+            await asyncio.sleep(1)
             await m.delete()
 
     elif query.data.startswith("setgs"):
