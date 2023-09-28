@@ -1240,13 +1240,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             user_id = query.from_user.id
             username =  query.from_user.mention 
 
-            log_msg = await client.send_cached_media(
-                chat_id=LOG_CHANNEL,
-                file_id=file_id,
             )
-            fileName = {quote_plus(get_name(log_msg))}
-            lazy_stream = f"{URL}watch/{str(log_msg.id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
-            lazy_download = f"{URL}{str(log_msg.id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
 
             xo = await query.message.reply_text(f'🔐')
             await asyncio.sleep(1)
@@ -1308,7 +1302,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
-        m=await query.message.reply_sticker(sticker="CAACAgUAAxkBAAEKHAJk504563prYQMfO9NO51-p7xo1VAACgAMAAuMV0FVUQzIP1OspYjAE")
+        m=await query.message.reply_sticker(sticker="CAACAgQAAxkBAAEKaAdlFWeRtYQgKh6nOEx2geTK6swLnAACmwIAAuHFEyUWCNAEfNs5hzAE")
         await asyncio.sleep(3)
         await m.delete()
 
@@ -1391,6 +1385,10 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
+        m=await query.message.reply_sticker(sticker="CAACAgIAAxkBAAEKaAVlFWU-rsx8dxaTuiBtT3Iu9JOVfgACdhEAAsMAASlJLbkjGWa6DogwBA")
+        await asyncio.sleep(3)
+        await m.delete()
+        
     elif query.data == "manuelfilter":
         buttons = [[
             InlineKeyboardButton('⟸ Bᴀᴄᴋ', callback_data='filters'),
@@ -1548,6 +1546,10 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
+        m=await query.message.reply_sticker(sticker="CAACAgUAAxkBAAEKZ_1lFWDa_-cFVF94oDhlFc61KynwegACmgADyJRkFCxl4eFc7yVqMAQ")
+        await asyncio.sleep(1)
+        await m.delete()
+        
     elif query.data == "shortlink_info":
             btn = [[
             InlineKeyboardButton("⟸ Bᴀᴄᴋ", callback_data="start"),
@@ -1579,6 +1581,10 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
             )
+        m=await query.message.reply_sticker(sticker="CAACAgIAAxkBAAEKaAVlFWU-rsx8dxaTuiBtT3Iu9JOVfgACdhEAAsMAASlJLbkjGWa6DogwBA")
+        await asyncio.sleep(3)
+        await m.delete()
+
     elif query.data.startswith("setgs"):
         ident, set_type, status, grp_id = query.data.split("#")
         grpid = await active_connection(str(query.from_user.id))
