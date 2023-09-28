@@ -1579,9 +1579,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
             )
-        m=await query.message.reply_sticker(sticker="CAACAgIAAxkBAAEKaAVlFWU-rsx8dxaTuiBtT3Iu9JOVfgACdhEAAsMAASlJLbkjGWa6DogwBA")
-        await asyncio.sleep(3)
-        await m.delete()
+            m=await query.message.reply_sticker(sticker="CAACAgIAAxkBAAEKaAVlFWU-rsx8dxaTuiBtT3Iu9JOVfgACdhEAAsMAASlJLbkjGWa6DogwBA")
+            await asyncio.sleep(3)
+            await m.delete()
 
     elif query.data.startswith("setgs"):
         ident, set_type, status, grp_id = query.data.split("#")
