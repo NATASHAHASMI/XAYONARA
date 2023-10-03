@@ -473,7 +473,7 @@ async def filter_seasons_cb_handler(client: Client, query: CallbackQuery):
     search = FRESH.get(key)
     search = search.replace("_", " ")
     sea = ""
-    season_search = ["144p","240p", "360p", "480p", "720p", "1080p", "2160p", "clean Audio", "HD", "preDVD", "season 01","season 02","season 03","season 04","season 05","season 06","season 07","season 08","season 09","season 10", "season 1","season 2","season 3","season 4","season 5","season 6","season 7","season 8","season 9"]
+    season_search = ["144p","240p", "360p", "480p", "720p", "1080p", "2160p", "clean Audio", "HD", "preDVD", "144p","240p","360p","480p","720p","1080p","2160p","clean Audio","HD","preDVD", "season 1","season 2","season 3","season 4","season 5","season 6","season 7","season 8","season 9"]
     for x in range (len(season_search)):
         if season_search[x] in search:
             sea = season_search[x]
