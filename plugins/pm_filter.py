@@ -129,7 +129,7 @@ async def next_page(bot, query):
         btn.insert(0, 
             [
                 InlineKeyboardButton("ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
-                InlineKeyboardButton("Sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
+                InlineKeyboardButton("! Qᴜᴀʟɪᴛʏ !",  callback_data=f"seasons#{key}")
             ]
         )
         btn.insert(0, [
@@ -141,7 +141,7 @@ async def next_page(bot, query):
         btn.insert(0, 
             [
                 InlineKeyboardButton("ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
-                InlineKeyboardButton("Sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
+                InlineKeyboardButton("! Qᴜᴀʟɪᴛʏ !",  callback_data=f"seasons#{key}")
             ]
         )
         btn.insert(0, [
@@ -356,7 +356,7 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
         btn.insert(0, 
             [
                 InlineKeyboardButton("ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
-                InlineKeyboardButton("Sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
+                InlineKeyboardButton("! Qᴜᴀʟɪᴛʏ !",  callback_data=f"seasons#{key}")
             ]
         )
         btn.insert(0, [
@@ -368,7 +368,7 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
         btn.insert(0, 
             [
                 InlineKeyboardButton("ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
-                InlineKeyboardButton("Sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
+                InlineKeyboardButton("! Qᴜᴀʟɪᴛʏ !",  callback_data=f"seasons#{key}")
             ]
         )
         btn.insert(0, [
@@ -455,7 +455,7 @@ async def seasons_cb_handler(client: Client, query: CallbackQuery):
         0,
         [
             InlineKeyboardButton(
-                text="👇 𝚂𝙴𝙻𝙴𝙲𝚃 𝚂𝙴𝙰𝚂𝙾𝙽 👇", callback_data="ident"
+                text="👇 ꜱᴇʟᴇᴄᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ Qᴜᴀʟɪᴛʏ 👇", callback_data="ident"
             )
         ],
     )
@@ -473,7 +473,7 @@ async def filter_seasons_cb_handler(client: Client, query: CallbackQuery):
     search = FRESH.get(key)
     search = search.replace("_", " ")
     sea = ""
-    season_search = ["s01","s02", "s03", "s04", "s05", "s06", "s07", "s08", "s09", "s10", "season 01","season 02","season 03","season 04","season 05","season 06","season 07","season 08","season 09","season 10", "season 1","season 2","season 3","season 4","season 5","season 6","season 7","season 8","season 9"]
+    season_search = ["144p","240p", "360p", "480p", "720p", "1080p", "2160p", "clean Audio", "HD", "preDVD", "season 01","season 02","season 03","season 04","season 05","season 06","season 07","season 08","season 09","season 10", "season 1","season 2","season 3","season 4","season 5","season 6","season 7","season 8","season 9"]
     for x in range (len(season_search)):
         if season_search[x] in search:
             sea = season_search[x]
