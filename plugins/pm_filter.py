@@ -1696,7 +1696,7 @@ async def auto_filter(client, msg, spoll=False):
             return
         if len(message.text) < 100:
             search = message.text
-            m=await message.reply_sticker="CAACAgQAAxkBAAEKOkhk9yRcCGGpPDc-D9bxkSTjx2XiDAAC7g0AAn2mwVC98nx2ic38GjAE",   
+            m=await message.reply_sticker=("CAACAgQAAxkBAAEKOkhk9yRcCGGpPDc-D9bxkSTjx2XiDAAC7g0AAn2mwVC98nx2ic38GjAE"),   
             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⚡ 𝑼𝑷𝑫𝑨𝑻𝑬𝑺", url=f"https://t.me/MYFLiiX")]])
             search = search.lower()
             find = search.split(" ")
@@ -1726,7 +1726,7 @@ async def auto_filter(client, msg, spoll=False):
     else:
         message = msg.message.reply_to_message  # msg will be callback query
         search, files, offset, total_results = spoll
-        m=await message.reply_sticker="CAACAgQAAxkBAAEKOkhk9yRcCGGpPDc-D9bxkSTjx2XiDAAC7g0AAn2mwVC98nx2ic38GjAE",   
+        m=await message.reply_sticker=("CAACAgQAAxkBAAEKOkhk9yRcCGGpPDc-D9bxkSTjx2XiDAAC7g0AAn2mwVC98nx2ic38GjAE"),   
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⚡ 𝑼𝑷𝑫𝑨𝑻𝑬𝑺", url=f"https://t.me/MYFLiiX")]])
         settings = await get_settings(message.chat.id)
         await msg.message.delete()
