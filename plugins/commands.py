@@ -68,9 +68,16 @@ async def start(client, message):
             gtxt = "<b>ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ 🌇</b>"
         else:
             gtxt = "<b>ɢᴏᴏᴅ ɴɪɢʜᴛ 🥱</b>"
-        m=await message.reply_sticker("CAACAgIAAxkBAAEKRaVk_u5GkCDzoXBT0BsBIf45XCHddgACQhAAAjPFKUmQDtQRpypKgjAE") 
-        await asyncio.sleep(1)
-        await m.delete()
+        PM_START_TEX.format(usr.first_name), parse_mode=ParseMode.MARKDOWN
+            )
+            time.sleep(0.4)
+            lol.edit_text("🎊")
+            time.sleep(0.5)
+            lol.edit_text("⚡")
+            time.sleep(0.3)
+            lol.edit_text("ꜱᴛᴀʀᴛɪɴɢ... ")
+            time.sleep(0.4)
+            lol.delete()
         await message.reply_photo(
             photo=random.choice(PICS),
             caption=script.START_TXT.format(message.from_user.mention, gtxt, temp.U_NAME, temp.B_NAME),
