@@ -69,7 +69,6 @@ async def start(client, message):
         else:
             gtxt = "<b>ɢᴏᴏᴅ ɴɪɢʜᴛ 🥱</b>"
         PM_START_TEX.format(usr.first_name), parse_mode=ParseMode.MARKDOWN
-            )
             time.sleep(0.4)
             lol.edit_text("🎊")
             time.sleep(0.5)
