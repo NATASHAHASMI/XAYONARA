@@ -280,7 +280,9 @@ special Thanks To ❤️ Developers -
 -Dev 1 [Owner of this bot ]<a href='https://t.me/XAYOONARA'>XAYONARA</a>
 """
 
-
+PM_START_TEX = """
+ʜᴇʟʟᴏ `{}`, ʜᴏᴡ ᴀʀᴇ ʏᴏᴜ \nᴡᴀɪᴛ ᴀ ᴍᴏᴍᴇɴᴛ ʙʀᴏ . . . 
+"""
 
 
 
