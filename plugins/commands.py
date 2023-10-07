@@ -68,7 +68,9 @@ async def start(client, message):
             gtxt = "<b>ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ 🌇</b>"
         else:
             gtxt = "<b>ɢᴏᴏᴅ ɴɪɢʜᴛ 🥱</b>"
-        m=await message.reply_text=script.PM_START_TEX.format(query.from_user.mention)
+        m=await query.message.reply_text(
+            text=script.PM_START_TEX.format(query.from_user.mention),
+        )
         await asyncio.sleep(0.4)
         await m.edit_text("🎊")
         await asyncio.sleep(0.5)
