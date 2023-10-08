@@ -68,7 +68,7 @@ async def start(client, message):
             gtxt = "<b>ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ 🌇</b>"
         else:
             gtxt = "<b>ɢᴏᴏᴅ ɴɪɢʜᴛ 🥱</b>"
-        m=await message.reply_text(f"<i>ʜᴇʟʟᴏ <b>{mention}</b>. ʜᴏᴡ ᴀʀᴇ ʏᴏᴜ \nᴡᴀɪᴛ ᴀ ᴍᴏᴍᴇɴᴛ ʙʀᴏ . . .</i>")
+        m=await message.reply_text(f"<i>ʜᴇʟʟᴏ <b>{}</b>. ʜᴏᴡ ᴀʀᴇ ʏᴏᴜ \nᴡᴀɪᴛ ᴀ ᴍᴏᴍᴇɴᴛ ʙʀᴏ . . .</i>")
         await asyncio.sleep(0.4)
         await m.edit_text("🎊")
         await asyncio.sleep(0.5)
@@ -80,6 +80,9 @@ async def start(client, message):
         await asyncio.sleep(0.2)
         await m.edit_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ...</i></b>")
         await asyncio.sleep(0.4)
+        await m.delete()
+        m=await message.reply_sticker("CAACAgQAAxkBAAEKG-Nk50URpkgyBkQ2iBpUVnnZqC7GpwACbg8AAuHqsVDaMQeY6CcRojAE")
+        await asyncio.sleep(0.8)
         await m.delete()
         await message.reply_photo(
             photo=random.choice(PICS),
