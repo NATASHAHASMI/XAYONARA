@@ -79,7 +79,8 @@ async def start(client, message):
         await m.delete()
         m=await message.reply_sticker("CAACAgUAAxkBAAEKeqFlIphZuJ0sfe_iswFpi2MxruRpxgACcw8AAp97GFU7EAeWuhSBsDAE")
         await asyncio.sleep(2)
-        await m.edit_sticker("CAACAgUAAxkBAAEKaDhlFYIZMDBz9T4D31AqVKi_CFjBQAACMAkAAu27qVSWPRdiIgvqqjAE")
+        await m.delete()
+        m=await message.reply_sticker("CAACAgUAAxkBAAEKaDhlFYIZMDBz9T4D31AqVKi_CFjBQAACMAkAAu27qVSWPRdiIgvqqjAE")
         await asyncio.sleep(1)
         await m.delete()
         await message.reply_photo(
