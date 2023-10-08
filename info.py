@@ -82,7 +82,7 @@ PUBLIC_FILE_STORE = is_enabled((environ.get('PUBLIC_FILE_STORE', "True")), True)
 
 LANGUAGES = ["Malyalam", "Mal", "Tamil", "Tam" ,"English", "Eng", "Hindi", "Hin", "Telgu", "Tel", "Kannada", "Kan"]
 
-QUALITY = ["480p" , "720p" , "1080p" , "2160p"]
+QUALITIES = ["480p" , "720p" , "1080p" , "2160p"]
 
 SEASONS = ["SEASON 1" , "SEASON 2" , "SEASON 3" , "SEASON 4", "SEASON 5" , "SEASON 6" , "SEASON 7" , "SEASON 8" , "SEASON 9" , "SEASON 10"]
 
