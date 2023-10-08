@@ -35,6 +35,21 @@ async def start(client, message):
                     InlineKeyboardButton('⚔️ ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ ⚔️', url="https://t.me/MYFLiiX")
                   ]]
         reply_markup = InlineKeyboardMarkup(buttons)
+        m=await message.reply_text("<i><b>ʜᴇʟʟᴏ. ʜᴏᴡ ᴀʀᴇ ʏᴏᴜ \nᴡᴀɪᴛ ᴀ ᴍᴏᴍᴇɴᴛ ʙʀᴏ . . .</b></i>")
+        await asyncio.sleep(0.4)
+        await m.edit_text("🎊")
+        await asyncio.sleep(0.5)
+        await m.edit_text("⚡")
+        await asyncio.sleep(0.4)
+        await m.edit_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ...</i></b>")
+        await asyncio.sleep(0.4)
+        await m.delete()
+        m=await message.reply_sticker("CAACAgUAAxkBAAEKeqFlIphZuJ0sfe_iswFpi2MxruRpxgACcw8AAp97GFU7EAeWuhSBsDAE")
+        await asyncio.sleep(2)
+        await m.delete()
+        m=await message.reply_sticker("CAACAgUAAxkBAAEKaDhlFYIZMDBz9T4D31AqVKi_CFjBQAACMAkAAu27qVSWPRdiIgvqqjAE")
+        await asyncio.sleep(1)
+        await m.delete()
         await message.reply(script.GSTART_TXT.format(message.from_user.mention if message.from_user else message.chat.title, temp.U_NAME, temp.B_NAME), reply_markup=reply_markup, disable_web_page_preview=True)
         await asyncio.sleep(2) # 😢 https://github.com/EvamariaTG/EvaMaria/blob/master/plugins/p_ttishow.py#L17 😬 wait a bit, before checking.
         if not await db.get_chat(message.chat.id):
