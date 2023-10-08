@@ -68,7 +68,7 @@ async def start(client, message):
             gtxt = "<b>ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ 🌇</b>"
         else:
             gtxt = "<b>ɢᴏᴏᴅ ɴɪɢʜᴛ 🥱</b>"
-        m=await message.reply_text("<i>ʜᴇʟʟᴏ <b>{}</b>. ʜᴏᴡ ᴀʀᴇ ʏᴏᴜ \nᴡᴀɪᴛ ᴀ ᴍᴏᴍᴇɴᴛ ʙʀᴏ . . .</i>")
+        m=await message.reply_text("<i><b>ʜᴇʟʟᴏ. ʜᴏᴡ ᴀʀᴇ ʏᴏᴜ \nᴡᴀɪᴛ ᴀ ᴍᴏᴍᴇɴᴛ ʙʀᴏ . . .</b></i>")
         await asyncio.sleep(0.4)
         await m.edit_text("🎊")
         await asyncio.sleep(0.5)
@@ -77,7 +77,11 @@ async def start(client, message):
         await m.edit_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ...</i></b>")
         await asyncio.sleep(0.4)
         await m.delete()
-        await message.reply_sticker("CAACAgUAAxkBAAEKeoBlIpCgXrMIqXzwNeN5OYptU3u_bgACkA0AAsLEGVWBSddtScW1IjAE")
+        m=await message.reply_sticker("CAACAgUAAxkBAAEKeqFlIphZuJ0sfe_iswFpi2MxruRpxgACcw8AAp97GFU7EAeWuhSBsDAE")
+        await asyncio.sleep(2)
+        await m.edit_sticker("CAACAgUAAxkBAAEKaDhlFYIZMDBz9T4D31AqVKi_CFjBQAACMAkAAu27qVSWPRdiIgvqqjAE")
+        await asyncio.sleep(1)
+        await m.delete()
         await message.reply_photo(
             photo=random.choice(PICS),
             caption=script.START_TXT.format(message.from_user.mention, gtxt, temp.U_NAME, temp.B_NAME),
