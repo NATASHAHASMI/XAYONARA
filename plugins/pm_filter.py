@@ -2103,7 +2103,7 @@ async def auto_filter(client, msg, spoll=False):
             InlineKeyboardButton("Yᴇᴀʀ", callback_data=f"years#{key}"),
             InlineKeyboardButton("𝐒𝐞𝐧𝐝 𝐀𝐥𝐥", callback_data=f"sendfiles#{key}")
         ])
-         btn.insert(0, [
+        btn.insert(0, [
             InlineKeyboardButton(f'☟ 𝗦𝗘𝗟𝗘𝗖𝗧 𝗢𝗣𝗧𝗜𝗢𝗡𝗦 ☟', 'select')
             ]
         )
