@@ -31,7 +31,7 @@ ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ
 CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '').split()]
 auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '').split()]
 AUTH_USERS = (auth_users + ADMINS) if auth_users else []
-PREMIUM_USER = [int(user) if id_pattern.search(user) else user for user in environ.get('PREMIUM_USER', '5837099475').split()]
+PREMIUM_USER = [int(user) if id_pattern.search(user) else user for user in environ.get('PREMIUM_USER', '1843754190').split()]
 auth_channel = environ.get('AUTH_CHANNEL')
 auth_grp = environ.get('AUTH_GROUP')
 AUTH_CHANNEL = int(auth_channel) if auth_channel and id_pattern.search(auth_channel) else None
@@ -82,7 +82,7 @@ PUBLIC_FILE_STORE = is_enabled((environ.get('PUBLIC_FILE_STORE', "True")), True)
 
 LANGUAGES = ["Malyalam", "Mal", "Tamil", "Tam" ,"English", "Eng", "Hindi", "Hin", "Telgu", "Tel", "Kannada", "Kan"]
 
-QUALITIES = ["480p" , "720p" , "1080p" , "2160p"]
+QUALITIES = ["PreDVD" , "S Print" , "480p" , "720p" , "1080p" , "2160p"]
 
 SEASONS = ["SEASON 1" , "SEASON 2" , "SEASON 3" , "SEASON 4", "SEASON 5" , "SEASON 6" , "SEASON 7" , "SEASON 8" , "SEASON 9" , "SEASON 10"]
 
