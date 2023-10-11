@@ -114,7 +114,7 @@ async def start(client, message):
             return
         btn = [
             [
-                InlineKeyboardButton("❆ Jᴏɪɴ Oᴜʀ Cʜᴀɴɴᴇʟ ❆", url=invite_link.invite_link)
+                InlineKeyboardButton("🍿 Jᴏɪɴ Oᴜʀ Cʜᴀɴɴᴇʟ 🍿", url=invite_link.invite_link)
             ],[
                 InlineKeyboardButton('㋡ Wʜʏ l'ᴍ Jᴏɪɴɪɴɢ ❓', callback_data='sinfo')
             ]
