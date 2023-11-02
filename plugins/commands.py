@@ -319,7 +319,7 @@ async def start(client, message):
         files_ = await get_file_details(file_id)
         files = files_[0]
         g = await get_shortlink(chat_id, f"https://telegram.me/{temp.U_NAME}?start=file_{file_id}")
-        k = await client.send_message(chat_id=user,text=f" <b><i>ʜᴇʏ {user} {gtxt}</i></b> <b>📕Nᴀᴍᴇ ➠ : <code>{files.file_name}</code> \n\n🔗Sɪᴢᴇ ➠ : {get_size(files.file_size)}\n\n📂Fɪʟᴇ ʟɪɴᴋ ➠ : {g}\n\n<i>Note: This message is deleted in 20 mins to avoid copyrights. Save the link to Somewhere else</i></b>", 
+        k = await client.send_message(chat_id=user,text=f" <b><i>ʜᴇʏ {user} {gtxt}</i></b> <b>📕Nᴀᴍᴇ ➠ : <code>{files.file_name}</code> \n\n🔗Sɪᴢᴇ ➠ : {get_size(files.file_size)}\n\n📂Fɪʟᴇ ʟɪɴᴋ ➠ : {g}\n\n<i>Note: This message is deleted in 20 mins to avoid copyrights. Save the link to Somewhere else</i></b>"
         current_time = datetime.now(pytz.timezone(TIMEZONE))      
         if current_time.hour < 12:
             gtxt = "<b>ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ ☕</b>" 
@@ -328,7 +328,7 @@ async def start(client, message):
         elif current_time.hour < 21:
             gtxt = "<b>ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ 🌇</b>"
         else:
-            gtxt = "<b>ɢᴏᴏᴅ ɴɪɢʜᴛ 🥱</b>"
+            gtxt = "<b>ɢᴏᴏᴅ ɴɪɢʜᴛ 🥱</b>",
                                       reply_markup=InlineKeyboardMarkup(
                 [
                     [
@@ -409,7 +409,7 @@ async def start(client, message):
             files_ = await get_file_details(file_id)
             files = files_[0]
             g = await get_shortlink(chat_id, f"https://telegram.me/{temp.U_NAME}?start=file_{file_id}")
-            k = await client.send_message(chat_id=user,text=f" <b><i>ʜᴇʏ {user} {gtxt}</i></b> <b>📕Nᴀᴍᴇ ➠ : <code>{files.file_name}</code> \n\n🔗Sɪᴢᴇ ➠ : {get_size(files.file_size)}\n\n📂Fɪʟᴇ ʟɪɴᴋ ➠ : {g}\n\n<i>Note: This message is deleted in 20 mins to avoid copyrights. Save the link to Somewhere else</i></b>", 
+            k = await client.send_message(chat_id=user,text=f" <b><i>ʜᴇʏ {user} {gtxt}</i></b> <b>📕Nᴀᴍᴇ ➠ : <code>{files.file_name}</code> \n\n🔗Sɪᴢᴇ ➠ : {get_size(files.file_size)}\n\n📂Fɪʟᴇ ʟɪɴᴋ ➠ : {g}\n\n<i>Note: This message is deleted in 20 mins to avoid copyrights. Save the link to Somewhere else</i></b>"
         current_time = datetime.now(pytz.timezone(TIMEZONE))       
         if current_time.hour < 12:
             gtxt = "<b>ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ ☕</b>" 
@@ -418,7 +418,7 @@ async def start(client, message):
         elif current_time.hour < 21:
             gtxt = "<b>ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ 🌇</b>"
         else:
-            gtxt = "<b>ɢᴏᴏᴅ ɴɪɢʜᴛ 🥱</b>"
+            gtxt = "<b>ɢᴏᴏᴅ ɴɪɢʜᴛ 🥱</b>",
                                       reply_markup=InlineKeyboardMarkup(
                 [
                         [
