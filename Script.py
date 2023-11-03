@@ -96,11 +96,11 @@ Cᴏᴍᴍᴀɴᴅs Aɴᴅ Usᴀɢᴇ:
 
     
     STATUS_TXT = """<b><i>ʜᴇʏ</i></b> <b>{}</b> <b><i>{}.</i></b>\n\n
-<spoiler><b>★ Tᴏᴛᴀʟ Fɪʟᴇs: <code>1{}</code>
+<b>★ Tᴏᴛᴀʟ Fɪʟᴇs: <code>1{}</code>
 ★ Tᴏᴛᴀʟ Usᴇʀs: <code>{}</code>
 ★ Tᴏᴛᴀʟ Cʜᴀᴛs: <code>{}</code>
 ★ Usᴇᴅ Sᴛᴏʀᴀɢᴇ: <code>{}</code>
-★ Fʀᴇᴇ Sᴛᴏʀᴀɢᴇ: <code>{}</code></b></spoiler>"""
+★ Fʀᴇᴇ Sᴛᴏʀᴀɢᴇ: <code>{}</code></b>"""
 
     LOG_TEXT_G = """#NewGroup
 Gʀᴏᴜᴘ = {}(<code>{}</code>)
