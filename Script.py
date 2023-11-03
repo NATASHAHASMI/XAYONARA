@@ -95,7 +95,7 @@ Cᴏᴍᴍᴀɴᴅs Aɴᴅ Usᴀɢᴇ:
 • /search  - <code>ɢᴇᴛ ᴛʜᴇ ꜰɪʟᴍ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ ꜰʀᴏᴍ ᴠᴀʀɪᴏᴜꜱ ꜱᴏᴜʀᴄᴇꜱ.</code>"""
 
     
-    STATUS_TXT = """<b><i>ʜᴇʏ</i></b> <b>{}</b> <b><i>{}.</i></b>\n\n
+    STATUS_TXT = """<b><i>ʜᴇʏ</i></b> <b>{}</b> <b><i>{}.</i></b>\n
 <b>★ Tᴏᴛᴀʟ Fɪʟᴇs: <code>1{}</code>
 ★ Tᴏᴛᴀʟ Usᴇʀs: <code>{}</code>
 ★ Tᴏᴛᴀʟ Cʜᴀᴛs: <code>{}</code>
