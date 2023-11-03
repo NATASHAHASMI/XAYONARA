@@ -8,8 +8,12 @@ from utils import get_size, temp, get_settings
 from Script import script
 from pyrogram.errors import ChatAdminRequired
 import asyncio 
+import pytz
+from datetime import datetime
 
 """-----------------------------------------https://t.me/GetTGLink/4179 --------------------------------------"""
+
+TIMEZONE = "Asia/Kolkata"
 
 @Client.on_message(filters.new_chat_members & filters.group)
 async def save_group(bot, message):
@@ -164,7 +168,17 @@ async def re_enable_chat(bot, message):
 
 @Client.on_message(filters.command('stats') & filters.incoming)
 async def get_ststs(bot, message):
-    rju = await message.reply('Fetching stats..')
+    current_time = datetime.now(pytz.timezone(TIMEZONE))
+    curr_time = current_time.hour        
+    if curr_time < 12:
+        gtxt = "<b>ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ ☕</b>" 
+    elif curr_time < 17:
+        gtxt = "<b>ɢᴏᴏᴅ ᴀғᴛᴇʀɴᴏᴏɴ 😈</b>" 
+    elif curr_time < 21:
+        gtxt = "<b>ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ 🌇</b>"
+    else:
+        gtxt = "<b>ɢᴏᴏᴅ ɴɪɢʜᴛ 🥱</b>"
+    rju = await message.reply('<b><i>𝙵𝙴𝚃𝙲𝙷𝙸𝙽𝙶 𝚂𝚃𝙰𝚃𝚄𝚂..⏳</i></b>')
     total_users = await db.total_users_count()
     totl_chats = await db.total_chat_count()
     files = await Media.count_documents()
@@ -172,7 +186,7 @@ async def get_ststs(bot, message):
     free = 536870912 - size
     size = get_size(size)
     free = get_size(free)
-    await rju.edit(script.STATUS_TXT.format(files, total_users, totl_chats, size, free))
+    await rju.edit(script.STATUS_TXT.format(message.from_user.mention, gtxt, files, total_users, totl_chats, size, free))
 
 
 @Client.on_message(filters.command('invite') & filters.user(ADMINS))
