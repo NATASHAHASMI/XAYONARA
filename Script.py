@@ -189,8 +189,7 @@ Any Doubts or Not Connecting? Contact Me <a href='https://t.me/XAYOONARA'>𝑿�
 
 𝗠𝗲𝘀𝘀𝗮𝗴𝗲 <b>: {}</b>"""
 
-    CAPTION = """ <b>📂<a href="https://telegram.me/MyFliix_2"><b><i>{file_name}</i></b></a>\n━━━━━━━━━━━━━━━━━━━━━━━\n
- <b>☞</b> [𝙈𝙔𝙁𝙇𝙞𝙞𝙓](https://t.me/myfliix_2)""" 
+    CAPTION = """ <code>🏷 Tɪᴛʟᴇ : {file_name}</code>\n\n📢 Jᴏɪɴ : @Movieblast_Official ❤️‍🔥""" 
 
     IMDB_TEMPLATE_TXT = """
 <b>Query: {qurey}
