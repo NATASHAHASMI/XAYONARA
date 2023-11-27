@@ -1741,9 +1741,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         )
         await message.reply_sticker("CAACAgQAAxkBAAEKOkhk9yRcCGGpPDc-D9bxkSTjx2XiDAAC7g0AAn2mwVC98nx2ic38GjAE",
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f'Donate', url=f"https://t.me/MYFLiiX")]]) 
-                                   )
-        )
-        
+        )   
     elif query.data == "manuelfilter":
         buttons = [[
             InlineKeyboardButton('⟸ Bᴀᴄᴋ', callback_data='filters'),
