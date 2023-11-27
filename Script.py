@@ -189,7 +189,7 @@ Any Doubts or Not Connecting? Contact Me <a href='https://t.me/XAYOONARA'>𝑿�
 
 𝗠𝗲𝘀𝘀𝗮𝗴𝗲 <b>: {}</b>"""
 
-    CAPTION = """ <code>🏷 Tɪᴛʟᴇ : {file_name}</code>\n\n📢 Jᴏɪɴ : @Movieblast_Official ❤️‍🔥""" 
+    CAPTION = """<b>🏷 Tɪᴛʟᴇ :</b><code>{file_name}</code>\n\n<b>📢 Jᴏɪɴ :</b> <b><i>@MYFLiiX_2</i></b>❤️‍🔥""" 
 
     IMDB_TEMPLATE_TXT = """
 <b>Query: {qurey}
