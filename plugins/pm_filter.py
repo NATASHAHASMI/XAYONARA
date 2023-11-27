@@ -1632,7 +1632,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     InlineKeyboardButton('✨ ᴍᴏᴠɪᴇ ɢʀᴏᴜᴘ ✨', url="https://t.me/MYFLiiX_2")
                 ],[
                     InlineKeyboardButton('⚡ ʜᴇʟᴘ ⚡', callback_data='help'),
-                    InlineKeyboardButton('🤝 ᴀʙᴏᴜᴛ 🤝', callback_data='about')
+                    InlineKeyboardButton('👑 ᴀʙᴏᴜᴛ 👑', callback_data='about')
                 ],[
                     InlineKeyboardButton('💰 Pʀᴇᴍɪᴜᴍ Pʟᴀɴ 💸', callback_data="shortlink_info")
                   ]]
@@ -1738,6 +1738,10 @@ async def cb_handler(client: Client, query: CallbackQuery):
             text=script.ABOUT_TXT.format(temp.B_NAME),
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
+        )
+        await message.reply_sticker("CAACAgQAAxkBAAEKOkhk9yRcCGGpPDc-D9bxkSTjx2XiDAAC7g0AAn2mwVC98nx2ic38GjAE",
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f'Donate', url=f"https://t.me/MYFLiiX")]]) 
+                                   )
         )
         
     elif query.data == "manuelfilter":
