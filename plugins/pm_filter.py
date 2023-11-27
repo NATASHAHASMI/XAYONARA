@@ -1739,9 +1739,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
-        await message.reply_sticker("CAACAgQAAxkBAAEKOkhk9yRcCGGpPDc-D9bxkSTjx2XiDAAC7g0AAn2mwVC98nx2ic38GjAE",
-        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f'Donate', url=f"https://t.me/MYFLiiX")]]) 
-        )   
+        await query.message.reply_sticker(sticker="CAACAgIAAxkBAAEKaAVlFWU-rsx8dxaTuiBtT3Iu9JOVfgACdhEAAsMAASlJLbkjGWa6DogwBA")
+        )
     elif query.data == "manuelfilter":
         buttons = [[
             InlineKeyboardButton('⟸ Bᴀᴄᴋ', callback_data='filters'),
