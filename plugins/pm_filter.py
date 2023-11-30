@@ -1585,11 +1585,16 @@ async def cb_handler(client: Client, query: CallbackQuery):
             await query.answer("Yᴏᴜ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ sᴜғғɪᴄɪᴀɴᴛ ʀɪɢᴛs ᴛᴏ ᴅᴏ ᴛʜɪs !", show_alert=True)
 
     elif lazyData.startswith("generate_stream_link"):
-    async def stream_downloader(bot, query):
-    file_id = query.data.split('#', 1)[1]
-    msg = await bot.send_cached_media(
-        chat_id=LOG_CHANNEL,
-        file_id=file_id)
+    async def generate_stream_link(bot, query):
+    _, file_id = lazyData.split(":")
+    try:
+        user_id = query.from_user.id
+        username = query.from_user.mention 
+
+        log_msg = await client.send_cached_media(
+            chat_id=LOG_CHANNEL,
+            file_id=file_id,
+        )
         fileName = {quote_plus(get_name(log_msg))}
         lazy_stream = f"{URL}watch/{str(log_msg.id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
         lazy_download = f"{URL}{str(log_msg.id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
@@ -1599,7 +1604,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     [
                         InlineKeyboardButton("ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ", url=lazy_stream),
                         InlineKeyboardButton("ꜰᴀsᴛ ᴅᴏᴡɴʟᴏᴀᴅ", url=lazy_download)
-                    ],[
+                    ], [
                         InlineKeyboardButton('⁉️ ᴄʟᴏsᴇ ⁉️', callback_data='close_data')
                     ]
                 ]
