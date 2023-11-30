@@ -323,7 +323,7 @@ def promote(client, message):
      message.reply_text(f"Promoted {user_to_promote.mention} to admin.")
 
 
-@app.on_message(filters.command("demote") & filters.group)
+@Client.on_message(filters.command("demote") & filters.group)
 def demote(client, message):
      chat_id = message.chat.id
      from_user = message.from_user
