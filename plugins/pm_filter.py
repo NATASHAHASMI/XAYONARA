@@ -1585,6 +1585,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             await query.answer("Yᴏᴜ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ sᴜғғɪᴄɪᴀɴᴛ ʀɪɢᴛs ᴛᴏ ᴅᴏ ᴛʜɪs !", show_alert=True)
 
     elif lazyData.startswith("generate_stream_link"):
+    async def stream_downloader(bot, query):
     file_id = query.data.split('#', 1)[1]
     msg = await bot.send_cached_media(
         chat_id=LOG_CHANNEL,
