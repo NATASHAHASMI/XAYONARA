@@ -321,10 +321,10 @@ def promote(client, message):
      )
      
      message.reply_text(f"Promoted {user_to_promote.mention} to admin.")
- 
- # The Command to demote a user from admin rights
- @app.on_message(filters.command("demote") & filters.group)
- def demote(client, message):
+
+
+@app.on_message(filters.command("demote") & filters.group)
+def demote(client, message):
      chat_id = message.chat.id
      from_user = message.from_user
  
