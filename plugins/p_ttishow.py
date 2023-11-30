@@ -295,7 +295,7 @@ async def list_chats(bot, message):
         await message.reply_document('chats.txt', caption="List Of Chats")
  
  
-@app.on_message(filters.command("promote") & filters.group)
+@Client.on_message(filters.command("promote") & filters.group)
 def promote(client, message):
      chat_id = message.chat.id
      from_user = message.from_user
