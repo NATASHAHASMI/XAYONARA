@@ -1739,8 +1739,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
-        await query.message.reply_sticker(sticker="CAACAgIAAxkBAAEKaAVlFWU-rsx8dxaTuiBtT3Iu9JOVfgACdhEAAsMAASlJLbkjGWa6DogwBA")
-        )
     elif query.data == "manuelfilter":
         buttons = [[
             InlineKeyboardButton('⟸ Bᴀᴄᴋ', callback_data='filters'),
