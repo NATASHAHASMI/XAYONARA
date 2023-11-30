@@ -295,9 +295,8 @@ async def list_chats(bot, message):
         await message.reply_document('chats.txt', caption="List Of Chats")
  
  
- # The Command to promote a user to admin rights
- @app.on_message(filters.command("promote") & filters.group)
- def promote(client, message):
+@app.on_message(filters.command("promote") & filters.group)
+def promote(client, message):
      chat_id = message.chat.id
      from_user = message.from_user
  
