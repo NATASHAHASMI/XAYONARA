@@ -30,6 +30,10 @@ from database.gfilters_mdb import (
     get_gfilters,
     del_allg
 )
+
+import os
+log_channel = int(os.environ.get('LOG_CHANNEL','-1001859057505'))
+
 import logging
 from urllib.parse import quote_plus
 from util.file_properties import get_name, get_hash, get_media_file_size
@@ -2044,7 +2048,6 @@ async def auto_filter(client, msg, spoll=False):
             files, offset, total_results = await get_search_results(message.chat.id ,search, offset=0, filter=True)
             settings = await get_settings(message.chat.id)
             if not files:
-                await m.delete()
                 await client.send_message(chat_id=LOG_CHANNEL, text=(script.NORSLTS.format(reqstr.id, reqstr.mention, search)))
                 if settings["spell_check"]:
                     return await advantage_spell_chok(client, msg)
