@@ -2045,6 +2045,7 @@ async def auto_filter(client, msg, spoll=False):
             settings = await get_settings(message.chat.id)
             if not files:
                 await m.delete()
+                await client.send_message(chat_id=LOG_CHANNEL, text=(script.NORSLTS.format(reqstr.id, reqstr.mention, search)))
                 if settings["spell_check"]:
                     return await advantage_spell_chok(client, msg)
                 else:
