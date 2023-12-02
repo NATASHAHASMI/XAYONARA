@@ -2054,17 +2054,17 @@ async def auto_filter(client, msg, spoll=False):
                 if settings["spell_check"]:
                     return await advantage_spell_chok(client, msg)
                 else:
-                    if NO_RESULTS_MSG:
-                        keyboard = InlineKeyboardMarkup().add(
-    InlineKeyboardButton("OKAY 🆗", callback_data="close_data")
-                        )
-                        await client.send_message(
-                            chat_id=LOG_CHANNEL,
-                            text=script.NORSLTS.format(reqstr.id, reqstr.mention, search),
-                            reply_markup=keyboard
-                        )
+    if NO_RESULTS_MSG:
+        keyboard = InlineKeyboardMarkup().add(
+            InlineKeyboardButton("✅ DONE ✅", callback_data="close_data")
+        )
+        await client.send_message(
+            chat_id=LOG_CHANNEL,
+            text=script.NORSLTS.format(reqstr.id, reqstr.mention, search),
+            reply_markup=keyboard
+        )
+    return
 
-                    return
         else:
             return
     else:
