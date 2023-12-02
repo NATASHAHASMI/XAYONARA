@@ -2054,7 +2054,7 @@ async def auto_filter(client, msg, spoll=False):
                 if settings["spell_check"]:
                     return await advantage_spell_chok(client, msg)
                 else:
-    if NO_RESULTS_MSG:
+                    if NO_RESULTS_MSG:
         keyboard = InlineKeyboardMarkup().add(
             InlineKeyboardButton("✅ DONE ✅", callback_data="close_data")
         )
