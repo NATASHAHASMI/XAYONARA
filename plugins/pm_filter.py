@@ -33,6 +33,9 @@ from database.gfilters_mdb import (
     del_allg
 )
 
+import os
+req_channel = int(os.environ.get('REQ_CHANNEL','-1001859057505'))
+
 import logging
 from urllib.parse import quote_plus
 from util.file_properties import get_name, get_hash, get_media_file_size
@@ -2048,11 +2051,12 @@ async def auto_filter(client, msg, spoll=False):
             settings = await get_settings(message.chat.id)
             if not files:
                 await m.delete() 
+                await client.send_message(req_channel, f"★ #𝗡𝗼𝗥𝗲𝘀𝘂𝗹𝘁𝘀 ★",reply_markup=InlinKeyboardMarkup([[InlinKeyboardButton("OKAY 🆗", callback_data="close_data")]]))
                 if settings["spell_check"]:
                     return await advantage_spell_chok(client, msg)
                 else:
-                    if NO_RESULTS_MSG:
-                        await client.send_message(chat_id=LOG_CHANNEL, text=(script.NORSLTS.format(reqstr.id, reqstr.mention, search)))
+                    #if NO_RESULTS_MSG:
+                        #await client.send_message(chat_id=LOG_CHANNEL, text=(script.NORSLTS.format(reqstr.id, reqstr.mention, search)))
                     return
         else:
             return
