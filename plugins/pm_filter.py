@@ -2058,8 +2058,7 @@ async def auto_filter(client, msg, spoll=False):
                         await client.send_message(
                             chat_id=LOG_CHANNEL,
                             text=script.NORSLTS.format(reqstr.id, reqstr.mention, search),
-                            await query.edit_message_reply_markup(
-                                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("✅ DONE ✅", callback_data="close_data")]]))
+                            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("✅ DONE ✅", callback_data="close_data")]])
                         )
                         await query.edit_message_reply_markup(reply_markup=None)
                     return
