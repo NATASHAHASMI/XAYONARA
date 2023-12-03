@@ -2061,6 +2061,7 @@ async def auto_filter(client, msg, spoll=False):
                             await query.edit_message_reply_markup(
                                 reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("✅ DONE ✅", callback_data="close_data")]]))
                         )
+                        await query.edit_message_reply_markup(reply_markup=None)
                     return
 
         else:
