@@ -2050,7 +2050,7 @@ async def auto_filter(client, msg, spoll=False):
             files, offset, total_results = await get_search_results(message.chat.id ,search, offset=0, filter=True)
             settings = await get_settings(message.chat.id)
             if not files:
-                await client.send_message(req_channel, text=f"OKAY OKAY OKAY", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("DONE ✅", callback_data="close_data")]]))
+                await client.send_message(req_channel, text=f"★ #𝗡𝗼𝗥𝗲𝘀𝘂𝗹𝘁𝘀 ★\n\n🆔 𝗜𝗗 : {reqstr.id}\n📛 𝗡𝗮𝗺𝗲 : {reqstr.mention}\n⚠️ 𝗠𝗲𝘀𝘀𝗮𝗴𝗲 : {search}", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("✅✅ DONE ✅✅", callback_data="close_data")]]))
                 await m.delete()
                 if settings["spell_check"]:
                     return await advantage_spell_chok(client, msg)
