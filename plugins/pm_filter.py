@@ -33,9 +33,6 @@ from database.gfilters_mdb import (
     del_allg
 )
 
-import os
-req_channel = int(os.environ.get('REQ_CHANNEL','-1001859057505'))
-
 import logging
 from urllib.parse import quote_plus
 from util.file_properties import get_name, get_hash, get_media_file_size
