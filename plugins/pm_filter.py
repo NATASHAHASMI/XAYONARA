@@ -84,8 +84,8 @@ async def pm_text(bot, message):
     if content.startswith("/") or content.startswith("#"): return  # ignore commands and hashtags
     if user_id in ADMINS: return # ignore admins
     await message.reply_text(
-         text=f"<b>ʜᴇʏ {user} 😍 ,\n\nʏᴏᴜ ᴄᴀɴ'ᴛ ɢᴇᴛ ᴍᴏᴠɪᴇs ꜰʀᴏᴍ ʜᴇʀᴇ. ʀᴇǫᴜᴇsᴛ ɪᴛ ɪɴ ᴏᴜʀ <a href=https://t.me/MYFLiiX_2>ᴍᴏᴠɪᴇ ɢʀᴏᴜᴘ</a> ᴏʀ ᴄʟɪᴄᴋ ʀᴇǫᴜᴇsᴛ ʜᴇʀᴇ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ 👇</b>",   
-         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("📝 ʀᴇǫᴜᴇsᴛ ʜᴇʀᴇ ", url=f"https://t.me/MYFLiiX_2")]])
+         text=f"<b>ʜᴇʏ {user} 😍 ,\n\nʏᴏᴜ ᴄᴀɴ'ᴛ ɢᴇᴛ ᴍᴏᴠɪᴇs ꜰʀᴏᴍ ʜᴇʀᴇ. ʀᴇǫᴜᴇsᴛ ɪᴛ ɪɴ ᴏᴜʀ <a href=https://t.me/Movie_Studio_Request>ᴍᴏᴠɪᴇ ɢʀᴏᴜᴘ</a> ᴏʀ ᴄʟɪᴄᴋ ʀᴇǫᴜᴇsᴛ ʜᴇʀᴇ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ 👇</b>",   
+         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("📝 ʀᴇǫᴜᴇsᴛ ʜᴇʀᴇ ", url=f"https://t.me/Movie_Studio_Request")]])
     )
     await bot.send_message(
         chat_id=LOG_CHANNEL,
@@ -1632,10 +1632,10 @@ async def cb_handler(client: Client, query: CallbackQuery):
 
     elif query.data == "start":
         buttons = [[
-                    InlineKeyboardButton('⤬ Jᴏɪɴ Oᴜʀ Mᴀɪɴ Gʀᴏᴜᴘ ⤬', url=f'https://t.me/MYFLiiX')
+                    InlineKeyboardButton('⤬ Jᴏɪɴ Oᴜʀ Mᴀɪɴ Gʀᴏᴜᴘ ⤬', url=f'https://t.me/Movie_Studio_Request')
                 ],[
-                    InlineKeyboardButton('🗡️ ᴜᴘᴅᴀᴛᴇ 🗡️', url="https://t.me/MYFLiiX"),
-                    InlineKeyboardButton('✨ ᴍᴏᴠɪᴇ ɢʀᴏᴜᴘ ✨', url="https://t.me/MYFLiiX_2")
+                    InlineKeyboardButton('🗡️ ᴜᴘᴅᴀᴛᴇ 🗡️', url="https://t.me/Moviestudioabhi"),
+                    InlineKeyboardButton('✨ ᴍᴏᴠɪᴇ ɢʀᴏᴜᴘ ✨', url="https://t.me/Movie_Studio_Request")
                 ],[
                     InlineKeyboardButton('⚡ ʜᴇʟᴘ ⚡', callback_data='help'),
                     InlineKeyboardButton('👑 ᴀʙᴏᴜᴛ 👑', callback_data='about')
@@ -2032,7 +2032,7 @@ async def auto_filter(client, msg, spoll=False):
         if len(message.text) < 100:
             search = message.text
             m=await message.reply_sticker("CAACAgQAAxkBAAEKOkhk9yRcCGGpPDc-D9bxkSTjx2XiDAAC7g0AAn2mwVC98nx2ic38GjAE",
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f'ꜱᴇᴀʀᴄʜɪɴɢ ꜰᴏʀ {search} 🔎', url=f"https://t.me/MYFLiiX")]]) 
+            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f'ꜱᴇᴀʀᴄʜɪɴɢ ꜰᴏʀ {search} 🔎', url=f"https://t.me/Moviestudioabhi")]]) 
             )                              
             search = search.lower()
             find = search.split(" ")
@@ -2050,15 +2050,12 @@ async def auto_filter(client, msg, spoll=False):
             files, offset, total_results = await get_search_results(message.chat.id ,search, offset=0, filter=True)
             settings = await get_settings(message.chat.id)
             if not files:
-                await client.send_message(req_channel, text=f"★ #𝗡𝗼𝗥𝗲𝘀𝘂𝗹𝘁𝘀 ★\n\n🆔 𝗜𝗗 : {reqstr.id}\n📛 𝗡𝗮𝗺𝗲 : {reqstr.mention}\n⚠️ 𝗠𝗲𝘀𝘀𝗮𝗴𝗲 : {search}", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("✅✅ DONE ✅✅", callback_data="close_data")]]))
                 await m.delete()
                 if settings["spell_check"]:
                     return await advantage_spell_chok(client, msg)
                 else:
                     #if NO_RESULTS_MSG:
                         #await client.send_message(
-                            #chat_id=LOG_CHANNEL,
-                           # text=script.NORSLTS.format(reqstr.id, reqstr.mention, search),)
                     return
 
         else:
@@ -2067,7 +2064,7 @@ async def auto_filter(client, msg, spoll=False):
         message = msg.message.reply_to_message  # msg will be callback query
         search, files, offset, total_results = spoll
         m=await message.reply_sticker("CAACAgQAAxkBAAEKOkhk9yRcCGGpPDc-D9bxkSTjx2XiDAAC7g0AAn2mwVC98nx2ic38GjAE",
-        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f'ꜱᴇᴀʀᴄʜɪɴɢ ꜰᴏʀ {search} 🔎', url=f"https://t.me/MYFLiiX")]]) 
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f'ꜱᴇᴀʀᴄʜɪɴɢ ꜰᴏʀ {search} 🔎', url=f"https://t.me/Moviestudioabhi")]]) 
         )
         settings = await get_settings(message.chat.id)
         await msg.message.delete()
