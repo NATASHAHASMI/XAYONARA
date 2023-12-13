@@ -1,5 +1,6 @@
 # Kanged From @TroJanZheX
 import asyncio
+from asyncio import coroutine
 import re
 import ast
 import math
