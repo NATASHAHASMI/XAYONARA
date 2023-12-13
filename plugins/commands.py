@@ -62,13 +62,8 @@ async def start(client, message):
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention))
     if len(message.command) != 2:
         buttons = [[
-                    InlineKeyboardButton('⤬ Jᴏɪɴ Oᴜʀ Mᴀɪɴ Gʀᴏᴜᴘ ⤬', url=f'https://t.me/Movie_Studio_Request')
-                ],[
-                    InlineKeyboardButton('🗡️ ᴜᴘᴅᴀᴛᴇ 🗡️', url="https://t.me/Moviestudioabhi"),
-                    InlineKeyboardButton('✨ ᴍᴏᴠɪᴇ ɢʀᴏᴜᴘ ✨', url="https://t.me/Movie_Studio_Request")
-                ],[
-                    InlineKeyboardButton('⚡ ʜᴇʟᴘ ⚡', callback_data='help'),
-                    InlineKeyboardButton('👑 ᴀʙᴏᴜᴛ 👑', callback_data='about')
+                    InlineKeyboardButton('👨‍🚒 ʜᴇʟᴘ', callback_data='help'),
+                    InlineKeyboardButton('📚 ᴀʙᴏᴜᴛ', callback_data='about')
                 ],[
                     InlineKeyboardButton('💰 Pʀᴇᴍɪᴜᴍ Pʟᴀɴ 💸', callback_data="shortlink_info")
                   ]]
@@ -136,13 +131,8 @@ async def start(client, message):
         return
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
         buttons = [[
-                    InlineKeyboardButton('⤬ Jᴏɪɴ Oᴜʀ Mᴀɪɴ Gʀᴏᴜᴘ ⤬', url=f'https://t.me/Moviestudioabhi')
-                ],[
-                    InlineKeyboardButton('🗡️ ᴜᴘᴅᴀᴛᴇ 🗡️', url="https://t.me/Moviestudioabhi"),
-                    InlineKeyboardButton('✨ ᴍᴏᴠɪᴇ ɢʀᴏᴜᴘ ✨', url="https://t.me/Movie_Studio_Request")
-                ],[
-                    InlineKeyboardButton('⚡ ʜᴇʟᴘ ⚡', callback_data='help'),
-                    InlineKeyboardButton('👑 ᴀʙᴏᴜᴛ 👑', callback_data='about')
+                    InlineKeyboardButton('👨‍🚒 ʜᴇʟᴘ', callback_data='help'),
+                    InlineKeyboardButton('📚 ᴀʙᴏᴜᴛ', callback_data='about')
                 ],[
                     InlineKeyboardButton('💰 Pʀᴇᴍɪᴜᴍ Pʟᴀɴ 💸', callback_data="shortlink_info")
                   ]]
