@@ -11,6 +11,7 @@ pyrogram>=2.0.30
  datetime 
  pytz 
  aiohttp
+ asyncio
 
 #---master---# 
  #Telethroid==0.0.10 
@@ -30,6 +31,7 @@ pyrogram>=2.0.30
  wget 
  pytz
  aiofiles
+ coroutine
  dnspython==2.3.0
  ### googletrans==4.0.0-rc1 ###
 python-decouple
