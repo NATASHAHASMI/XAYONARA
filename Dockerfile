@@ -1,12 +1,17 @@
-FROM python:3.10.8-slim-buster
+FROM python:3.10.13-slim-buster
 
-RUN apt update && apt upgrade -y
-RUN apt install git -y
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y git && \
+    rm -rf /var/lib/apt/lists/*
+
 COPY requirements.txt /requirements.txt
+WORKDIR /
 
-RUN cd /
-RUN pip3 install -U pip && pip3 install -U -r requirements.txt
+RUN pip3 install --no-cache-dir -U pip && \
+    pip3 install --no-cache-dir -U -r requirements.txt
+
 RUN mkdir /Auto-search-tamil-bot
 WORKDIR /Auto-search-tamil-bot
+
 COPY start.sh /start.sh
 CMD ["/bin/bash", "/start.sh"]
