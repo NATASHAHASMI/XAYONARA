@@ -35,19 +35,7 @@ async def start(client, message):
                     InlineKeyboardButton('⚔️ ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ ⚔️', url="https://t.me/Moviestudioabhi")
                   ]]
         reply_markup = InlineKeyboardMarkup(buttons)
-        m=await message.reply_text("<i><b>ʜᴇʟʟᴏ. ʜᴏᴡ ᴀʀᴇ ʏᴏᴜ \nᴡᴀɪᴛ ᴀ ᴍᴏᴍᴇɴᴛ ʙʀᴏ . . .</b></i>")
-        await asyncio.sleep(0.4)
-        await m.edit_text("🎊")
-        await asyncio.sleep(0.5)
-        await m.edit_text("⚡")
-        await asyncio.sleep(0.4)
-        await m.edit_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ...</i></b>")
-        await asyncio.sleep(0.4)
-        await m.delete()
-        m=await message.reply_sticker("CAACAgUAAxkBAAEKeqFlIphZuJ0sfe_iswFpi2MxruRpxgACcw8AAp97GFU7EAeWuhSBsDAE")
-        await asyncio.sleep(2)
-        await m.delete()
-        m=await message.reply_sticker("CAACAgUAAxkBAAEKaDhlFYIZMDBz9T4D31AqVKi_CFjBQAACMAkAAu27qVSWPRdiIgvqqjAE")
+        m=await message.reply_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ...⚡</i></b>")
         await asyncio.sleep(1)
         await m.delete()
         await message.reply(script.GSTART_TXT.format(message.from_user.mention if message.from_user else message.chat.title, temp.U_NAME, temp.B_NAME), reply_markup=reply_markup, disable_web_page_preview=True)
@@ -78,19 +66,7 @@ async def start(client, message):
             gtxt = "<b>ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ 🌇</b>"
         else:
             gtxt = "<b>ɢᴏᴏᴅ ɴɪɢʜᴛ 🥱</b>"
-        m=await message.reply_text("<i><b>ʜᴇʟʟᴏ. ʜᴏᴡ ᴀʀᴇ ʏᴏᴜ \nᴡᴀɪᴛ ᴀ ᴍᴏᴍᴇɴᴛ ʙʀᴏ . . .</b></i>")
-        await asyncio.sleep(0.4)
-        await m.edit_text("🎊")
-        await asyncio.sleep(0.5)
-        await m.edit_text("⚡")
-        await asyncio.sleep(0.4)
-        await m.edit_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ...</i></b>")
-        await asyncio.sleep(0.4)
-        await m.delete()
-        m=await message.reply_sticker("CAACAgUAAxkBAAEKeqFlIphZuJ0sfe_iswFpi2MxruRpxgACcw8AAp97GFU7EAeWuhSBsDAE")
-        await asyncio.sleep(2)
-        await m.delete()
-        m=await message.reply_sticker("CAACAgUAAxkBAAEKaDhlFYIZMDBz9T4D31AqVKi_CFjBQAACMAkAAu27qVSWPRdiIgvqqjAE")
+        m=await message.reply_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ...⚡</i></b>")
         await asyncio.sleep(1)
         await m.delete()
         await message.reply_photo(
@@ -109,7 +85,7 @@ async def start(client, message):
             return
         btn = [
             [
-                InlineKeyboardButton("🍿 Jᴏɪɴ Oᴜʀ Cʜᴀɴɴᴇʟ 🍿", url=invite_link.invite_link)
+                InlineKeyboardButton("🍿 Jᴏɪɴ Bᴀᴄᴋᴜᴘ Cʜᴀɴɴᴇʟ 🍿", url=invite_link.invite_link)
             ],[
                 InlineKeyboardButton("㋡ Wʜʏ l'ᴍ Jᴏɪɴɪɴɢ ❓", callback_data='sinfo')
             ]
