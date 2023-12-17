@@ -1679,7 +1679,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         
     elif query.data == "admin_command":
         if query.from_user.id not in ADMINS:
-            return await query.answer(f"𝙷𝙴𝚈. {query.from_user.mention}.😍\n\n𝚃𝙷𝙸𝚂 𝙸𝚂 𝙽𝙾𝚃 𝙵𝙾𝚁 𝚈𝙾𝚄 𝙾𝙽𝙻𝚈 𝙰𝙳𝙼𝙸𝙽𝚂.😎", show_alert=True)
+            return await query.answer(f"𝙷𝙴𝚈. {query.from_user.first_name}.😍\n\n𝚃𝙷𝙸𝚂 𝙸𝚂 𝙽𝙾𝚃 𝙵𝙾𝚁 𝚈𝙾𝚄 𝙾𝙽𝙻𝚈 𝙰𝙳𝙼𝙸𝙽𝚂.😎", show_alert=True)
         buttons = [[
             InlineKeyboardButton('⟸ Bᴀᴄᴋ', callback_data='help')
         ]]
