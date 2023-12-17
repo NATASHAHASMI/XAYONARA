@@ -1679,7 +1679,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         
     elif query.data == "admin_command":
         if query.from_user.id not in ADMINS:
-            return await query.answer("𝙷𝙴𝚈. {mention} 😍\n\n𝚃𝙷𝙸𝚂 𝙸𝚂 𝙽𝙾𝚃 𝙵𝙾𝚁 𝚈𝙾𝚄 𝙾𝙽𝙻𝚈 𝙰𝙳𝙼𝙸𝙽𝚂.😎", show_alert=True)
+            return await query.answer(f"𝙷𝙴𝚈. {query.from_user.mention}.😍\n\n𝚃𝙷𝙸𝚂 𝙸𝚂 𝙽𝙾𝚃 𝙵𝙾𝚁 𝚈𝙾𝚄 𝙾𝙽𝙻𝚈 𝙰𝙳𝙼𝙸𝙽𝚂.😎", show_alert=True)
         buttons = [[
             InlineKeyboardButton('⟸ Bᴀᴄᴋ', callback_data='help')
         ]]
@@ -1765,9 +1765,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
             )
     elif query.data == "disclaimer":
             btn = [[
-                    InlineKeyboardButton('🏴‍☠️ Hᴏᴍᴇ', callback_data='start')
+                    InlineKeyboardButton("Rᴇᴘᴏʀᴛ Bᴜɢꜱ & Fᴇᴇᴅᴀᴄᴋ ⚠️", url="https://telegram.me/xayonara_contact_bot")
                   ],[
-                    InlineKeyboardButton("Rᴇᴘᴏʀᴛ Bᴜɢꜱ & Fᴇᴇᴅᴀᴄᴋ", url="https://telegram.me/xayonara_contact_bot")
+                    InlineKeyboardButton('🏴‍☠️ Hᴏᴍᴇ', callback_data='start')
                   ]]
             await client.edit_message_media(
                 query.message.chat.id, 
@@ -2008,15 +2008,15 @@ async def auto_filter(client, msg, spoll=False):
         )
         temp.IMDB_CAP[message.from_user.id] = cap
         if not settings["button"]:
-            cap+="<b>\n\n<u><i>🍿 Y𝙾𝚄𝚁 F𝙸𝙻𝙴𝚂 ☟</i></u></b>\n"
+            cap+="<b>\n\n<u>🍿 𝒀𝑶𝑼𝑹 𝑭𝑰𝑳𝑬𝑺 ☟</u></b>\n"
             for file in files:
                 cap += f"<b>\n📁<a href='https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}'>{get_size(file.file_size)}☞{' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))}\n</a></b>"
     else:
         if settings["button"]:
-            cap = f"<b>Tʜᴇ Rᴇꜱᴜʟᴛꜱ Fᴏʀ ☞ `{search}`\nTᴏᴛᴀʟ Rᴇꜱᴜʟᴛꜱ Fᴏᴜɴᴅ ☞`{str(total_results)}`.\n\nRᴇǫᴜᴇsᴛᴇᴅ Bʏ ☞ {message.from_user.mention}\n\n⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️\n\n</b>"
+            cap = f"<b>Tʜᴇ Rᴇꜱᴜʟᴛꜱ Fᴏʀ ☞ `{search}`.\nTᴏᴛᴀʟ Rᴇꜱᴜʟᴛꜱ Fᴏᴜɴᴅ ☞ `{str(total_results)}`.\n\nRᴇǫᴜᴇsᴛᴇᴅ Bʏ ☞ {message.from_user.mention}\n\n⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️\n\n</b>"
         else:
-            cap = f"<b>Tʜᴇ Rᴇꜱᴜʟᴛꜱ Fᴏʀ ☞ `{search}`\nTᴏᴛᴀʟ Rᴇꜱᴜʟᴛꜱ Fᴏᴜɴᴅ ☞`{str(total_results)}`.\n\nRᴇǫᴜᴇsᴛᴇᴅ Bʏ ☞ {message.from_user.mention}\n\n⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️\n\n</b>"
-            cap+="<b><u><i>🍿 Y𝙾𝚄𝚁 F𝙸𝙻𝙴𝚂 ☟</i></u></b>\n\n"
+            cap = f"<b>Tʜᴇ Rᴇꜱᴜʟᴛꜱ Fᴏʀ ☞ `{search}`.\nTᴏᴛᴀʟ Rᴇꜱᴜʟᴛꜱ Fᴏᴜɴᴅ ☞ `{str(total_results)}`.\n\nRᴇǫᴜᴇsᴛᴇᴅ Bʏ ☞ {message.from_user.mention}\n\n⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️\n\n</b>"
+            cap+="<b><u>🍿 𝒀𝑶𝑼𝑹 𝑭𝑰𝑳𝑬𝑺 ☟</u></b>\n\n"
             for file in files:
                 cap += f"<b>📁<a href='https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}'>{get_size(file.file_size)}☞{' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))}\n\n</a></b>"
 
