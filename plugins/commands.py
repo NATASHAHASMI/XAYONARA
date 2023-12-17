@@ -36,7 +36,7 @@ async def start(client, message):
                   ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         m=await message.reply_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ...⚡</i></b>")
-        await asyncio.sleep(1)
+        await asyncio.sleep(0.5)
         await m.delete()
         await message.reply(script.GSTART_TXT.format(message.from_user.mention if message.from_user else message.chat.title, temp.U_NAME, temp.B_NAME), reply_markup=reply_markup, disable_web_page_preview=True)
         await asyncio.sleep(2) # 😢 https://github.com/EvamariaTG/EvaMaria/blob/master/plugins/p_ttishow.py#L17 😬 wait a bit, before checking.
@@ -67,7 +67,7 @@ async def start(client, message):
         else:
             gtxt = "<b>ɢᴏᴏᴅ ɴɪɢʜᴛ 🥱</b>"
         m=await message.reply_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ...⚡</i></b>")
-        await asyncio.sleep(1)
+        await asyncio.sleep(0.5)
         await m.delete()
         await message.reply_photo(
             photo=random.choice(PICS),
