@@ -1694,7 +1694,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
-      m=await query.message.reply_text("😎")
+        m=await query.message.reply_text("😎")
         await asyncio.sleep(1)
         await m.delete()
    
