@@ -1567,8 +1567,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 reply_markup=InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ", url=lazy_stream),
-                InlineKeyboardButton("ꜰᴀsᴛ ᴅᴏᴡɴʟᴏᴀᴅ", url=lazy_download)
+                InlineKeyboardButton("🖥️ ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ", url=lazy_stream),
+                InlineKeyboardButton("🚀 ꜰᴀsᴛ ᴅᴏᴡɴʟᴏᴀᴅ", url=lazy_download)
             ],[
                 InlineKeyboardButton('⁉️ ᴄʟᴏsᴇ ⁉️', callback_data='close_data')
             ]
@@ -1907,9 +1907,7 @@ async def auto_filter(client, msg, spoll=False):
     else:
         message = msg.message.reply_to_message  # msg will be callback query
         search, files, offset, total_results = spoll
-        m=await message.reply_text(f"<b> 𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓</b> `{search}` 🔍")
         settings = await get_settings(message.chat.id)
-        await m.delete()
     pre = 'filep' if settings['file_secure'] else 'file'
     key = f"{message.chat.id}-{message.id}"
     FRESH[key] = search
@@ -2013,9 +2011,9 @@ async def auto_filter(client, msg, spoll=False):
                 cap += f"<b>\n📁<a href='https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}'>{get_size(file.file_size)}☞{' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))}\n</a></b>"
     else:
         if settings["button"]:
-            cap = f"<b>📢 Rᴇꜱᴜʟᴛꜱ Fᴏʀ ☞ `{search}`.\nTᴏᴛᴀʟ Rᴇꜱᴜʟᴛꜱ Fᴏᴜɴᴅ ☞ `{str(total_results)}`.\n\nRᴇǫᴜᴇsᴛᴇᴅ Bʏ ☞ {message.from_user.mention}\n\n⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️\n\n</b>"
+            cap = f"<b>📢 Rᴇꜱᴜʟᴛꜱ Fᴏʀ ☞ `{search}`.\n🚀 Rᴇꜱᴜʟᴛꜱ Fᴏᴜɴᴅ ☞ `{str(total_results)}`.\n🧑‍💻 Rᴇǫᴜᴇsᴛᴇᴅ Bʏ ☞ {message.from_user.mention}\n\n⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️\n\n</b>"
         else:
-            cap = f"<b>📢 Rᴇꜱᴜʟᴛꜱ Fᴏʀ ☞ `{search}`.\nTᴏᴛᴀʟ Rᴇꜱᴜʟᴛꜱ Fᴏᴜɴᴅ ☞ `{str(total_results)}`.\n\nRᴇǫᴜᴇsᴛᴇᴅ Bʏ ☞ {message.from_user.mention}\n\n⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️\n\n</b>"
+            cap = f"<b>📢 Rᴇꜱᴜʟᴛꜱ Fᴏʀ ☞ `{search}`.\n🚀 Rᴇꜱᴜʟᴛꜱ Fᴏᴜɴᴅ ☞ `{str(total_results)}`.\n🧑‍💻 Rᴇǫᴜᴇsᴛᴇᴅ Bʏ ☞ {message.from_user.mention}\n\n⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️\n\n</b>"
             cap+="<b><u>🍿 𝒀𝑶𝑼𝑹 𝑭𝑰𝑳𝑬𝑺 ☟</u></b>\n\n"
             for file in files:
                 cap += f"<b>📁<a href='https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}'>{get_size(file.file_size)}☞{' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))}\n\n</a></b>"
