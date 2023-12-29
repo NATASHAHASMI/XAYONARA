@@ -357,7 +357,7 @@ async def start(client, message):
     elif data.startswith("files"):
         user = message.from_user.id
         if temp.SHORT.get(user)==None:
-            await message.reply_text(text="<b><i>𝑯𝒆𝒚.\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ʀᴇQᴜᴇꜱᴛ ᴘʟᴇᴀꜱᴇ ꜱᴇɴᴅ ʏᴏᴜʀ ʀᴇQᴜᴇꜱᴛ ᴏɴ ɢʀᴏᴜᴘ</i></b>")
+            await message.reply_text(text="<b>ᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ʀᴇQᴜᴇꜱᴛ ᴘʟᴇᴀꜱᴇ ꜱᴇɴᴅ ʏᴏᴜʀ ʀᴇQᴜᴇꜱᴛ ᴏɴ ɢʀᴏᴜᴘ</b>")
         else:
             chat_id = temp.SHORT.get(user)
         settings = await get_settings(chat_id)
