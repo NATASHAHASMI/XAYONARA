@@ -17,7 +17,7 @@ async def handwrite(_, message: Message):
             photo=req,
             caption=(MALIK.format(message.from_user.mention, temp.U_NAME, temp.B_NAME, message.chat.title, req)),
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton("📑 ᴛᴇʟᴇɢʀᴀᴘʜ ʟɪɴᴋ 📑", url=f"{req}")]]
+                [[InlineKeyboardButton("📑 ᴛᴇʟᴇɢʀᴀᴘʜ ʟɪɴᴋ 📑", url=f"https://t.me/xayoonara")]]
             ),
         )
         await asyncio.sleep(0.3)
