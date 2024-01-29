@@ -11,7 +11,6 @@ owner_id = 1843754190
 @Client.on_message(filters.command("write"))
 async def handwrite(_, message: Message):
     if message.from_user.id != owner_id:
-        await message.reply_text("ᴘʟᴇᴀꜱᴇ ꜱᴇɴᴅ ᴛʜᴇ ᴛᴇxᴛ ɪɴ ᴛʜᴇ ᴄᴏʀʀᴇᴄᴛ ꜰᴏʀᴍᴀᴛ : /write ʏᴏᴜʀ ᴛᴇxᴛ ✍️")
         return
 
     if not message.reply_to_message:
@@ -32,4 +31,3 @@ async def handwrite(_, message: Message):
 MALIK = """<b>sᴜᴄᴄᴇssꜰᴜʟʟʏ ᴡʀɪᴛᴛᴇɴ ᴛᴇxᴛ ✔️\n\n🔊 ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ - {}.\n✍ ᴡʀɪᴛᴛᴇɴ ʙʏ - <a href=https://t.me/{}>{}</a>,\n👥 ɢʀᴏᴜᴘ - {}\n🖇 ʟɪɴᴋ - {}</b>"""
 
 MALIKK = """<b>ʜᴇʏ {}.\n\nᴘʟᴇᴀsᴇ ᴡᴀɪᴛ...\n\nᴡʀɪᴛɪɴɢ ʏᴏᴜʀ ᴛᴇxᴛ...</b>"""
-        
