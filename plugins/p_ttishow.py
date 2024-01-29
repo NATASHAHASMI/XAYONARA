@@ -163,49 +163,17 @@ async def re_enable_chat(bot, message):
     await message.reply("Chat Successfully re-enabled")
 
 
-# Add this to your main code to keep track of the last update timestamp
-# Initialize this when your bot starts
-last_files_update = datetime.datetime.now()
-
 @Client.on_message(filters.command('stats') & filters.incoming)
 async def get_ststs(bot, message):
-    rju = await message.reply('Fetching stats..')
-
-    # Custom logic to get dynamic file count
-    dynamic_files_count = calculate_dynamic_files_count()
-
+    rju = await message.reply(f'<i><b>𝙵𝙴𝚃𝙲𝙷𝙸𝙽𝙶 𝚂𝚃𝙰𝚃𝚂..</b></i>')
     total_users = await db.total_users_count()
     totl_chats = await db.total_chat_count()
     size = await db.get_db_size()
     free = 536870912 - size
     size = get_size(size)
     free = get_size(free)
-
-    await rju.edit(script.STATUS_TXT.format(dynamic_files_count, total_users, totl_chats, size, free))
-
-def calculate_dynamic_files_count():
-    global last_files_update
-
-    current_time = datetime.datetime.now()
-    week_difference = (current_time - last_files_update).days // 7
-
-    # If a week has passed, update the file count
-    if week_difference > 0:
-        # Your logic to increment the file count goes here
-        # For example, you can fetch the current count from the database
-        current_files_count = 3000000  # Replace with your actual count
-        new_files_count = current_files_count + week_difference * 3000  # Increment by 3000 for each week
-
-        # Update the timestamp and save the new file count in the database
-        last_files_update = current_time
-        # Update the database with the new_files_count
-
-        return new_files_count
-    else:
-        # If it hasn't been a week, return the current count
-        return current_files_count
-
-
+    await rju.edit(script.STATUS_TXT.format(total_users, totl_chats, size, free))
+    
 
 @Client.on_message(filters.command('invite') & filters.user(ADMINS))
 async def gen_invite(bot, message):
