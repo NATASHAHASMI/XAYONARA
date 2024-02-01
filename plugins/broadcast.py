@@ -6,8 +6,13 @@ from info import ADMINS
 from utils import broadcast_messages, broadcast_messages_group
 import asyncio
 
+# Global variable to track the broadcasting status
+broadcast_cancelled = False
+
 @Client.on_message(filters.command("broadcast") & filters.user(ADMINS) & filters.reply)
 async def broadcast_to_users(bot, message):
+    global broadcast_cancelled
+
     users = await db.get_all_users()
     b_msg = message.reply_to_message
     status_message = await message.reply_text(text='Broadcasting your messages...')
@@ -17,6 +22,10 @@ async def broadcast_to_users(bot, message):
     done, blocked, deleted, failed, success = 0, 0, 0, 0, 0
 
     async for user in users:
+        if broadcast_cancelled:
+            await status_message.edit("Broadcast Cancelled.")
+            return
+
         pti, sh = await broadcast_messages(int(user['id']), b_msg)
         if pti:
             success += 1
@@ -45,6 +54,8 @@ async def broadcast_to_users(bot, message):
 
 @Client.on_message(filters.command("grp_broadcast") & filters.user(ADMINS) & filters.reply)
 async def broadcast_to_groups(bot, message):
+    global broadcast_cancelled
+
     groups = await db.get_all_chats()
     b_msg = message.reply_to_message
     status_message = await message.reply_text(text='Broadcasting your messages to groups...')
@@ -54,6 +65,10 @@ async def broadcast_to_groups(bot, message):
     done, failed, success = 0, 0, 0
 
     async for group in groups:
+        if broadcast_cancelled:
+            await status_message.edit("Broadcast Cancelled.")
+            return
+
         pti, sh = await broadcast_messages_group(int(group['id']), b_msg)
         if pti:
             success += 1
@@ -73,3 +88,10 @@ async def broadcast_to_groups(bot, message):
         f"Total Groups {total_groups}\nCompleted: {done} / {total_groups}\n"
         f"Success: {success}\nFailed: {failed}"
     )
+
+@Client.on_message(filters.command("broadcast_cancel") & filters.user(ADMINS))
+async def cancel_broadcast(bot, message):
+    global broadcast_cancelled
+    broadcast_cancelled = True
+    await message.reply_text("Broadcast Cancelled.")
+        
