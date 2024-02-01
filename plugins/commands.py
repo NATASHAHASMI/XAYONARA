@@ -1113,25 +1113,6 @@ async def removetutorial(bot, message):
     await save_group_settings(grpid, 'is_tutorial', False)
     await reply.edit_text(f"<b>Successfully Removed Your Tutorial Link!!!</b>")
 
-@Client.on_message(filters.command('set_caption'))
-async def save_caption(client, message):
-    userid = message.from_user.id if message.from_user else None
-    if not userid:
-        return await message.reply("<b>You are Anonymous admin you can't use this command !</b>")
-    chat_type = message.chat.type
-    if chat_type not in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
-        return await message.reply_text("Use this command in group.")      
-    grp_id = message.chat.id
-    title = message.chat.title
-    if not await is_check_admin(client, grp_id, message.from_user.id):
-        return await message.reply_text('You not admin in this group.')
-    try:
-        caption = message.text.split(" ", 1)[1]
-    except:
-        return await message.reply_text("Command Incomplete!") 
-    await save_group_settings(grp_id, 'caption', caption)
-    await message.reply_text(f"Successfully changed caption for {title} to\n\n{caption}")
-        
 
 @Client.on_message(filters.command("restart") & filters.user(ADMINS))
 async def stop_button(bot, message):
