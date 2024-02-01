@@ -7,7 +7,7 @@ from utils import broadcast_messages, broadcast_messages_group
 import asyncio
 
 # Global variable to track the broadcasting status
-broadcast_cancelled = False
+broadcast_cancelled = True
 
 @Client.on_message(filters.command("broadcast") & filters.user(ADMINS) & filters.reply)
 async def broadcast_to_users(bot, message):
