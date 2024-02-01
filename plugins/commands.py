@@ -1113,65 +1113,24 @@ async def removetutorial(bot, message):
     await save_group_settings(grpid, 'is_tutorial', False)
     await reply.edit_text(f"<b>Successfully Removed Your Tutorial Link!!!</b>")
 
-@Client.on_message(filters.command("set_caption"))
-async def setcaption(bot, message):
+@Client.on_message(filters.command('set_caption'))
+async def save_caption(client, message):
     userid = message.from_user.id if message.from_user else None
     if not userid:
-        return await message.reply("You are an anonymous admin. Turn off anonymous admin and try again this command")
-
+        return await message.reply("<b>You are Anonymous admin you can't use this command !</b>")
     chat_type = message.chat.type
-    if chat_type == enums.ChatType.PRIVATE:
-        return await message.reply_text("This command works only in groups. Try it in your own group.")
-    elif chat_type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
-        grpid = message.chat.id
-        title = message.chat.title
-    else:
-        return
-
-    userid = message.from_user.id
-    user = await bot.get_chat_member(grpid, userid)
-    if user.status != enums.ChatMemberStatus.ADMINISTRATOR and user.status != enums.ChatMemberStatus.OWNER and str(userid) not in ADMINS:
-        return
-    else:
-        pass
-
-    if len(message.command) == 1:
-        return await message.reply("<b>Give me a caption along with this command\n\nCommand Usage: /set_caption your caption</b>")
-    elif len(message.command) == 2:
-        reply = await message.reply_text("<b>Please Wait...</b>")
-        caption = message.command[1]
-        await save_group_settings(grpid, 'caption', caption)
-        await save_group_settings(grpid, 'is_caption', True)
-        await reply.edit_text(f"<b>Successfully Added Caption\n\nHere is your caption for your group {title} - <code>{caption}</code></b>")
-    else:
-        return await message.reply("<b>You entered Incorrect Format\n\nFormat: /set_caption your caption</b>")
-
-
-@Client.on_message(filters.command("remove_caption"))
-async def removecaption(bot, message):
-    userid = message.from_user.id if message.from_user else None
-    if not userid:
-        return await message.reply("You are an anonymous admin. Turn off anonymous admin and try again this command")
-
-    chat_type = message.chat.type
-    if chat_type == enums.ChatType.PRIVATE:
-        return await message.reply_text("This command works only in groups. Try it in your own group.")
-    elif chat_type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
-        grpid = message.chat.id
-        title = message.chat.title
-    else:
-        return
-
-    userid = message.from_user.id
-    user = await bot.get_chat_member(grpid, userid)
-    if user.status != enums.ChatMemberStatus.ADMINISTRATOR and user.status != enums.ChatMemberStatus.OWNER and str(userid) not in ADMINS:
-        return
-    else:
-        pass
-
-    reply = await message.reply_text("<b>Please Wait...</b>")
-    await save_group_settings(grpid, 'is_caption', False)
-    await reply.edit_text(f"<b>Successfully Removed Your Caption!!!</b>")
+    if chat_type not in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+        return await message.reply_text("Use this command in group.")      
+    grp_id = message.chat.id
+    title = message.chat.title
+    if not await is_check_admin(client, grp_id, message.from_user.id):
+        return await message.reply_text('You not admin in this group.')
+    try:
+        caption = message.text.split(" ", 1)[1]
+    except:
+        return await message.reply_text("Command Incomplete!") 
+    await save_group_settings(grp_id, 'caption', caption)
+    await message.reply_text(f"Successfully changed caption for {title} to\n\n{caption}")
         
 
 @Client.on_message(filters.command("restart") & filters.user(ADMINS))
