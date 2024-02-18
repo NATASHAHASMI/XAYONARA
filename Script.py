@@ -147,24 +147,16 @@ Any Doubts or Not Connecting? Contact Me <a href='https://t.me/XAYOONARA'>𝑿�
 
     CAPTION = """<b>🏷 Tɪᴛʟᴇ :</b><code>{file_name}</code>\n\n<b>📢 Jᴏɪɴ :</b> <b>@Moviestudioabhi</b> ❤️‍🔥""" 
 
-    IMDB_TEMPLATE_TXT = """
-<b>Query: {qurey}
-
-IMDb Data:
-
-<b>🏷 Title</b>: <a href={url}>{title}</a>
-🎭 Genres: {genres}
-📆 Year: <a href={url}/releaseinfo>{year}</a>
-🌟 Rating: <a href={url}/ratings>{rating}</a> / 10 (based on {votes} user ratings.)
-☀️ Languages : <code>{languages}</code>
-📀 RunTime: {runtime} Minutes
-📆 Release Info : {release_date}
-🎛 Countries : <code>{countries}</code>
-
-
-⏰Result Shown in: {remaining_seconds} <i>seconds</i> 🔥
-
-Requested by : {message.from_user.mention}</b>"""
+    IMDB = """
+╭──────────────────────
+<b>‣ ᴛɪᴛʟᴇ </b>» <a href={url}>{title}</a>
+<b>‣ ʟᴀɴɢᴜᴀɢᴇꜱ </b>» <code>{languages}</code>
+<b>‣ ɢᴇɴʀᴇꜱ </b>» {genres}
+<b>‣ ʏᴇᴀʀ </b>» <a href={url}/releaseinfo>{year}</a>
+<b>‣ ʀᴀᴛɪɴɢ </b>» <a href={url}/ratings>{rating}</a> / 10 (based on {votes} user ratings.)
+╰──────────────────────
+<b><i><a href='t.me/moviestudioabhi'>ᴊᴏɪɴ ʙᴀᴄᴋᴜᴘ</a></i></b>📢
+"""
     
  
     RESTART_TXT = """
