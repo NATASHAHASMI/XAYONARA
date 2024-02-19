@@ -148,14 +148,14 @@ Any Doubts or Not Connecting? Contact Me <a href='https://t.me/XAYOONARA'>𝑿�
     CAPTION = """<b>🏷 Tɪᴛʟᴇ :</b><code>{file_name}</code>\n\n<b>📢 Jᴏɪɴ :</b> <b>@Moviestudioabhi</b> ❤️‍🔥""" 
 
     IMDB = """
-    <b>{title}</b> {aka}
+    <b>📌{title}.</b>
 ╭──────────────────────
-<b>‣ ʟᴀɴɢᴜᴀɢᴇꜱ </b>» <code>{languages}</code>
-<b>‣ ɢᴇɴʀᴇꜱ » {genres}</b>
-<b>‣ ʏᴇᴀʀ » {year}</b>
-<b>‣ ʀᴀᴛɪɴɢ » {rating} / 10</b>
+<b>‣ Lᴀɴɢᴜᴀɢᴇꜱ </b>» <code>{languages}</code>
+<b>‣ Gᴇɴʀᴇꜱ » {genres}</b>
+<b>‣ Yᴇᴀʀ » {year}</b>
+<b>‣ Rᴀᴛɪɴɢ » {rating} / 10</b>
 ╰──────────────────────
-<b><i>📢 <a href='t.me/moviestudioabhi'>ᴊᴏɪɴ ʙᴀᴄᴋᴜᴘ</a></i></b>
+<b><i>📢 <a href='t.me/moviestudioabhi'>Jᴏɪɴ Bᴀᴄᴋᴜᴘ</a></i></b>
 """
     
  
