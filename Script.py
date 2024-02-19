@@ -147,7 +147,7 @@ Any Doubts or Not Connecting? Contact Me <a href='https://t.me/XAYOONARA'>𝑿�
 
     CAPTION = """<b>🏷 Tɪᴛʟᴇ :</b><code>{file_name}</code>\n\n<b>📢 Jᴏɪɴ :</b> <b>@Moviestudioabhi</b> ❤️‍🔥""" 
 
-    IMDB = """
+    IMDB_TEMPLATE_TXT = """
     <b>📌{title}.</b>
 ╭──────────────────────
 <b>‣ Lᴀɴɢᴜᴀɢᴇꜱ </b>» <code>{languages}</code>
