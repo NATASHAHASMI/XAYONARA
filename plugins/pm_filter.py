@@ -79,9 +79,6 @@ async def pm_text(bot, message):
     user = message.from_user.first_name
     user_id = message.from_user.id
 
-    if content.startswith("/") or content.startswith("#"):
-        return  # ignore commands and hashtags
-
     if user_id in ADMINS:
         return  # ignore admins
 
@@ -94,6 +91,7 @@ async def pm_text(bot, message):
     ]
     rnd_emoji = random.choice(emojis)
 
+    await message.react(rnd_emoji, big=True)
     await message.reply_text(
          text=f"<b>ʜᴇʏ {user} 😍 ,\n\nʏᴏᴜ ᴄᴀɴ'ᴛ ɢᴇᴛ ᴍᴏᴠɪᴇs ꜰʀᴏᴍ ʜᴇʀᴇ. ʀᴇǫᴜᴇsᴛ ɪᴛ ɪɴ ᴏᴜʀ <a href=https://t.me/Movie_Studio_Request>ᴍᴏᴠɪᴇ ɢʀᴏᴜᴘ</a> ᴏʀ ᴄʟɪᴄᴋ ʀᴇǫᴜᴇsᴛ ʜᴇʀᴇ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ 👇</b>",
          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("📝 ʀᴇǫᴜᴇsᴛ ʜᴇʀᴇ ", url=f"https://t.me/Movie_Studio_Request")]])
@@ -103,9 +101,6 @@ async def pm_text(bot, message):
         chat_id=LOG_CHANNEL,
         text=f"<b>#𝐏𝐌_𝐌𝐒𝐆\n\nNᴀᴍᴇ : {user}\n\nID : {user_id}\n\nMᴇssᴀɢᴇ : {content}</b>"
     )
-
-    # Send the reaction emoji
-    await message.react(rnd_emoji, big=True)
 
 
 @Client.on_callback_query(filters.regex(r"^next"))
