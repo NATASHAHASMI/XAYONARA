@@ -90,7 +90,7 @@ async def pm_text(bot, message):
     )
 
 @Client.on_message(filters.private & filters.text & filters.incoming & filters.group & filters.command)
-async def react_msg(client, message):
+async def react_msg(bot, message):
     emojis = [
         "👍",
         "👎",
