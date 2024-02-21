@@ -151,9 +151,7 @@ async def react_msg(bot, message):
         "😎",
     ]
     rnd_emoji = random.choice(emojis)
-    await client.send_reaction(
-        chat_id=message.chat.id, message_id=message.id, emoji=rnd_emoji, big=True
-    )
+    await massage.react(emoji=rnd_emoji, big=True)
     return
 
 @Client.on_callback_query(filters.regex(r"^next"))
