@@ -89,18 +89,12 @@ async def pm_text(bot, message):
         text=f"<b>#𝐏𝐌_𝐌𝐒𝐆\n\nNᴀᴍᴇ : {user}\n\nID : {user_id}\n\nMᴇssᴀɢᴇ : {content}</b>"
     )
 
-@Client.on_message(filters.group & filters.text & filters.incoming)
-async def give_filter(client, message):
-    emojis = [
-        "👍", "👎", "❤", "🔥", "🥰", "👏", "😁", "🤔", "😱", "🎉", "🤩", "🙏", "👌", "🕊", "🤡",
-        "🥱", "😍", "🐳", "❤‍🔥", "🌚", "🌭", "💯", "🤣", "⚡", "🏆", "💔", "🤨", "😐", "🍓", "🍾", "💋",
-        "😈", "😴", "🤓", "👻", "👨‍💻", "👀", "🙈", "😇", "🤝", "✍", "🤗", "🫡", "🎅", "🎄", "☃", "💅",
-        "🤪", "🗿", "🆒", "💘", "🙉", "🦄", "😘", "💊", "🙊", "😎"
-    ]
-    rnd_emoji = random.choice(emojis)
-    await message.react(emoji=rnd_emoji, big=True)
-    return
-
+@Client.on_message(filters.private & filters.text & filters.incoming)
+async def pm_text(bot, message):
+    content = message.text
+    user_id = message.from_user.id
+    if user_id in ADMINS: return # ignore admins
+    await message.react("😍", big=True)
 
 @Client.on_callback_query(filters.regex(r"^next"))
 async def next_page(bot, query):
