@@ -105,7 +105,7 @@ async def pm_text(bot, message):
     )
 
     # Send the reaction emoji
-    await message.reply_text(rnd_emoji, quote=True)
+    await message.react(rnd_emoji, big=True)
 
 
 @Client.on_callback_query(filters.regex(r"^next"))
