@@ -49,7 +49,7 @@ BUTTONS0 = {}
 BUTTONS1 = {}
 BUTTONS2 = {}
 SPELL_CHECK = {}
-emojis = ["🔍","🔎"]
+emojis = ["⚡","🔥"]
 # ENABLE_SHORTLINK = ""
 
 @Client.on_message(filters.group & filters.text & filters.incoming)
@@ -1880,12 +1880,13 @@ async def auto_filter(client, msg, spoll=False):
         if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
             return
         if len(message.text) < 100:
-            random_emoji = random.choice(["🔍", "🔎"])
             try:
-                await message.react(random_emoji, big=True)
+                await message.react("🔍", big=True)
             except:
                 pass
+
             search = message.text
+            m = await message.reply_text(f"<b> 𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓</b> `{search}` 🔍")
             search = search.lower()
             find = search.split(" ")
             search = ""
@@ -1902,6 +1903,7 @@ async def auto_filter(client, msg, spoll=False):
             files, offset, total_results = await get_search_results(message.chat.id ,search, offset=0, filter=True)
             settings = await get_settings(message.chat.id)
             if not files:
+                await m.delete()
                 if settings["spell_check"]:
                     return await advantage_spell_chok(client, msg)
                 else:
