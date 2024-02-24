@@ -49,7 +49,7 @@ BUTTONS0 = {}
 BUTTONS1 = {}
 BUTTONS2 = {}
 SPELL_CHECK = {}
-emojis = ["⚡", "🌟", "💫", "✨", "🎉", "🔥"]
+emojis = ["🔍","🔎"]
 # ENABLE_SHORTLINK = ""
 
 @Client.on_message(filters.group & filters.text & filters.incoming)
@@ -1880,8 +1880,9 @@ async def auto_filter(client, msg, spoll=False):
         if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
             return
         if len(message.text) < 100:
+            random_emoji = random.choice(["🔍", "🔎"])
             try:
-                await message.react("🔍", big=True)
+                await message.react(random_emoji, big=True)
             except:
                 pass
             search = message.text
