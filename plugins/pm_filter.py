@@ -1882,7 +1882,6 @@ async def auto_filter(client, msg, spoll=False):
         if len(message.text) < 100:
             search = message.text
             await message.react("🔍", big=True)
-            m=await message.reply_text(f"<b> 𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓</b> `{search}` 🔍")
             search = search.lower()
             find = search.split(" ")
             search = ""
@@ -1912,7 +1911,7 @@ async def auto_filter(client, msg, spoll=False):
     else:
         message = msg.message.reply_to_message  # msg will be callback query
         search, files, offset, total_results = spoll
-        m=await message.reply_text(f"<b> 𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓</b> `{search}` 🔍")
+        await message.react("🔍", big=True)
         settings = await get_settings(message.chat.id)
         await m.delete()
     pre = 'filep' if settings['file_secure'] else 'file'
