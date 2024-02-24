@@ -49,7 +49,7 @@ BUTTONS0 = {}
 BUTTONS1 = {}
 BUTTONS2 = {}
 SPELL_CHECK = {}
-emojis = ["⚡","🔥"]
+emojis = ["👍", "❤", "🔥", "🥰", "😁", "🤔", "🎉", "🤩", "🙏", "👌", "🕊", "🤡", "😍", "🐳", "❤‍🔥", "🌚", "🌭", "💯", "🤣", "⚡", "🏆", "💔", "🤨", "😐", "🍾", "😈", "😴", "🤓", "👻", "👨‍💻", "😇", "🤝", "🤗", "🫡", "🎅", "🎄", "☃", "🤪", "🗿", "🆒", "💘", "🦄", "😘", "😎"]
 # ENABLE_SHORTLINK = ""
 
 @Client.on_message(filters.group & filters.text & filters.incoming)
@@ -1880,7 +1880,7 @@ async def auto_filter(client, msg, spoll=False):
         if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
             return
         if len(message.text) < 100:
-            random_emoji = random.choice(["⚡", "🌟", "💫", "✨", "🔎", "🔍"])
+            random_emoji = random.choice(emojis)
             try:
                 await message.react(random_emoji, big=True)
             except:
@@ -1917,11 +1917,6 @@ async def auto_filter(client, msg, spoll=False):
     else:
         message = msg.message.reply_to_message  # msg will be callback query
         search, files, offset, total_results = spoll
-        random_emoji = random.choice(["⚡", "🌟", "💫", "✨", "🔎", "🔍"])
-        try:
-            await message.react(random_emoji, big=True)
-        except:
-            pass
         m=await message.reply_text(f"<b> 𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓</b> `{search}` 🔍")
         settings = await get_settings(message.chat.id)
         await m.delete()
