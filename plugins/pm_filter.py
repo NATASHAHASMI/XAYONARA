@@ -20,6 +20,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQ
 from pyrogram import Client, filters, enums
 from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid
 from utils import get_size, is_subscribed, get_poster, search_gagala, temp, get_settings, save_group_settings, get_shortlink, get_tutorial, send_all, get_cap
+from utils import react_msg
 from database.users_chats_db import db
 from database.ia_filterdb import Media, get_file_details, get_search_results, get_bad_files
 from database.filters_mdb import (
@@ -52,6 +53,10 @@ SPELL_CHECK = {}
 
 @Client.on_message(filters.group & filters.text & filters.incoming)
 async def give_filter(client, message):
+    try:
+        await react_msg(client, message)
+    except:
+        pass
     if message.chat.id != SUPPORT_CHAT_ID:
         manual = await manual_filters(client, message)
         if manual == False:
@@ -75,6 +80,10 @@ async def give_filter(client, message):
             
 @Client.on_message(filters.private & filters.text & filters.incoming)
 async def pm_text(bot, message):
+    try:
+        await react_msg(client, message)
+    except:
+        pass
     content = message.text
     user = message.from_user.first_name
     user_id = message.from_user.id
@@ -91,6 +100,10 @@ async def pm_text(bot, message):
 
 @Client.on_message(filters.private & filters.text & filters.incoming & filters.command)
 async def pm_text(bot, message):
+    try:
+        await react_msg(client, message)
+    except:
+        pass
     content = message.text
     user_id = message.from_user.id
     if user_id in ADMINS: return # ignore admins
