@@ -25,6 +25,9 @@ TIMEZONE = "Asia/Kolkata"
 
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
+    await client.send_reaction(
+        chat_id=message.chat.id, message_id=message.id, emoji="⚡", big=True
+    )
     if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
         buttons = [[
                     InlineKeyboardButton('⤬ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ ⤬', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
