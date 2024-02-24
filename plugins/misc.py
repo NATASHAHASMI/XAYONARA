@@ -3,6 +3,7 @@ from pyrogram import Client, filters, enums
 from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant, MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
 from info import IMDB_TEMPLATE
 from utils import extract_user, get_file_id, get_poster, last_online
+from utils import react_msg
 import time
 from datetime import datetime
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
@@ -12,6 +13,10 @@ logger.setLevel(logging.ERROR)
 
 @Client.on_message(filters.command('id'))
 async def showid(client, message):
+    try:
+        await react_msg(client, message)
+    except:
+        pass
     chat_type = message.chat.type
     if chat_type == enums.ChatType.PRIVATE:
         user_id = message.chat.id
@@ -56,6 +61,10 @@ async def showid(client, message):
 
 @Client.on_message(filters.command(["info"]))
 async def who_is(client, message):
+    try:
+        await react_msg(client, message)
+    except:
+        pass
     # https://github.com/SpEcHiDe/PyroGramBot/blob/master/pyrobot/plugins/admemes/whois.py#L19
     status_message = await message.reply_text(
         "`Fetching user info...`"
@@ -129,6 +138,10 @@ async def who_is(client, message):
 
 @Client.on_message(filters.command(["imdb", 'search']))
 async def imdb_search(client, message):
+    try:
+        await react_msg(client, message)
+    except:
+        pass
     if ' ' in message.text:
         k = await message.reply('<b>Searching IMDb....</b>')
         r, title = message.text.split(None, 1)
