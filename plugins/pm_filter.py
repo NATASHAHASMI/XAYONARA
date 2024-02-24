@@ -1880,15 +1880,12 @@ async def auto_filter(client, msg, spoll=False):
     
     if not spoll:
         message = msg
-        try:
-        await react_msg(client, message)
-    except:
-        pass
         if message.text.startswith("/"): return  # ignore commands
         if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
             return
         if len(message.text) < 100:
             search = message.text
+            await message.react("🔍", big=True)
             m=await message.reply_text(f"<b> 𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓</b> `{search}` 🔍")
             search = search.lower()
             find = search.split(" ")
