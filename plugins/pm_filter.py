@@ -53,10 +53,6 @@ SPELL_CHECK = {}
 
 @Client.on_message(filters.group & filters.text & filters.incoming)
 async def give_filter(client, message):
-    try:
-        await react_msg(client, message)
-    except:
-        pass
     if message.chat.id != SUPPORT_CHAT_ID:
         manual = await manual_filters(client, message)
         if manual == False:
@@ -80,10 +76,6 @@ async def give_filter(client, message):
             
 @Client.on_message(filters.private & filters.text & filters.incoming)
 async def pm_text(bot, message):
-    try:
-        await react_msg(client, message)
-    except:
-        pass
     content = message.text
     user = message.from_user.first_name
     user_id = message.from_user.id
@@ -100,10 +92,6 @@ async def pm_text(bot, message):
 
 @Client.on_message(filters.private & filters.text & filters.incoming & filters.command)
 async def pm_text(bot, message):
-    try:
-        await react_msg(client, message)
-    except:
-        pass
     content = message.text
     user_id = message.from_user.id
     if user_id in ADMINS: return # ignore admins
@@ -1892,6 +1880,10 @@ async def auto_filter(client, msg, spoll=False):
     
     if not spoll:
         message = msg
+        try:
+        await react_msg(client, message)
+    except:
+        pass
         if message.text.startswith("/"): return  # ignore commands
         if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
             return
