@@ -5,6 +5,7 @@ from info import ADMINS, LOG_CHANNEL, SUPPORT_CHAT, MELCOW_NEW_USERS, MELCOW_IMG
 from database.users_chats_db import db
 from database.ia_filterdb import Media
 from utils import get_size, temp, get_settings
+from utils import react_msg
 from Script import script
 from pyrogram.errors import ChatAdminRequired
 import asyncio 
@@ -42,7 +43,7 @@ async def save_group(bot, message):
                     InlineKeyboardButton('Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ', url=GRP_LNK),
                     InlineKeyboardButton('Uᴘᴅᴀᴛᴇs Cʜᴀɴɴᴇʟ', url=CHNL_LNK)
                  ],[
-                    InlineKeyboardButton("Bᴏᴛ Oᴡɴᴇʀ", url="t.me/creatorrio")
+                    InlineKeyboardButton("Bᴏᴛ Oᴡɴᴇʀ", url="t.me/xayoonara")
                   ]]
         reply_markup=InlineKeyboardMarkup(buttons)
         await message.reply_text(
@@ -165,6 +166,10 @@ async def re_enable_chat(bot, message):
 
 @Client.on_message(filters.command('stats') & filters.incoming)
 async def get_ststs(bot, message):
+    try:
+        await react_msg(client, message)
+    except:
+        pass
     rju = await message.reply(f'<i><b>𝙵𝙴𝚃𝙲𝙷𝙸𝙽𝙶 𝚂𝚃𝙰𝚃𝚂..</b></i>')
     total_users = await db.total_users_count()
     totl_chats = await db.total_chat_count()
