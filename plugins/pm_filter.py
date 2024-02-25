@@ -1916,6 +1916,11 @@ async def auto_filter(client, msg, spoll=False):
             return
     else:
         message = msg.message.reply_to_message  # msg will be callback query
+        try:
+                await message.react(random_emoji, big=True)
+            except:
+                pass
+                
         search, files, offset, total_results = spoll
         m=await message.reply_text(f"<b> 𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓</b> `{search}` 🔍")
         settings = await get_settings(message.chat.id)
