@@ -69,68 +69,8 @@ async def is_subscribed(bot, query):
 
 async def react_msg(client, message):
     emojis = [
-        "👍",
-        "❤",
-        "🔥",
-        "🥰",
-        "👏",
-        "😁",
-        "🤔",
-        "😱",
-        "🎉",
-        "🤩",
-        "👌",
-        "🕊",
-        "🤡",
-        "🥱",
-        "😍",
-        "🐳",
-        "❤‍🔥",
-        "🌚",
-        "🌭",
-        "💯",
-        "🤣",
-        "⚡",
-        "🏆",
-        "💔",
-        "🤨",
-        "😐",
-        "🍓",
-        "🍾",
-        "💋",
-        "😈",
-        "😴",
-        "🤓",
-        "👻",
-        "👨‍💻",
-        "👀",
-        "😇",
-        "🤝",
-        "✍",
-        "🤗",
-        "🫡",
-        "🎅",
-        "🎄",
-        "☃",
-        "💅",
-        "🤪",
-        "🗿",
-        "🆒",
-        "💘",
-        "🦄",
-        "😘",
-        "😎",
-    ]
-    rnd_emoji = random.choice(emojis)
-    await client.send_reaction(
-        chat_id=message.chat.id, message_id=message.id, emoji=rnd_emoji, big=True
-    )
-    return
-
-async def react_message(client, message):
-    emojis = [
-        "🔍",
-        "🔎",   
+        "🔍", 
+        "🔎",
     ]
     rnd_emoji = random.choice(emojis)
     await client.send_reaction(
