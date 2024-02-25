@@ -1880,9 +1880,8 @@ async def auto_filter(client, msg, spoll=False):
         if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
             return
         if len(message.text) < 100:
-            random_emoji = random.choice(emojis)
             try:
-                await message.react(random_emoji, big=True)
+                await react_msg(client, message)
             except:
                 pass
                 
@@ -1917,10 +1916,10 @@ async def auto_filter(client, msg, spoll=False):
     else:
         message = msg.message.reply_to_message  # msg will be callback query
         try:
-            await message.react(random_emoji, big=True)
+            await react_msg(client, message)
         except:
             pass
-                
+              
         search, files, offset, total_results = spoll
         m=await message.reply_text(f"<b> 𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓</b> `{search}` 🔍")
         settings = await get_settings(message.chat.id)
