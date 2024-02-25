@@ -54,6 +54,9 @@ emojis = ["👍", "❤", "🔥", "🥰", "😁", "🤔", "🎉", "🤩", "🙏",
 
 @Client.on_message(filters.group & filters.text & filters.incoming)
 async def give_filter(client, message):
+    await client.send_reaction(
+        chat_id=message.chat.id, message_id=message.id, emoji="🤝", big=True
+    )
     if message.chat.id != SUPPORT_CHAT_ID:
         manual = await manual_filters(client, message)
         if manual == False:
@@ -1881,7 +1884,7 @@ async def auto_filter(client, msg, spoll=False):
             return
         if len(message.text) < 100:
             try:
-                await message.react("🔍", big=True)
+                await react_msg(client, message)
             except:
                 pass
                 
@@ -1914,7 +1917,7 @@ async def auto_filter(client, msg, spoll=False):
     else:
         message = msg.message.reply_to_message  # msg will be callback query
         try:
-            await message.react("🔍", big=True)
+            await react_msg(client, message)
         except:
             pass
               
