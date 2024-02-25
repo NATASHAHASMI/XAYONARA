@@ -1881,9 +1881,7 @@ async def auto_filter(client, msg, spoll=False):
             return
         if len(message.text) < 100:
             try:
-                await client.send_reaction(
-                    chat_id=message.chat.id, message_id=message.id, emoji="🔍", big=True
-                )
+                await client.send_reaction(emoji="🔍", big=True)
             except:
                 pass
                 
@@ -1916,9 +1914,7 @@ async def auto_filter(client, msg, spoll=False):
     else:
         message = msg.message.reply_to_message  # msg will be callback query
         try:
-            await client.send_reaction(
-                chat_id=message.chat.id, message_id=message.id, emoji="🔍", big=True
-            )
+            await client.send_reaction(emoji="🔍", big=True)
         except:
             pass
               
