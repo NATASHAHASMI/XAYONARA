@@ -1886,7 +1886,6 @@ async def auto_filter(client, msg, spoll=False):
                 pass
                 
             search = message.text
-            m=await message.reply_text(f"<b> 𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓</b> `{search}` 🔍")
             search = search.lower()
             find = search.split(" ")
             search = ""
@@ -1921,7 +1920,6 @@ async def auto_filter(client, msg, spoll=False):
             pass
               
         search, files, offset, total_results = spoll
-        m=await message.reply_text(f"<b> 𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓</b> `{search}` 🔍")
         settings = await get_settings(message.chat.id)
         await m.delete()
     pre = 'filep' if settings['file_secure'] else 'file'
