@@ -1902,7 +1902,6 @@ async def auto_filter(client, msg, spoll=False):
             files, offset, total_results = await get_search_results(message.chat.id ,search, offset=0, filter=True)
             settings = await get_settings(message.chat.id)
             if not files:
-                await m.delete()
                 if settings["spell_check"]:
                     return await advantage_spell_chok(client, msg)
                 else:
@@ -1921,7 +1920,6 @@ async def auto_filter(client, msg, spoll=False):
               
         search, files, offset, total_results = spoll
         settings = await get_settings(message.chat.id)
-        await m.delete()
     pre = 'filep' if settings['file_secure'] else 'file'
     key = f"{message.chat.id}-{message.id}"
     FRESH[key] = search
