@@ -100,7 +100,7 @@ async def pm_react(bot, message):
         await react_msg(client, message)
     except:
         pass
-    )
+        return
 
 @Client.on_callback_query(filters.regex(r"^next"))
 async def next_page(bot, query):
