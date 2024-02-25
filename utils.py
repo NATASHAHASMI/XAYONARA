@@ -69,22 +69,9 @@ async def is_subscribed(bot, query):
 
 async def react_msg(client, message):
     emojis = [
-        "🔍",
-        "🔎",
-        "🔍",
-        "🔎",
-        "🔍",
-        "🔎",
-        "🔍",
-        "🔎",
-        "🔍",
-        "🔎",
-        "🔍",
-        "🔎",
-        "🔍",
-        "🔎",
-        "🔍",
-        "🔎",
+        "👨‍💻",
+        "👨‍💻",
+        "👨‍💻",
     ]
     rnd_emoji = random.choice(emojis)
     await client.send_reaction(
