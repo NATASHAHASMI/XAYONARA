@@ -94,7 +94,7 @@ async def pm_text(bot, message):
 
 @Client.on_message(filters.private & filters.text & filters.incoming)
 async def pm_react(bot, message):
-    content = message.react
+    content = message.text
     if user_id in ADMINS: return
     try:
         await react_msg(client, message)
