@@ -88,19 +88,7 @@ async def pm_text(bot, message):
         chat_id=LOG_CHANNEL,
         text=f"<b>#𝐏𝐌_𝐌𝐒𝐆\n\nNᴀᴍᴇ : {user}\n\nID : {user_id}\n\nMᴇssᴀɢᴇ : {content}</b>"
     )
-
-@Client.on_message(filters.private & filters.text & filters.incoming & filters.group & filters.command)
-async def react_msg(bot, message):
-    emojis = [
-        "👍", "👎", "❤", "🔥", "🥰", "👏", "😁", "🤔", "😱", "🎉", "🤩", "🙏", "👌", "🕊", "🤡",
-        "🥱", "😍", "🐳", "❤‍🔥", "🌚", "🌭", "💯", "🤣", "⚡", "🏆", "💔", "🤨", "😐", "🍓", "🍾", "💋",
-        "😈", "😴", "🤓", "👻", "👨‍💻", "👀", "🙈", "😇", "🤝", "✍", "🤗", "🫡", "🎅", "🎄", "☃", "💅",
-        "🤪", "🗿", "🆒", "💘", "🙉", "🦄", "😘", "💊", "🙊", "😎"
-    ]
-    rnd_emoji = random.choice(emojis)
-    await message.react(emoji=rnd_emoji, big=True)
-    return
-
+    
 
 @Client.on_callback_query(filters.regex(r"^next"))
 async def next_page(bot, query):
