@@ -1974,7 +1974,7 @@ async def auto_filter(client, msg, spoll=False):
         )
         btn.insert(0, [
             InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}")
-
+        )
     else:
         btn = []
         btn.insert(0, 
