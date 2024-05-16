@@ -80,7 +80,7 @@ MELCOW_NEW_USERS = is_enabled((environ.get('MELCOW_NEW_USERS', "True")), True)
 PROTECT_CONTENT = is_enabled((environ.get('PROTECT_CONTENT', "False")), False)
 PUBLIC_FILE_STORE = is_enabled((environ.get('PUBLIC_FILE_STORE', "True")), True)
 
-LANGUAGES = ["Malyalam", "Mal", "Tamil", "Tam" ,"English", "Eng", "Hindi", "Hin", "Telgu", "Tel", "Kannada", "Kan"]
+LANGUAGES = ["Malyalam", "Mal", "Tamil", "Tam" ,"English", "Eng", "Hindi", "Hin", "Telgu", "Tel", "Kannada", "Kan", "Bangali", "Ban", "Marathi", "Mar"]
 
 QUALITIES = ["PREDVD" , "S Print" , "480p" , "720p" , "1080p" , "2160p"]
 
