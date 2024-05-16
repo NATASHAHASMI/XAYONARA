@@ -132,7 +132,7 @@ async def next_page(bot, query):
 
         btn.insert(0, 
             [
-                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"languages#{key}"),
+                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"years#{key}"),
                 InlineKeyboardButton(f"🍿 Sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
             ]
         )
@@ -149,7 +149,7 @@ async def next_page(bot, query):
         btn = []
         btn.insert(0, 
             [
-                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"languages#{key}"),
+                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"years#{key}"),
                 InlineKeyboardButton(f"🍿 Sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
             ]
         )
@@ -369,7 +369,7 @@ async def filter_years_cb_handler(client: Client, query: CallbackQuery):
         ]
         btn.insert(0, 
             [
-                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"languages#{key}"),
+                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"years#{key}"),
                 InlineKeyboardButton(f"🍿 Sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
             ]
         )
@@ -386,7 +386,7 @@ async def filter_years_cb_handler(client: Client, query: CallbackQuery):
         btn = []
         btn.insert(0, 
             [
-                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"languages#{key}"),
+                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"years#{key}"),
                 InlineKeyboardButton(f"🍿 Sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
             ]
         )
@@ -531,7 +531,7 @@ async def filter_qualities_cb_handler(client: Client, query: CallbackQuery):
         ]
         btn.insert(0, 
             [
-                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"languages#{key}"),
+                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"years#{key}"),
                 InlineKeyboardButton(f"🍿 Sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
             ]
         )
@@ -548,7 +548,7 @@ async def filter_qualities_cb_handler(client: Client, query: CallbackQuery):
         btn = []
         btn.insert(0, 
             [
-                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"languages#{key}"),
+                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"years#{key}"),
                 InlineKeyboardButton(f"🍿 Sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
             ]
         )
@@ -693,7 +693,7 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
         ]
         btn.insert(0, 
             [
-                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"languages#{key}"),
+                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"years#{key}"),
                 InlineKeyboardButton(f"🍿 Sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
             ]
         )
@@ -710,7 +710,7 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
         btn = []
         btn.insert(0, 
             [
-                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"languages#{key}"),
+                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"years#{key}"),
                 InlineKeyboardButton(f"🍿 Sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
             ]
         )
@@ -893,7 +893,7 @@ async def filter_seasons_cb_handler(client: Client, query: CallbackQuery):
         btn = []
         btn.insert(0, 
             [
-                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"languages#{key}"),
+                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"years#{key}"),
                 InlineKeyboardButton(f"🍿 Sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
             ]
         )
