@@ -8,5 +8,5 @@ RUN cd /
 RUN pip3 install -U pip && pip3 install -U -r requirements.txt
 RUN mkdir /XAYONARA
 WORKDIR /XAYONARA
-COPY start.sh /start.sh
-CMD ["/bin/bash", "/start.sh"]
+COPY . /XAYONARA
+CMD ["python", "bot.py"]
