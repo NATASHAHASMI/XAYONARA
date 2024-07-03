@@ -80,4 +80,7 @@ async def start(self):
     bind_address = "0.0.0.0"
     await web.TCPSite(app, bind_address, PORT).start()
     await idle()
-if __name__ == '__main__':
+
+
+app = Bot()
+app.run()
