@@ -49,6 +49,7 @@ DATABASE_NAME = environ.get('DATABASE_NAME', "xayonara")
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Telegram_files')
 
 # Others
+ON_HEROKU = environ.get('ON_HEROKU', True)
 VERIFY = bool(environ.get('VERIFY', False))
 SHORTLINK_URL = environ.get('SHORTLINK_URL', '')
 SHORTLINK_API = environ.get('SHORTLINK_API', '')
