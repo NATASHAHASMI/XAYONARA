@@ -22,7 +22,7 @@ from pyrogram import Client, __version__
 from pyrogram.raw.all import layer
 from database.ia_filterdb import Media, Media2, choose_mediaDB, db as clientDB
 from database.users_chats_db import db
-from info import SESSION, API_ID, API_HASH, BOT_TOKEN, LOG_STR, LOG_CHANNEL, PORT, SECONDDB_URI, ON_HEROKU
+from info import SESSION, API_ID, API_HASH, BOT_TOKEN, LOG_STR, LOG_CHANNEL, PORT, SECONDDB_URI
 from utils import temp
 from typing import Union, Optional, AsyncGenerator
 from pyrogram import types
@@ -44,25 +44,7 @@ files = glob.glob(ppath)
 LazyPrincessBot.start()
 loop = asyncio.get_event_loop()
 
-async def Lazy_start():
-    print('\n')
-    print('Initalizing Lazy Bot')
-    bot_info = await LazyPrincessBot.get_me()
-    LazyPrincessBot.username = bot_info.username
-    await initialize_clients()
-    for name in files:
-        with open(name) as a:
-            patt = Path(a.name)
-            plugin_name = patt.stem.replace(".py", "")
-            plugins_dir = Path(f"plugins/{plugin_name}.py")
-            import_path = "plugins.{}".format(plugin_name)
-            spec = importlib.util.spec_from_file_location(import_path, plugins_dir)
-            load = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(load)
-            sys.modules["plugins." + plugin_name] = load
-            print("Lazy Imported => " + plugin_name)
-    if ON_HEROKU:
-        asyncio.create_task(ping_server())
+async def start(self):       
     b_users, b_chats = await db.get_banned()
     temp.BANNED_USERS = b_users
     temp.BANNED_CHATS = b_chats
@@ -100,8 +82,4 @@ async def Lazy_start():
     await idle()
 
 if __name__ == '__main__':
-    try:
-        loop.run_until_complete(Lazy_start())
-    except KeyboardInterrupt:
-        logging.info('Service Stopped Bye 👋')
         
