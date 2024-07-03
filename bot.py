@@ -81,4 +81,7 @@ async def start(self):
     await web.TCPSite(app, bind_address, PORT).start()
     await idle()
 
-if __name__ == '__main__': 
+if __name__ == '__main__':
+    try:
+    except KeyboardInterrupt:
+        logging.info('Service Stopped Bye 👋')
