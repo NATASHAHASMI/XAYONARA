@@ -38,7 +38,7 @@ from lazybot import LazyPrincessBot
 from util.keepalive import ping_server
 from lazybot.clients import initialize_clients
 from sample_info import tempDict
-
+ON_HEROKU = True
 ppath = "plugins/*.py"
 files = glob.glob(ppath)
 LazyPrincessBot.start()
@@ -61,6 +61,7 @@ async def Lazy_start():
             spec.loader.exec_module(load)
             sys.modules["plugins." + plugin_name] = load
             print("Lazy Imported => " + plugin_name)
+            
     if ON_HEROKU:
         asyncio.create_task(ping_server())
     b_users, b_chats = await db.get_banned()
