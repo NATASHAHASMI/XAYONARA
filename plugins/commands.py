@@ -7,7 +7,7 @@ import pytz
 from datetime import datetime
 from Script import script
 from pyrogram import Client, filters, enums
-from pyrogram.errors import ChatAdminRequired, FloodWait
+from pyrogram.errors import ChatAdminRequired, FloodWait, InviteHashExpired
 from pyrogram.types import *
 from database.ia_filterdb import Media, Media2,  get_file_details, unpack_new_file_id, get_bad_files
 from database.users_chats_db import db
@@ -21,6 +21,8 @@ import json
 import base64
 logger = logging.getLogger(__name__)
 
+AUTH_CHANNEL_1 = "-1001841340007"
+AUTH_CHANNEL_2 = "-1002196649548"
 BATCH_FILES = {}
 TIMEZONE = "Asia/Kolkata"
 
@@ -81,34 +83,71 @@ async def start(client, message):
             parse_mode=enums.ParseMode.HTML
         )
         return
-    
-    if AUTH_CHANNEL and not await is_subscribed(client, message):
-        try:
-            invite_link = await client.create_chat_invite_link(int(AUTH_CHANNEL))
-        except ChatAdminRequired:
-            logger.error("Make sure Bot is admin in Forcesub channel")
-            return
-        btn = [
-            [
-                InlineKeyboardButton("🍿 Jᴏɪɴ Bᴀᴄᴋᴜᴘ Cʜᴀɴɴᴇʟ 🍿", url=invite_link.invite_link)
-            ],[
-                InlineKeyboardButton("㋡ Wʜʏ l'ᴍ Jᴏɪɴɪɴɢ ❓", callback_data='sinfo')
-            ]
-        ]
+    # Function to check subscription
+async def is_subscribed(client, user_id, channel):
+    try:
+        member = await client.get_chat_member(channel, user_id)
+        return member.status in ["member", "administrator", "creator"]
+    except Exception:
+        return False
 
-        if message.command[1] != "subscribe":
-            try:
-                kk, file_id = message.command[1].split("_", 1)
-                btn.append([InlineKeyboardButton("🔄 Tʀʏ Aɢᴀɪɴ", callback_data=f"checksub#{kk}#{file_id}")])
-            except (IndexError, ValueError):
-                btn.append([InlineKeyboardButton("🔄 Tʀʏ Aɢᴀɪɴ", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
-        await client.send_photo(
-            chat_id=message.from_user.id,
-            photo="https://telegra.ph/file/20b4aaaddb8aba646e53c.jpg",
-            caption="**You are not in our channel given below so you don't get the movie file...\n\nIf you want the movie file, click on the '🍿ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ🍿' button below and join our back-up channel, then click on the '🔄 Try Again' button below...\n\nThen you will get the movie files...**",
-            reply_markup=InlineKeyboardMarkup(btn),
-            parse_mode=enums.ParseMode.MARKDOWN
-            )
+# Function to create invite link
+async def create_invite_link(client, channel):
+    try:
+        invite_link = await client.create_chat_invite_link(channel, creates_join_request=True)
+        return invite_link.invite_link
+    except ChatAdminRequired:
+        logger.error(f"Make sure Bot is admin in Forcesub channel {channel}")
+        return None
+
+# Function to send the force subscribe message
+async def send_force_subscribe_message(client, message, invite_link_1, invite_link_2=None):
+    btn = [
+        [
+            InlineKeyboardButton("🍿 Join Backup Channel 🍿", url=invite_link_1)
+        ]
+    ]
+    if invite_link_2:
+        btn[0].append(InlineKeyboardButton("🍿 Join Second Channel 🍿", url=invite_link_2))
+
+    btn.append([InlineKeyboardButton("㋡ Why I'm Joining? ❓", callback_data='sinfo')])
+
+    if message.command[1] != "subscribe":
+        try:
+            kk, file_id = message.command[1].split("_", 1)
+            btn.append([InlineKeyboardButton("🔄 Try Again", callback_data=f"checksub#{kk}#{file_id}")])
+        except (IndexError, ValueError):
+            btn.append([InlineKeyboardButton("🔄 Try Again", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
+
+    await client.send_photo(
+        chat_id=message.from_user.id,
+        photo="https://telegra.ph/file/20b4aaaddb8aba646e53c.jpg",
+        caption="**You are not in our channels given below so you don't get the movie file...\n\nIf you want the movie file, click on the 'Join Backup Channel' and 'Join Second Channel' buttons below and join our channels, then click on the 'Try Again' button below...\n\nThen you will get the movie files...**",
+        reply_markup=InlineKeyboardMarkup(btn),
+        parse_mode=enums.ParseMode.MARKDOWN
+    )
+
+# Force subscribe logic
+if AUTH_CHANNEL_1 and not await is_subscribed(client, message):
+    invite_link_1 = await create_invite_link(client, AUTH_CHANNEL_1)
+    
+    # Check subscription for the second channel
+    if SECOND_AUTH_CHANNEL and not await is_subscribed(client, message, SECOND_AUTH_CHANNEL):
+        invite_link_2 = await create_invite_link(client, SECOND_AUTH_CHANNEL)
+        
+        if invite_link_1 and invite_link_2:
+            await send_force_subscribe_message(client, message, invite_link_1, invite_link_2)
+        else:
+            logger.error("Failed to create invite links. Make sure the bot is admin in the channels.")
+    else:
+        if invite_link_1:
+            await send_force_subscribe_message(client, message, invite_link_1)
+        else:
+            logger.error("Failed to create invite link for the first channel. Make sure the bot is admin in the channel.")
+else:
+    # Code for when the user is already subscribed to both channels
+    pass
+    
         return
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
         buttons = [[
