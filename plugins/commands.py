@@ -147,7 +147,6 @@ if AUTH_CHANNEL_1 and not await is_subscribed(client, message):
 else:
     # Code for when the user is already subscribed to both channels
     pass
-    
         return
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
         buttons = [[
