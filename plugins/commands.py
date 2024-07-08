@@ -94,7 +94,7 @@ async def start(client, message):
             return False
         return True
 
-@Client.on_message(filters.command(["start", "subscribe"]))
+@Client.on_message(filters.command(["subscribe"]))
 async def start(client, message):
     if not await is_subscribed(client, message):
         try:
