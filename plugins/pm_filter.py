@@ -2072,15 +2072,15 @@ async def auto_filter(client, msg, spoll=False):
         )
         temp.IMDB_CAP[message.from_user.id] = cap
         if not settings["button"]:
-            cap+="<b>\n\n<u>🍿 𝒀𝑶𝑼𝑹 𝑭𝑰𝑳𝑬𝑺 ☟</u></b>\n"
+            cap+="<b>\n\n<u><blockquote>🍿 𝒀𝑶𝑼𝑹 𝑭𝑰𝑳𝑬𝑺 ☟</blockquote></u></b>\n"
             for file in files:
                 cap += f"<b><i>\n📗<a href='https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}'>❗{get_size(file.file_size)}❗{' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))}\n</a></i></b>"
     else:
         if settings["button"]:
-            cap = f"<b>📢 Rᴇꜱᴜʟᴛꜱ Fᴏʀ ☞ `{search}`.\n🔎 Rᴇꜱᴜʟᴛꜱ Fᴏᴜɴᴅ ☞ `{str(total_results)}`.\n🧑‍💻 Rᴇǫᴜᴇsᴛᴇᴅ Bʏ ☞ {message.from_user.mention}\n\n⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️\n\n</b>"
+            cap = f"<b>📢 Rᴇꜱᴜʟᴛꜱ Fᴏʀ ☞ `{search}`.\n🔎 Rᴇꜱᴜʟᴛꜱ Fᴏᴜɴᴅ ☞ `{str(total_results)}`.\n🧑‍💻 Rᴇǫᴜᴇsᴛᴇᴅ Bʏ ☞ {message.from_user.mention}\n\n<blockquote>⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️\n\n</blockquote></b>"
         else:
-            cap = f"<b>📢 Rᴇꜱᴜʟᴛꜱ Fᴏʀ ☞ `{search}`.\n🔎 Rᴇꜱᴜʟᴛꜱ Fᴏᴜɴᴅ ☞ `{str(total_results)}`.\n🧑‍💻 Rᴇǫᴜᴇsᴛᴇᴅ Bʏ ☞ {message.from_user.mention}\n\n⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️\n\n</b>"
-            cap+="<b><u>🍿 𝒀𝑶𝑼𝑹 𝑭𝑰𝑳𝑬𝑺 ☟</u></b>\n\n"
+            cap = f"<b>📢 Rᴇꜱᴜʟᴛꜱ Fᴏʀ ☞ `{search}`.\n🔎 Rᴇꜱᴜʟᴛꜱ Fᴏᴜɴᴅ ☞ `{str(total_results)}`.\n🧑‍💻 Rᴇǫᴜᴇsᴛᴇᴅ Bʏ ☞ {message.from_user.mention}\n\n<blockquote>⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️\n\n</blockquote></b>"
+            cap+="<b><u><blockquote>🍿 𝒀𝑶𝑼𝑹 𝑭𝑰𝑳𝑬𝑺 ☟</blockquote></u></b>\n\n"
             for file in files:
                 cap += f"<b><i>📗<a href='https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}'>❗{get_size(file.file_size)}❗{' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))}\n\n</a></i></b>"
 
