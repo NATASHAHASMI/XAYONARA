@@ -83,16 +83,16 @@ async def start(client, message):
         )
         return
     async def is_subscribed(client, message):
-    try:
-        for channel_id in AUTH_CHANNELS:
-            await client.get_chat_member(channel_id, message.from_user.id)
-    except ChatAdminRequired:
-        logger.error("Bot should be admin in one of the AUTH_CHANNELS")
-        return False
-    except Exception as e:
-        logger.error(f"Error checking subscription: {str(e)}")
-        return False
-    return True
+        try:
+            for channel_id in AUTH_CHANNELS:
+                await client.get_chat_member(channel_id, message.from_user.id)
+        except ChatAdminRequired:
+            logger.error("Bot should be admin in one of the AUTH_CHANNELS")
+            return False
+        except Exception as e:
+            logger.error(f"Error checking subscription: {str(e)}")
+            return False
+        return True
 
 @Client.on_message(filters.command(["start", "subscribe"]))
 async def start(client, message):
