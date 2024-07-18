@@ -67,6 +67,13 @@ async def is_subscribed(bot, query):
 
     return False
 
+async def is_check_admin(bot, chat_id, user_id):
+    try:
+        member = await bot.get_chat_member(chat_id, user_id)
+        return member.status in [enums.ChatMemberStatus.ADMINISTRATOR, enums.ChatMemberStatus.OWNER]
+    except:
+        return False
+
 async def react_msg(client, message):
     emojis = [
         "👍",
