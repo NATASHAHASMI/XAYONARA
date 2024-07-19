@@ -91,7 +91,7 @@ YEARS = ["2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016",
 
 
 # Online Stream and Download
-BIN_CHANNEL = environ.get("BIN_CHANNEL", "-1001998895377")
+BIN_CHANNEL = environ.get("BIN_CHANNEL", "-1001859057505")
 if len(BIN_CHANNEL) == 0:
     logging.error('BIN_CHANNEL is missing, exiting now')
     exit()
