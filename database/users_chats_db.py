@@ -1,11 +1,11 @@
 import datetime
 import pytz
-import motor.motor_asyncio
+from motor.motor_asyncio import AsyncIOMotorClient
 from info import DATABASE_NAME, DATABASE_URI, IMDB, IMDB_TEMPLATE, MELCOW_NEW_USERS, P_TTI_SHOW_OFF, SINGLE_BUTTON, SPELL_CHECK_REPLY, PROTECT_CONTENT, AUTO_DELETE, MAX_BTN, AUTO_FFILTER, SHORTLINK_API, SHORTLINK_URL, IS_SHORTLINK, TUTORIAL, IS_TUTORIAL
+client = AsyncIOMotorClient(DATABASE_URI)
 fsubs = client['fsubs']
 
-class Database:
-    
+class Database: 
     def __init__(self, uri, database_name):
         self._client = motor.motor_asyncio.AsyncIOMotorClient(uri)
         self.db = self._client[database_name]
