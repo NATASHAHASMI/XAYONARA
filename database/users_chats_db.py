@@ -1,6 +1,8 @@
-# https://github.com/odysseusmax/animated-lamp/blob/master/bot/database/database.py
+import datetime
+import pytz
 import motor.motor_asyncio
 from info import DATABASE_NAME, DATABASE_URI, IMDB, IMDB_TEMPLATE, MELCOW_NEW_USERS, P_TTI_SHOW_OFF, SINGLE_BUTTON, SPELL_CHECK_REPLY, PROTECT_CONTENT, AUTO_DELETE, MAX_BTN, AUTO_FFILTER, SHORTLINK_API, SHORTLINK_URL, IS_SHORTLINK, TUTORIAL, IS_TUTORIAL
+fsubs = client['fsubs']
 
 class Database:
     
@@ -9,7 +11,7 @@ class Database:
         self.db = self._client[database_name]
         self.col = self.db.users
         self.grp = self.db.groups
-
+        self.grp_and_ids = fsubs.grp_and_ids
 
     def new_user(self, id, name):
         return dict(
@@ -150,5 +152,19 @@ class Database:
     async def get_db_size(self):
         return (await self.db.command("dbstats"))['dataSize']
 
+    async def setFsub(self , grpID , fsubID):
+        return await self.grp_and_ids.update_one({'grpID': grpID} , {'$set': {'grpID': grpID , "fsubID": fsubID}}, upsert=True)    
+    async def getFsub(self , grpID):
+        link = await self.grp_and_ids.find_one({"grpID": grpID})
+        if link is not None:
+            return link.get("fsubID")
+        else:
+            return None
+    async def delFsub(self , grpID):
+        result =  await self.grp_and_ids.delete_one({"grpID": grpID})
+        if result.deleted_count != 0:
+            return True
+        else:
+            return False
 
 db = Database(DATABASE_URI, DATABASE_NAME)
