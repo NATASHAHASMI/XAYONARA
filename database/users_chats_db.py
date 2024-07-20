@@ -1,11 +1,7 @@
 import datetime
 import pytz
-from motor.motor_asyncio import AsyncIOMotorClient
+import motor.motor_asyncio
 from info import DATABASE_NAME, DATABASE_URI, IMDB, IMDB_TEMPLATE, MELCOW_NEW_USERS, P_TTI_SHOW_OFF, SINGLE_BUTTON, SPELL_CHECK_REPLY, PROTECT_CONTENT, AUTO_DELETE, MAX_BTN, AUTO_FFILTER, SHORTLINK_API, SHORTLINK_URL, IS_SHORTLINK, TUTORIAL, IS_TUTORIAL
-# from utils import get_seconds
-client = AsyncIOMotorClient(DATABASE_URI)
-mydb = client[DATABASE_NAME]
-fsubs = client['fsubs']
 
 class Database: 
     def __init__(self, uri, database_name):
@@ -13,7 +9,6 @@ class Database:
         self.db = self._client[database_name]
         self.col = self.db.users
         self.grp = self.db.groups
-        self.grp_and_ids = fsubs.grp_and_ids
 
     def new_user(self, id, name):
         return dict(
