@@ -14,6 +14,10 @@
  pytz 
  aiohttp
  asyncio
+ Flask
+ gunicorn
+ werkzeug
+ itsdangerous
 
 #---master---# 
  #Telethroid==0.0.10 
