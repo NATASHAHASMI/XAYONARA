@@ -1654,7 +1654,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await client.edit_message_media(
             query.message.chat.id, 
             query.message.id, 
-            media=InputMediaPhoto(media=random.choice(PICS), has_spoiler=True)
+            InputMediaPhoto(random.choice(PICS), has_spoiler=True)
         )
         await query.message.edit_text(
             text=script.START_TXT.format(query.from_user.mention, gtxt, temp.U_NAME, temp.B_NAME),
@@ -1674,7 +1674,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await client.edit_message_media(
             query.message.chat.id, 
             query.message.id, 
-            media=InputMediaPhoto(media=random.choice(PICS), has_spoiler=True)
+            InputMediaPhoto(random.choice(PICS), has_spoiler=True)
         )
         await query.message.edit_text(
             text=script.HELP_TXT.format(query.from_user.mention),
@@ -1692,7 +1692,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await client.edit_message_media(
             query.message.chat.id, 
             query.message.id, 
-            media=InputMediaPhoto(media=random.choice(PICS), has_spoiler=True)
+            InputMediaPhoto(random.choice(PICS), has_spoiler=True)
         )
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
@@ -1711,7 +1711,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await client.edit_message_media(
             query.message.chat.id, 
             query.message.id, 
-            media=InputMediaPhoto(media=random.choice(PICS), has_spoiler=True)
+            InputMediaPhoto(random.choice(PICS), has_spoiler=True)
         )
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
@@ -1729,7 +1729,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await client.edit_message_media(
             query.message.chat.id, 
             query.message.id, 
-            media=InputMediaPhoto(media=random.choice(PICS), has_spoiler=True)
+            InputMediaPhoto(random.choice(PICS), has_spoiler=True)
         )
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
@@ -1748,7 +1748,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await client.edit_message_media(
             query.message.chat.id, 
             query.message.id, 
-            media=InputMediaPhoto(media=random.choice(PICS), has_spoiler=True)
+            InputMediaPhoto(random.choice(PICS), has_spoiler=True)
         )
         reply_markup = InlineKeyboardMarkup(buttons)
         #primary db
@@ -1831,7 +1831,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             await client.edit_message_media(
                 query.message.chat.id, 
                 query.message.id, 
-                media=InputMediaPhoto(media=random.choice(PICS), has_spoiler=True)
+                InputMediaPhoto(random.choice(PICS), has_spoiler=True)
             )
             reply_markup = InlineKeyboardMarkup(btn)
             await query.message.edit_text(
