@@ -160,7 +160,7 @@ Any Doubts or Not Connecting? Contact Me <a href='https://t.me/XAYOONARA'>𝑿�
 
 𝗠𝗲𝘀𝘀𝗮𝗴𝗲 <b>: {}</b>"""
 
-    CAPTION = """<b>🏷 Tɪᴛʟᴇ :</b><blockquote><b><i>{file_name}</i></b></blockquote>\n\n<blockquote><b>📢 Jᴏɪɴ </b></blockquote>: <b>@Moviestudioabhi</b> ❤️‍🔥\n<b><a href='https://graph.org/All-Solution-In-One-Page-08-03'>ᴘʟᴇᴀꜱᴇ ʀᴇᴀᴅ ʙᴇꜰᴏʀᴇ ᴡᴀᴛᴄʜɪɴɢ.📚</a></b>""" 
+    CAPTION = """<b>🏷 Tɪᴛʟᴇ :</b><blockquote><b><i>{file_name}</i></b></blockquote>\n\n<blockquote><b>📢 Jᴏɪɴ </b></blockquote>: <b>@Moviestudioabhi</b> ❤️‍🔥\n\n<blockquote><b><i><a href='https://graph.org/All-Solution-In-One-Page-08-03'>ᴘʟᴇᴀꜱᴇ ʀᴇᴀᴅ ʙᴇꜰᴏʀᴇ ᴡᴀᴛᴄʜɪɴɢ.📚</a></i></b></blockquote>""" 
 
     IMDB_TEMPLATE_TXT = """
     <b>📌{title}.</b>
