@@ -72,8 +72,16 @@ async def start(client, message):
             gtxt = "<b>ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ 🌇</b>"
         else:
             gtxt = "<b>ɢᴏᴏᴅ ɴɪɢʜᴛ 🥱</b>"
-        m=await message.reply_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ...⚡</i></b>")
-        await asyncio.sleep(0.3)
+        m=await message.reply_text("<b><i><pre>ꜱᴛᴀʀᴛɪɴɢ</pre></i></b>")
+        await asyncio.sleep(0.1)
+        await m.edit_text("<b><i><pre>ꜱᴛᴀʀᴛɪɴɢ.</pre></i></b>")
+        await asyncio.sleep(0.1)
+        await m.edit_text("<b><i><pre>ꜱᴛᴀʀᴛɪɴɢ..</pre></i></b>")
+        await asyncio.sleep(0.1)
+        await m.edit_text("<b><i><pre>ꜱᴛᴀʀᴛɪɴɢ...</pre></i></b>")
+        await asyncio.sleep(0.1)
+        await m.edit_text("⚡")
+        await asyncio.sleep(0.1)
         await m.delete()
         await message.reply_photo(
             photo=random.choice(PICS),
