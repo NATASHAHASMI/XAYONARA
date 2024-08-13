@@ -1,8 +1,8 @@
 class script(object):
     START_TXT = """<b> ʜᴇʏ 😎. <i>{}</i> {},</b>
     
-<pre><i><b>Iᴍ Tʜᴇ Mᴏsᴛ Aᴅᴠᴀɴᴄᴇ Aɪ Pᴏᴡᴇʀᴅ 🤖 Aᴜᴛᴏ Fɪʟᴛᴇʀ Bᴏᴛ..
-Jᴜꜱᴛ Sᴇɴᴅ Mᴇ Aɴʏ Mᴏᴠɪᴇꜱ & Sᴇʀɪᴇꜱ Nᴀᴍᴇ Aɴᴅ Sᴇᴇ Mʏ Pᴏᴡᴇʀ..✨</b></i></pre>
+<blockquote><i><b>Iᴍ Tʜᴇ Mᴏsᴛ Aᴅᴠᴀɴᴄᴇ Aɪ Pᴏᴡᴇʀᴅ 🤖 Aᴜᴛᴏ Fɪʟᴛᴇʀ Bᴏᴛ..
+Jᴜꜱᴛ Sᴇɴᴅ Mᴇ Aɴʏ Mᴏᴠɪᴇꜱ & Sᴇʀɪᴇꜱ Nᴀᴍᴇ Aɴᴅ Sᴇᴇ Mʏ Pᴏᴡᴇʀ..✨</b></i></blockquote>
 <pre><i><b>ғᴏʀ ᴍᴏʀᴇ ᴅᴇᴛᴀɪʟs ᴜsᴇ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ʙᴇʟᴏᴡ 🤞🏻</b></i></pre>
 
 <spoiler><b>🔋 Mᴀɪɴᴛᴀɪɴᴇᴅ Bʏ - <a href='https://telegram.me/xayonara_contact_bot'>✘ 𝐚 𝐲 𝐨 𝐧 𝐚 𝐫 𝐚.</a></b></spoiler>
@@ -120,7 +120,7 @@ Nᴀᴍᴇ - {}"""
 
     DISCLAIMER_TXT = """
     𝑯𝒆𝒚 {}.😈
-    <b><i><blockquote>Tʜɪꜱ Iꜱ Aɴ Oᴘᴇɴ Sᴏᴜʀᴄᴇ Pʀᴏᴊᴇᴄᴛ.</blockquote>
+    <b><i><pre><blockquote>Tʜɪꜱ Iꜱ Aɴ Oᴘᴇɴ Sᴏᴜʀᴄᴇ Pʀᴏᴊᴇᴄᴛ.</blockquote></pre>
 
 Aʟʟ Tʜᴇ Fɪʟᴇꜱ Iɴ Tʜɪꜱ Bᴏᴛ Aʀᴇ Fʀᴇᴇʟʏ Aᴠᴀɪʟᴀʙʟᴇ Oɴ Tʜᴇ Iɴᴛᴇʀɴᴇᴛ Oʀ Pᴏꜱᴛᴇᴅ Bʏ Sᴏᴍᴇʙᴏᴅʏ Eʟꜱᴇ.
 Jᴜꜱᴛ Fᴏʀ Eᴀꜱʏ Sᴇᴀʀᴄʜɪɴɢ Tʜɪꜱ Bᴏᴛ ɪꜱ Iɴᴅᴇxɪɴɢ Fɪʟᴇꜱ Wʜɪᴄʜ Aʀᴇ Aʟʀᴇᴀᴅʏ Uᴘʟᴏᴀᴅᴇᴅ Oɴ Tᴇʟᴇɢʀᴀᴍ.
@@ -160,7 +160,7 @@ Any Doubts or Not Connecting? Contact Me <a href='https://t.me/XAYOONARA'>𝑿�
 
 𝗠𝗲𝘀𝘀𝗮𝗴𝗲 <b>: {}</b>"""
 
-    CAPTION = """<b>🏷 Tɪᴛʟᴇ :</b><pre><b><i>{file_name}</i></b></pre>\n\n<blockquote><b>📢 Jᴏɪɴ </b></blockquote>: <b>@Moviestudioabhi</b> ❤️‍🔥\n\n<pre><b><i><a href='https://graph.org/All-Solution-In-One-Page-08-03'>ᴘʟᴇᴀꜱᴇ ʀᴇᴀᴅ ʙᴇꜰᴏʀᴇ ᴡᴀᴛᴄʜɪɴɢ.📚</a></i></b></pre>""" 
+    CAPTION = """<b>🏷 Tɪᴛʟᴇ :</b><pre><b><i>{file_name}</i></b></pre>\n\n<blockquote><b>📢 Jᴏɪɴ </b></blockquote>: <b>@Moviestudioabhi</b> ❤️‍🔥\n\n<blockquote><b><i><a href='https://graph.org/All-Solution-In-One-Page-08-03'>ᴘʟᴇᴀꜱᴇ ʀᴇᴀᴅ ʙᴇꜰᴏʀᴇ ᴡᴀᴛᴄʜɪɴɢ.📚</a></i></b></blockquote>""" 
 
     IMDB_TEMPLATE_TXT = """
     <b>📌{title}.</b>
