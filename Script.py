@@ -1,9 +1,9 @@
 class script(object):
     START_TXT = """<b> ʜᴇʏ 😎. <i>{}</i> {},</b>
     
-<blockquote><i><b>Iᴍ Tʜᴇ Mᴏsᴛ Aᴅᴠᴀɴᴄᴇ Aɪ Pᴏᴡᴇʀᴅ 🤖 Aᴜᴛᴏ Fɪʟᴛᴇʀ Bᴏᴛ..
-Jᴜꜱᴛ Sᴇɴᴅ Mᴇ Aɴʏ Mᴏᴠɪᴇꜱ & Sᴇʀɪᴇꜱ Nᴀᴍᴇ Aɴᴅ Sᴇᴇ Mʏ Pᴏᴡᴇʀ..✨</b></i></blockquote>
-<blockquote><i><b>ғᴏʀ ᴍᴏʀᴇ ᴅᴇᴛᴀɪʟs ᴜsᴇ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ʙᴇʟᴏᴡ 🤞🏻</b></i></blockquote>
+<pre><i><b>Iᴍ Tʜᴇ Mᴏsᴛ Aᴅᴠᴀɴᴄᴇ Aɪ Pᴏᴡᴇʀᴅ 🤖 Aᴜᴛᴏ Fɪʟᴛᴇʀ Bᴏᴛ..
+Jᴜꜱᴛ Sᴇɴᴅ Mᴇ Aɴʏ Mᴏᴠɪᴇꜱ & Sᴇʀɪᴇꜱ Nᴀᴍᴇ Aɴᴅ Sᴇᴇ Mʏ Pᴏᴡᴇʀ..✨</b></i></pre>
+<pre><i><b>ғᴏʀ ᴍᴏʀᴇ ᴅᴇᴛᴀɪʟs ᴜsᴇ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ʙᴇʟᴏᴡ 🤞🏻</b></i></pre>
 
 <spoiler><b>🔋 Mᴀɪɴᴛᴀɪɴᴇᴅ Bʏ - <a href='https://telegram.me/xayonara_contact_bot'>✘ 𝐚 𝐲 𝐨 𝐧 𝐚 𝐫 𝐚.</a></b></spoiler>
 """
@@ -11,10 +11,10 @@ Jᴜꜱᴛ Sᴇɴᴅ Mᴇ Aɴʏ Mᴏᴠɪᴇꜱ & Sᴇʀɪᴇꜱ Nᴀᴍᴇ Aɴ�
 
 <spoiler><b>🔋 ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ - <a href='https://telegram.me/xayonara_contact_bot'>xᴀʏᴏɴᴀʀᴀ</a></b></spoiler>"""
    
-    HELP_TXT = """<b><blockquote>Hᴇʏ</blockquote></b> {}
+    HELP_TXT = """<b><pre>Hᴇʏ</pre></b> {}
 <b><blockquote>Hᴇʀᴇ Is Tʜᴇ Mʏ Cᴏᴍᴍᴀɴᴅs.</blockquote></b>"""
 
-    ABOUT_TXT = """<b>Hᴇʏ 😈 {},
+    ABOUT_TXT = """<b><pre>Hᴇʏ 😈 {},</pre>
     
 🧑‍💻 ᴍʏ ᴄʀᴇᴀᴛᴏʀ : <a href='https://t.me/XAYOONARA'>✘ 𝐚 𝐲 𝐨 𝐧 𝐚 𝐫 𝐚.</a>
 📚 ʟɪʙʀᴀʀʏ: <a href="https://github.com/Mayuri-Chan/pyrofork">ᴘʏʀᴏғᴏʀᴋ</a>
@@ -160,7 +160,7 @@ Any Doubts or Not Connecting? Contact Me <a href='https://t.me/XAYOONARA'>𝑿�
 
 𝗠𝗲𝘀𝘀𝗮𝗴𝗲 <b>: {}</b>"""
 
-    CAPTION = """<b>🏷 Tɪᴛʟᴇ :</b><blockquote><b><i>{file_name}</i></b></blockquote>\n\n<blockquote><b>📢 Jᴏɪɴ </b></blockquote>: <b>@Moviestudioabhi</b> ❤️‍🔥\n\n<blockquote><b><i><a href='https://graph.org/All-Solution-In-One-Page-08-03'>ᴘʟᴇᴀꜱᴇ ʀᴇᴀᴅ ʙᴇꜰᴏʀᴇ ᴡᴀᴛᴄʜɪɴɢ.📚</a></i></b></blockquote>""" 
+    CAPTION = """<b>🏷 Tɪᴛʟᴇ :</b><pre><b><i>{file_name}</i></b></pre>\n\n<blockquote><b>📢 Jᴏɪɴ </b></blockquote>: <b>@Moviestudioabhi</b> ❤️‍🔥\n\n<pre><b><i><a href='https://graph.org/All-Solution-In-One-Page-08-03'>ᴘʟᴇᴀꜱᴇ ʀᴇᴀᴅ ʙᴇꜰᴏʀᴇ ᴡᴀᴛᴄʜɪɴɢ.📚</a></i></b></pre>""" 
 
     IMDB_TEMPLATE_TXT = """
     <b>📌{title}.</b>
@@ -175,12 +175,12 @@ Any Doubts or Not Connecting? Contact Me <a href='https://t.me/XAYOONARA'>𝑿�
     
  
     RESTART_TXT = """
-<b><blockquote>Bᴏᴛ Rᴇsᴛᴀʀᴛᴇᴅ !
+<b><pre>Bᴏᴛ Rᴇsᴛᴀʀᴛᴇᴅ !
 
 📅 Dᴀᴛᴇ : <code>{}</code>
 ⏰ Tɪᴍᴇ : <code>{}</code>
 🌐 Tɪᴍᴇᴢᴏɴᴇ : <code>Asia/Kolkata</code>
-🛠️ Bᴜɪʟᴅ Sᴛᴀᴛᴜs: <code>v2.7.1 [ Sᴛᴀʙʟᴇ ]</code></b></blockquote>"""
+🛠️ Bᴜɪʟᴅ Sᴛᴀᴛᴜs: <code>v2.7.1 [ Sᴛᴀʙʟᴇ ]</code></b></pre>"""
 
     LOGO = """
 
