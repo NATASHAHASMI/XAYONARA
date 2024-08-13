@@ -1,11 +1,14 @@
 class script(object):
-    START_TXT = """<b> ʜᴇʏ 😎. <i>{}</i> {},</b>
-    
-<pre><i><b><code class="language-Iᴍ Tʜᴇ Mᴏsᴛ Aᴅᴠᴀɴᴄᴇ Aɪ Pᴏᴡᴇʀᴅ 🤖 Aᴜᴛᴏ Fɪʟᴛᴇʀ Bᴏᴛ..
-Jᴜꜱᴛ Sᴇɴᴅ Mᴇ Aɴʏ Mᴏᴠɪᴇꜱ & Sᴇʀɪᴇꜱ Nᴀᴍᴇ Aɴᴅ Sᴇᴇ Mʏ Pᴏᴡᴇʀ..✨">ғᴏʀ ᴍᴏʀᴇ ᴅᴇᴛᴀɪʟs ᴜsᴇ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ʙᴇʟᴏᴡ 🤞🏻</i></b></pre>
+    START_TXT = """<b>ʜᴇʏ 😎 <i>{}</i> {},</b>
+
+<pre><i><b>📽️ ʜᴇʀᴇ's ᴡʜᴀᴛ I ᴄᴀɴ ᴅᴏ:
+Jᴜꜱᴛ Sᴇɴᴅ Mᴇ Aɴʏ Mᴏᴠɪᴇꜱ & Sᴇʀɪᴇꜱ Nᴀᴍᴇ Aɴᴅ Sᴇᴇ Mʏ Pᴏᴡᴇʀ..✨</b></i></pre>
+
+<b>🔥 Cʜᴇᴄᴋ Oᴜᴛ Mʏ Pʀᴏᴡᴇꜱꜱ 🔥</b>
 
 <spoiler><b>🔋 Mᴀɪɴᴛᴀɪɴᴇᴅ Bʏ - <a href='https://telegram.me/xayonara_contact_bot'>✘ 𝐚 𝐲 𝐨 𝐧 𝐚 𝐫 𝐚.</a></b></spoiler>
 """
+
     GSTART_TXT = """<b><i>ʜᴇʏ 😎.</i></b> <b>{}</b> <b><i><blockquote>ɪ ᴀᴍ ᴘᴏᴡᴇʀꜰᴜʟʟ ᴍᴏᴠɪᴇꜱ & ꜱᴇʀɪᴇꜱ ᴘʀᴏᴠɪᴅᴇʀ ʙᴏᴛ ᴊᴜꜱᴛ ꜱᴇɴᴅ ᴍᴇ ᴀɴʏ ᴍᴏᴠɪᴇꜱ & ꜱᴇʀɪᴇꜱ ɴᴀᴍᴇ.</blockquote></i></b>
 
 <spoiler><b>🔋 ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ - <a href='https://telegram.me/xayonara_contact_bot'>xᴀʏᴏɴᴀʀᴀ</a></b></spoiler>"""
