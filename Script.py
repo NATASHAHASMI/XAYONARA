@@ -1,10 +1,9 @@
 class script(object):
-    START_TXT = """<b>ʜᴇʏ 😎 <i>{}</i> {},</b>
-
-<pre><i><b>📽️ ʜᴇʀᴇ's ᴡʜᴀᴛ I ᴄᴀɴ ᴅᴏ:
-Jᴜꜱᴛ Sᴇɴᴅ Mᴇ Aɴʏ Mᴏᴠɪᴇꜱ & Sᴇʀɪᴇꜱ Nᴀᴍᴇ Aɴᴅ Sᴇᴇ Mʏ Pᴏᴡᴇʀ..✨</b></i></pre>
-
-<b>🔥 Cʜᴇᴄᴋ Oᴜᴛ Mʏ Pʀᴏᴡᴇꜱꜱ 🔥</b>
+    START_TXT = """<b> ʜᴇʏ 😎. <i>{}</i> {},</b>
+    
+<blockquote><i><b>Iᴍ Tʜᴇ Mᴏsᴛ Aᴅᴠᴀɴᴄᴇ Aɪ Pᴏᴡᴇʀᴅ 🤖 Aᴜᴛᴏ Fɪʟᴛᴇʀ Bᴏᴛ..
+Jᴜꜱᴛ Sᴇɴᴅ Mᴇ Aɴʏ Mᴏᴠɪᴇꜱ & Sᴇʀɪᴇꜱ Nᴀᴍᴇ Aɴᴅ Sᴇᴇ Mʏ Pᴏᴡᴇʀ..✨</b></i></blockquote>
+<pre><i><b>ғᴏʀ ᴍᴏʀᴇ ᴅᴇᴛᴀɪʟs ᴜsᴇ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ʙᴇʟᴏᴡ 🤞🏻</b></i></pre>
 
 <spoiler><b>🔋 Mᴀɪɴᴛᴀɪɴᴇᴅ Bʏ - <a href='https://telegram.me/xayonara_contact_bot'>✘ 𝐚 𝐲 𝐨 𝐧 𝐚 𝐫 𝐚.</a></b></spoiler>
 """
