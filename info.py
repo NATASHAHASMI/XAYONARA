@@ -80,12 +80,15 @@ FILE_STORE_CHANNEL = [int(ch) for ch in (environ.get('FILE_STORE_CHANNEL', '')).
 MELCOW_NEW_USERS = is_enabled((environ.get('MELCOW_NEW_USERS', "True")), True)
 PROTECT_CONTENT = is_enabled((environ.get('PROTECT_CONTENT', "False")), False)
 PUBLIC_FILE_STORE = is_enabled((environ.get('PUBLIC_FILE_STORE', "True")), True)
+EPISODES = [f'E {i}'for i in range (1 , 30)]
 
 LANGUAGES = ["Malyalam", "Mal", "Tamil", "Tam" ,"English", "Eng", "Hindi", "Hin", "Telgu", "Tel", "Kannada", "Kan", "Bangali", "Ban", "Marathi", "Mar"]
+
 QUALITIES = ["PREDVD" , "S Print" , "480p" , "720p" , "1080p" , "2160p"]
+
 SEASONS = ["SEASON 1" , "SEASON 2" , "SEASON 3" , "SEASON 4", "SEASON 5" , "SEASON 6" , "SEASON 7" , "SEASON 8" , "SEASON 9" , "SEASON 10"]
+
 YEARS = ["2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999"]
-EPISODES = [f'E{i}'for i in range (1 , 30)]
 
 # Online Stream and Download
 NO_PORT = bool(environ.get('NO_PORT', False))
