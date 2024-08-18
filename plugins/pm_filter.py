@@ -143,7 +143,8 @@ async def next_page(bot, query):
             ]
         )
         btn.insert(0, [
-            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}")
+            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+            InlineKeyboardButton("⛓️ Eᴘɪꜱᴏᴅᴇs", callback_data=f"episodes#{key}#{offset}#{req}")
             ]
         )
     else:
@@ -160,7 +161,8 @@ async def next_page(bot, query):
             ]
         )
         btn.insert(0, [
-            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}")
+            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+            InlineKeyboardButton("⛓️ Eᴘɪꜱᴏᴅᴇs", callback_data=f"episodes#{key}#{offset}#{req}")
             ]
         )
     try:
@@ -277,8 +279,123 @@ async def advantage_spoll_choker(bot, query):
                 await asyncio.sleep(10)
                 await k.delete()
 
-#years
+#epis
+@Client.on_callback_query(filters.regex(r"^episodes#"))
+async def episodes_cb_handler(client: Client, query: CallbackQuery):
+    _, key, offset, req = query.data.split("#")
+    if int(req) != query.from_user.id:
+        return await query.answer(script.ALRT_TXT, show_alert=True) 
+    btn= []
+    for i in range(0, len(EPISODES)-1, 5):
+        btn.append([
+            InlineKeyboardButton(
+                text=EPISODES[i].title(),
+                callback_data=f"episode_search#{EPISODES[i].lower()}#{key}#0#{offset}#{req}"
+            ),
+            InlineKeyboardButton(
+                text=EPISODES[i+1].title(),
+                callback_data=f"episode_search#{EPISODES[i+1].lower()}#{key}#0#{offset}#{req}"
+            ),
+            InlineKeyboardButton(
+                text=EPISODES[i+2].title(),
+                callback_data=f"episode_search#{EPISODES[i+2].lower()}#{key}#0#{offset}#{req}"
+            ),
+        ])
 
+    btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɢᴇ", callback_data=f"next_{req}_{key}_{offset}")])
+    await query.message.edit_text("<b>ɪɴ ᴡʜɪᴄʜ ᴇᴘɪꜱᴏᴅᴇ ᴅᴏ ʏᴏᴜ ᴡᴀɴᴛ, ᴄʜᴏᴏsᴇ ғʀᴏᴍ ʜᴇʀᴇ ↓↓</b>", reply_markup=InlineKeyboardMarkup(btn))
+    return
+
+@Client.on_callback_query(filters.regex(r"^episode_search#"))
+async def episode_search(client: Client, query: CallbackQuery):
+    _, episode, key, offset, orginal_offset, req = query.data.split("#")
+    epis = int(episode.split(' ' , 1)[1])
+    if epis < 10:
+        epis = f'E0{epis}'
+    else:
+        epis = f'E{epis}'
+    
+    if int(req) != query.from_user.id:
+        return await query.answer(script.ALRT_TXT, show_alert=True)	
+    offset = int(offset)
+    search = BUTTONS.get(key)
+    cap = CAP.get(key)
+    if not search:
+        await query.answer(script.OLD_ALRT_TXT.format(query.from_user.first_name),show_alert=True)
+        return 
+    search = search.replace("_", " ")
+    files, n_offset, total = await get_search_results(f"{search} {epis}", max_results=int(MAX_BTN), offset=offset)
+    files2, n_offset2, total2 = await get_search_results(f"{search} {episode}", max_results=int(MAX_BTN), offset=offset)
+    total += total2
+    try:
+        n_offset = int(n_offset)
+    except:
+        try: 
+            n_offset = int(n_offset2)
+        except : 
+            n_offset = 0
+    files = [file for file in files if re.search(epis, file.file_name, re.IGNORECASE)]
+    
+    if not files:
+        files = [file for file in files2 if re.search(episode, file.file_name, re.IGNORECASE)]
+        if not files:
+            await query.answer(f"sᴏʀʀʏ {episode.title()} ɴᴏᴛ ғᴏᴜɴᴅ ғᴏʀ {search}", show_alert=1)
+            return
+
+    batch_ids = files
+    temp.FILES_ID[f"{query.message.chat.id}-{query.id}"] = batch_ids
+    batch_link = f"batchfiles#{query.message.chat.id}#{query.id}#{query.from_user.id}"
+    reqnxt = query.from_user.id if query.from_user else 0
+    settings = await get_settings(query.message.chat.id)
+    temp.CHAT[query.from_user.id] = query.message.chat.id
+    del_msg = f"\n\n<b>⚠️ ᴛʜɪs ᴍᴇssᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏ ᴅᴇʟᴇᴛᴇ ᴀꜰᴛᴇʀ <code>{get_readable_time(DELETE_TIME)}</code> ᴛᴏ ᴀᴠᴏɪᴅ ᴄᴏᴘʏʀɪɢʜᴛ ɪssᴜᴇs</b>" if settings["auto_delete"] else ''
+    links = ""
+    if settings["link"]:
+        btn = []
+        for file_num, file in enumerate(files, start=offset+1):
+            links += f"""<b>\n\n📗 <a href=https://t.me/{temp.U_NAME}?start=file_{query.message.chat.id}_{file.file_id}>❗️{get_size(file.file_size)}❗️ {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))} "{file_num}.</a></b>"""
+    else:
+        btn = [[
+                InlineKeyboardButton(text=f"🔗 {get_size(file.file_size)}≽ {formate_file_name(file.file_name)}", callback_data=f'files#{reqnxt}#{file.file_id}'),]
+                   for file in files
+              ]
+   
+    btn.insert(0,[
+        InlineKeyboardButton("📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{offset}#{req}"),
+        ])
+    btn.insert(1, [
+        InlineKeyboardButton("🎬 Qᴜᴀʟɪᴛʏ", callback_data=f"qualities#{key}#{offset}#{req}"),
+        InlineKeyboardButton("📆 Yᴇᴀʀ", callback_data=f"years#{key}#{offset}#{req}"),
+    ])
+    btn.insert(2,[
+        InlineKeyboardButton("♻️ Sᴇɴᴅ Aʟʟ", callback_data=batch_link),
+        ])
+    
+    if n_offset== '':
+        btn.append(
+            [InlineKeyboardButton(text="🚸 ɴᴏ ᴍᴏʀᴇ ᴘᴀɢᴇs 🚸", callback_data="buttons")]
+        )
+    elif n_offset == 0:
+        btn.append(
+            [InlineKeyboardButton("⪻ ʙᴀᴄᴋ", callback_data=f"episode_search#{episode}#{key}#{offset- int(MAX_BTN)}#{orginal_offset}#{req}"),
+             InlineKeyboardButton(f"{math.ceil(offset / int(MAX_BTN)) + 1}/{math.ceil(total / int(MAX_BTN))}", callback_data="pages",),
+            ])
+    elif offset==0:
+        btn.append(
+            [InlineKeyboardButton(f"{math.ceil(offset / int(MAX_BTN)) + 1}/{math.ceil(total / int(MAX_BTN))}",callback_data="pages",),
+             InlineKeyboardButton("ɴᴇxᴛ ⪼", callback_data=f"episode_search#{episode}#{key}#{n_offset}#{orginal_offset}#{req}"),])
+    else:
+        btn.append(
+            [InlineKeyboardButton("⪻ ʙᴀᴄᴋ", callback_data=f"episode_search#{episode}#{key}#{offset- int(MAX_BTN)}#{orginal_offset}#{req}"),
+             InlineKeyboardButton(f"{math.ceil(offset / int(MAX_BTN)) + 1}/{math.ceil(total / int(MAX_BTN))}", callback_data="pages",),
+             InlineKeyboardButton("ɴᴇxᴛ ⪼", callback_data=f"episode_search#{episode}#{key}#{n_offset}#{orginal_offset}#{req}"),])
+
+    btn.append([
+        InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɢᴇ", callback_data=f"next_{req}_{key}_{orginal_offset}"),])
+    await query.message.edit_text(cap + links + del_msg, disable_web_page_preview=True, parse_mode=enums.ParseMode.HTML, reply_markup=InlineKeyboardMarkup(btn))
+    return
+
+#years
 @Client.on_callback_query(filters.regex(r"^years#"))
 async def years_cb_handler(client: Client, query: CallbackQuery):
 
@@ -380,7 +497,8 @@ async def filter_years_cb_handler(client: Client, query: CallbackQuery):
             ]
         )
         btn.insert(0, [
-            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}")
+            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+            InlineKeyboardButton("⛓️ Eᴘɪꜱᴏᴅᴇs", callback_data=f"episodes#{key}#{offset}#{req}")
             ]
         )
     else:
@@ -397,7 +515,8 @@ async def filter_years_cb_handler(client: Client, query: CallbackQuery):
             ]
         )
         btn.insert(0, [
-            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}")
+            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+            InlineKeyboardButton("⛓️ Eᴘɪꜱᴏᴅᴇs", callback_data=f"episodes#{key}#{offset}#{req}")
             ]
         )
 
@@ -542,7 +661,8 @@ async def filter_qualities_cb_handler(client: Client, query: CallbackQuery):
             ]
         )
         btn.insert(0, [
-            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}")
+            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+            InlineKeyboardButton("⛓️ Eᴘɪꜱᴏᴅᴇs", callback_data=f"episodes#{key}#{offset}#{req}")
             ]
         )
     else:
@@ -559,7 +679,8 @@ async def filter_qualities_cb_handler(client: Client, query: CallbackQuery):
             ]
         )
         btn.insert(0, [
-            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}")
+            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+            InlineKeyboardButton("⛓️ Eᴘɪꜱᴏᴅᴇs", callback_data=f"episodes#{key}#{offset}#{req}")
             ]
         )
     if offset != "":
@@ -704,7 +825,8 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
             ]
         )
         btn.insert(0, [
-            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}")
+            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+            InlineKeyboardButton("⛓️ Eᴘɪꜱᴏᴅᴇs", callback_data=f"episodes#{key}#{offset}#{req}")
             ]
         )
     else:
@@ -721,7 +843,8 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
             ]
         )
         btn.insert(0, [
-            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}")
+            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+            InlineKeyboardButton("⛓️ Eᴘɪꜱᴏᴅᴇs", callback_data=f"episodes#{key}#{offset}#{req}")
             ]
         )
 
@@ -904,7 +1027,8 @@ async def filter_seasons_cb_handler(client: Client, query: CallbackQuery):
             ]
         )
         btn.insert(0, [
-            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}")
+            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+            InlineKeyboardButton("⛓️ Eᴘɪꜱᴏᴅᴇs", callback_data=f"episodes#{key}#{offset}#{req}")
             ]
         )
         
@@ -1994,7 +2118,8 @@ async def auto_filter(client, msg, spoll=False):
             ]
         )
         btn.insert(0, [
-            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}")
+            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+            InlineKeyboardButton("⛓️ Eᴘɪꜱᴏᴅᴇs", callback_data=f"episodes#{key}#{offset}#{req}")
             ]
         )
     else:
@@ -2011,7 +2136,8 @@ async def auto_filter(client, msg, spoll=False):
             ]
         )
         btn.insert(0, [
-            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}")
+            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+            InlineKeyboardButton("⛓️ Eᴘɪꜱᴏᴅᴇs", callback_data=f"episodes#{key}#{offset}#{req}")
             ]
         )
     if offset != "":
@@ -2073,15 +2199,15 @@ async def auto_filter(client, msg, spoll=False):
         )
         temp.IMDB_CAP[message.from_user.id] = cap
         if not settings["button"]:
-            cap+="<b>\n\n<u><blockquote>🍿 𝒀𝑶𝑼𝑹 𝑭𝑰𝑳𝑬𝑺 ☟</blockquote></u></b>\n"
+            cap+="<b>\n\n<u><pre>🍿 𝒀𝑶𝑼𝑹 𝑭𝑰𝑳𝑬𝑺 ☟</pre></u></b>\n"
             for file in files:
                 cap += f"<b><i>\n📗<a href='https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}'>❗{get_size(file.file_size)}❗{' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))}\n</a></i></b>"
     else:
         if settings["button"]:
-            cap = f"<b>📢 Rᴇꜱᴜʟᴛꜱ Fᴏʀ ☞ `{search}`.\n🔎 Rᴇꜱᴜʟᴛꜱ Fᴏᴜɴᴅ ☞ `{str(total_results)}`.\n🧑‍💻 Rᴇǫᴜᴇsᴛᴇᴅ Bʏ ☞ {message.from_user.mention}\n\n<blockquote>⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️\n\n</blockquote></b>"
+            cap = f"<b>📢 Rᴇꜱᴜʟᴛꜱ Fᴏʀ ☞ `{search}`.\n🔎 Rᴇꜱᴜʟᴛꜱ Fᴏᴜɴᴅ ☞ `{str(total_results)}`.\n🧑‍💻 Rᴇǫᴜᴇsᴛᴇᴅ Bʏ ☞ {message.from_user.mention}\n\n<pre>⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️\n\n</pre></b>"
         else:
-            cap = f"<b>📢 Rᴇꜱᴜʟᴛꜱ Fᴏʀ ☞ `{search}`.\n🔎 Rᴇꜱᴜʟᴛꜱ Fᴏᴜɴᴅ ☞ `{str(total_results)}`.\n🧑‍💻 Rᴇǫᴜᴇsᴛᴇᴅ Bʏ ☞ {message.from_user.mention}\n\n<blockquote>⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️\n\n</blockquote></b>"
-            cap+="<b><u><blockquote>🍿 𝒀𝑶𝑼𝑹 𝑭𝑰𝑳𝑬𝑺 ☟</blockquote></u></b>\n\n"
+            cap = f"<b>📢 Rᴇꜱᴜʟᴛꜱ Fᴏʀ ☞ `{search}`.\n🔎 Rᴇꜱᴜʟᴛꜱ Fᴏᴜɴᴅ ☞ `{str(total_results)}`.\n🧑‍💻 Rᴇǫᴜᴇsᴛᴇᴅ Bʏ ☞ {message.from_user.mention}\n\n<pre>⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️\n\n</pre></b>"
+            cap+="<b><u><pre>🍿 𝒀𝑶𝑼𝑹 𝑭𝑰𝑳𝑬𝑺 ☟</pre></u></b>\n\n"
             for file in files:
                 cap += f"<b><i>📗<a href='https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}'>❗{get_size(file.file_size)}❗{' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))}\n\n</a></i></b>"
 
