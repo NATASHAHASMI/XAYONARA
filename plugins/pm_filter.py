@@ -362,6 +362,7 @@ async def episode_search(client: Client, query: CallbackQuery):
    
     btn.insert(0,[
         InlineKeyboardButton("📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{offset}#{req}"),
+        InlineKeyboardButton("⛓️ Eᴘɪꜱᴏᴅᴇs", callback_data=f"episodes#{key}#{offset}#{req}")
         ])
     btn.insert(1, [
         InlineKeyboardButton("🎬 Qᴜᴀʟɪᴛʏ", callback_data=f"qualities#{key}#{offset}#{req}"),
