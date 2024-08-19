@@ -280,46 +280,6 @@ async def advantage_spoll_choker(bot, query):
                 await k.delete()
 
 #epis
-@Client.on_callback_query(filters.regex(r"^episodes#"))
-async def episodes_cb_handler(client: Client, query: CallbackQuery):
-    try:
-        if int(query.from_user.id) not in [query.message.reply_to_message.from_user.id, 0]:
-            return await query.answer(
-                f"⚠️ ʜᴇʟᴏ {query.from_user.first_name},\nᴛʜɪs ɪs ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ...",
-                show_alert=True,
-            )
-    except:
-        pass
-
-    _, key = query.data.split("#")
-    # Sample SEASONS list
-    SEASONS = [f"Season {i+1}" for i in range(10)]  # Adjust according to your seasons data
-
-    btn = []
-    for i in range(0, len(SEASONS)-1, 2):
-        row = []
-        for j in range(2):
-            if i+j < len(SEASONS):
-                row.append(
-                    InlineKeyboardButton(
-                        text=SEASONS[i+j],
-                        callback_data=f"epis#{SEASONS[i+j].split(' ')[-1]}#{key}"
-                    )
-                )
-        btn.append(row)
-
-    btn.insert(
-        0,
-        [
-            InlineKeyboardButton(
-                text="👇sᴇʟᴇᴄᴛ sᴇᴀsᴏɴ ꜰᴏʀ ᴇᴘɪꜱᴏᴅᴇꜱ👇", callback_data="ident"
-            )
-        ],
-    )
-    btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɢᴇ", callback_data=f"fe#homepage#{key}")])
-
-    await query.edit_message_reply_markup(InlineKeyboardMarkup(btn))
-
 @Client.on_callback_query(filters.regex(r"^epis#"))
 async def epis_cb_handler(client: Client, query: CallbackQuery):
     _, season_number, key = query.data.split("#")
@@ -362,6 +322,42 @@ async def epis_cb_handler(client: Client, query: CallbackQuery):
     btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ sᴇᴀsᴏɴs", callback_data=f"episodes#{key}")])
 
     await query.edit_message_reply_markup(InlineKeyboardMarkup(btn))
+
+
+@Client.on_callback_query(filters.regex(r"^episode#"))
+async def episode_cb_handler(client: Client, query: CallbackQuery):
+    _, selected_episode, key = query.data.split("#")
+    
+    # Handle the selected episode
+    chat_id = query.message.chat.id
+    # Filter the files based on the selected episode
+    # Assuming files are stored in a way that allows filtering by episode
+    files = temp.GETALL.get(key, [])
+    filtered_files = [file for file in files if selected_episode in file.file_name]
+    
+    if not filtered_files:
+        await query.answer("sᴏʀʀʏ, ɴᴏ ᴄᴏɴᴛᴇɴᴛ ғᴏᴜɴᴅ ғᴏʀ ᴛʜɪs ᴇᴘɪsᴏᴅᴇ", show_alert=True)
+        return
+    
+    # Create buttons for filtered files
+    btn = [
+        [
+            InlineKeyboardButton(
+                text=f"🀄️{get_size(file.file_size)}🎴{' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))}", 
+                callback_data=f'file#{file.file_id}'
+            )
+        ]
+        for file in filtered_files
+    ]
+    
+    btn.insert(0, [
+        InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"years#{key}"),
+        InlineKeyboardButton(f"🍿 Sᴇᴀsᴏɴs", callback_data=f"episodes#{key}")
+    ])
+    btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴇᴘɪsᴏᴅᴇs", callback_data=f"epis#{key}")])
+
+    await query.edit_message_reply_markup(InlineKeyboardMarkup(btn))
+
 
 
 @Client.on_callback_query(filters.regex(r"^fe#"))
