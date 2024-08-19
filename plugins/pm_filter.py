@@ -282,27 +282,60 @@ async def advantage_spoll_choker(bot, query):
 #epis
 @Client.on_callback_query(filters.regex(r"^episodes#"))
 async def episodes_cb_handler(client: Client, query: CallbackQuery):
-
     try:
         if int(query.from_user.id) not in [query.message.reply_to_message.from_user.id, 0]:
             return await query.answer(
-                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ...",
+                f"⚠️ ʜᴇʟᴏ {query.from_user.first_name},\nᴛʜɪs ɪs ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ...",
                 show_alert=True,
             )
     except:
         pass
+
     _, key = query.data.split("#")
-    search = FRESH.get(key)
-    search = search.replace(' ', '_')
+    # Sample SEASONS list
+    SEASONS = [f"Season {i+1}" for i in range(10)]  # Adjust according to your seasons data
+
     btn = []
-    for i in range(0, len(EPISODES)-1, 4):
+    for i in range(0, len(SEASONS)-1, 4):
         row = []
         for j in range(4):
-            if i+j < len(EPISODES):
+            if i+j < len(SEASONS):
                 row.append(
                     InlineKeyboardButton(
-                        text=EPISODES[i+j].title(),
-                        callback_data=f"fe#{EPISODES[i+j].lower()}#{key}"
+                        text=SEASONS[i+j],
+                        callback_data=f"epis#{SEASONS[i+j].split(' ')[-1]}#{key}"
+                    )
+                )
+        btn.append(row)
+
+    btn.insert(
+        0,
+        [
+            InlineKeyboardButton(
+                text="👇sᴇʟᴇᴄᴛ ʏᴏᴜʀ sᴇᴀsᴏɴ👇", callback_data="ident"
+            )
+        ],
+    )
+    btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɢᴇ", callback_data=f"fe#homepage#{key}")])
+
+    await query.edit_message_reply_markup(InlineKeyboardMarkup(btn))
+
+@Client.on_callback_query(filters.regex(r"^epis#"))
+async def epis_cb_handler(client: Client, query: CallbackQuery):
+    _, season_number, key = query.data.split("#")
+    # Sample episode list
+    NUMBER_OF_EPISODES_PER_SEASON = 10  # Adjust according to your data
+    episodes = [f"S{season_number}E{str(i+1).zfill(2)}" for i in range(NUMBER_OF_EPISODES_PER_SEASON)]
+
+    btn = []
+    for i in range(0, len(episodes)-1, 4):
+        row = []
+        for j in range(4):
+            if i+j < len(episodes):
+                row.append(
+                    InlineKeyboardButton(
+                        text=episodes[i+j],
+                        callback_data=f"episode#{episodes[i+j]}#{key}"
                     )
                 )
         btn.append(row)
@@ -315,12 +348,17 @@ async def episodes_cb_handler(client: Client, query: CallbackQuery):
             )
         ],
     )
-    req = query.from_user.id
-    offset = 0
-    btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɢᴇ", callback_data=f"fe#homepage#{key}")])
+    btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ sᴇᴀsᴏɴs", callback_data=f"episodes#{key}")])
 
     await query.edit_message_reply_markup(InlineKeyboardMarkup(btn))
-    
+
+
+@Client.on_callback_query(filters.regex(r"^episode#"))
+async def episode_cb_handler(client: Client, query: CallbackQuery):
+    _, episode, key = query.data.split("#")
+    # Handle the selected episode
+    # Fetch and display the content related to the selected episode
+    pass
 
 @Client.on_callback_query(filters.regex(r"^fe#"))
 async def filter_episodes_cb_handler(client: Client, query: CallbackQuery):
