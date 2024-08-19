@@ -280,46 +280,62 @@ async def advantage_spoll_choker(bot, query):
                 await k.delete()
 
 #epis
-@Client.on_callback_query(filters.regex(r"^episodes#"))
-async def episodes_cb_handler(client: Client, query: CallbackQuery):
-
+@Client.on_callback_query(filters.regex(r"^epis#"))
+async def epis_cb_handler(client: Client, query: CallbackQuery):
     try:
         if int(query.from_user.id) not in [query.message.reply_to_message.from_user.id, 0]:
             return await query.answer(
-                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ...",
+                f"⚠️ ʜᴇʟʟᴏ {query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ...",
                 show_alert=True,
             )
     except:
         pass
+
     _, key = query.data.split("#")
     search = FRESH.get(key)
     search = search.replace(' ', '_')
-    btn = []
-    for i in range(0, len(EPISODES)-1, 4):
-        row = []
-        for j in range(4):
-            if i+j < len(EPISODES):
-                row.append(
-                    InlineKeyboardButton(
-                        text=EPISODES[i+j].title(),
-                        callback_data=f"fe#{EPISODES[i+j].lower()}#{key}"
-                    )
-                )
-        btn.append(row)
 
-    btn.insert(
+    # Show seasons
+    season_buttons = [
+        InlineKeyboardButton(text=f"Season {i}", callback_data=f"epis#S{i}")
+        for i in range(1, 11)  # Assuming 10 seasons
+    ]
+    
+    season_buttons.insert(
         0,
-        [
-            InlineKeyboardButton(
-                text="👇sᴇʟᴇᴄᴛ ʏᴏᴜʀ ᴇᴘɪsᴏᴅᴇ👇", callback_data="ident"
-            )
-        ],
+        [InlineKeyboardButton(text="👇sᴇʟᴇᴄᴛ ʏᴏᴜʀ ᴇᴘɪsᴏᴅᴇ👇", callback_data="ident")]
     )
-    req = query.from_user.id
-    offset = 0
-    btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɢᴇ", callback_data=f"fe#homepage#{key}")])
+    season_buttons.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɪɢᴇ", callback_data=f"fe#homepage#{key}")])
 
-    await query.edit_message_reply_markup(InlineKeyboardMarkup(btn))
+    await query.edit_message_reply_markup(InlineKeyboardMarkup([season_buttons]))
+
+
+@Client.on_callback_query(filters.regex(r"^epis#"))
+async def epis_cb_handler(client: Client, query: CallbackQuery):
+    _, season = query.data.split("#")
+    
+    # Get episodes for the selected season
+    episodes = [f"{season}E{str(e).zfill(2)}" for e in range(1, 11)]
+
+    if int(query.from_user.id) not in [query.message.reply_to_message.from_user.id, 0]:
+        return await query.answer(
+            f"⚠️ ʜᴇʟʟᴏ {query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ...",
+            show_alert=True,
+        )
+
+    buttons = [
+        InlineKeyboardButton(text=episode.title(), callback_data=f"fe#{episode.lower()}#{season}")
+        for episode in episodes
+    ]
+    
+    buttons.insert(
+        0,
+        [InlineKeyboardButton(text="👇sᴇʟᴇᴄᴛ ʏᴏᴜʀ ᴇᴘɪsᴏᴅᴇ👇", callback_data="ident")]
+    )
+    buttons.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɪɢᴇ", callback_data=f"fe#homepage#{season}")])
+
+    await query.edit_message_reply_markup(InlineKeyboardMarkup([buttons]))
+
     
 
 @Client.on_callback_query(filters.regex(r"^fe#"))
