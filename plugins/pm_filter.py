@@ -296,9 +296,9 @@ async def episodes_cb_handler(client: Client, query: CallbackQuery):
     SEASONS = [f"Season {i+1}" for i in range(10)]  # Adjust according to your seasons data
 
     btn = []
-    for i in range(0, len(SEASONS)-1, 4):
+    for i in range(0, len(SEASONS)-1, 2):
         row = []
-        for j in range(4):
+        for j in range(2):
             if i+j < len(SEASONS):
                 row.append(
                     InlineKeyboardButton(
@@ -312,7 +312,7 @@ async def episodes_cb_handler(client: Client, query: CallbackQuery):
         0,
         [
             InlineKeyboardButton(
-                text="👇sᴇʟᴇᴄᴛ ʏᴏᴜʀ sᴇᴀsᴏɴ👇", callback_data="ident"
+                text="👇sᴇʟᴇᴄᴛ sᴇᴀsᴏɴ ꜰᴏʀ ᴇᴘɪꜱᴏᴅᴇꜱ👇", callback_data="ident"
             )
         ],
     )
@@ -324,7 +324,7 @@ async def episodes_cb_handler(client: Client, query: CallbackQuery):
 async def epis_cb_handler(client: Client, query: CallbackQuery):
     _, season_number, key = query.data.split("#")
     # Sample episode list
-    NUMBER_OF_EPISODES_PER_SEASON = 10  # Adjust according to your data
+    NUMBER_OF_EPISODES_PER_SEASON = 30  # Adjust according to your data
     episodes = [f"S{season_number}E{str(i+1).zfill(2)}" for i in range(NUMBER_OF_EPISODES_PER_SEASON)]
 
     btn = []
@@ -335,7 +335,7 @@ async def epis_cb_handler(client: Client, query: CallbackQuery):
                 row.append(
                     InlineKeyboardButton(
                         text=episodes[i+j],
-                        callback_data=f"episode#{episodes[i+j]}#{key}"
+                        callback_data=f"fe#{EPISODES[i+j].lower()}#{key}"
                     )
                 )
         btn.append(row)
@@ -352,13 +352,6 @@ async def epis_cb_handler(client: Client, query: CallbackQuery):
 
     await query.edit_message_reply_markup(InlineKeyboardMarkup(btn))
 
-
-@Client.on_callback_query(filters.regex(r"^episode#"))
-async def episode_cb_handler(client: Client, query: CallbackQuery):
-    _, episode, key = query.data.split("#")
-    # Handle the selected episode
-    # Fetch and display the content related to the selected episode
-    pass
 
 @Client.on_callback_query(filters.regex(r"^fe#"))
 async def filter_episodes_cb_handler(client: Client, query: CallbackQuery):
