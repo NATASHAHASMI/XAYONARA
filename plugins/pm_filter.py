@@ -364,33 +364,41 @@ async def filter_episodes_cb_handler(client: Client, query: CallbackQuery):
         btn = [[
                 InlineKeyboardButton(text=f"🔗 {get_size(file.file_size)}≽ {formate_file_name(file.file_name)}", callback_data=f'files#{reqnxt}#{file.file_id}'),]
                    for file in files
-              ]
-        btn.insert(0,[
-        InlineKeyboardButton("📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{offset}#{req}"),
-        InlineKeyboardButton("⛓️ Eᴘɪꜱᴏᴅᴇs", callback_data=f"episodes#{key}#{offset}#{req}")
-        ])
-    btn.insert(1, [
-        InlineKeyboardButton("🎬 Qᴜᴀʟɪᴛʏ", callback_data=f"qualities#{key}#{offset}#{req}"),
-        InlineKeyboardButton("📆 Yᴇᴀʀ", callback_data=f"years#{key}#{offset}#{req}"),
-    ])
-    btn.insert(2, [
-        InlineKeyboardButton("🍿 Sᴇᴀsᴏɴs", callback_data=f"seasons#{key}#{offset}#{req}"),
-        InlineKeyboardButton("♻️ Sᴇɴᴅ Aʟʟ", callback_data=batch_link)
-    ])
+        ]
+        btn.insert(0, 
+            [
+                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"years#{key}"),
+                InlineKeyboardButton(f"🍿 Sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
+            ]
+        )
+        btn.insert(0, [
+            InlineKeyboardButton(f"🎬 Qᴜᴀʟɪᴛʏ",  callback_data=f"qualities#{key}"),
+            InlineKeyboardButton(f"♻️ Sᴇɴᴅ Aʟʟ", callback_data=f"sendfiles#{key}")
+            ]
+        )
+        btn.insert(0, [
+            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+            InlineKeyboardButton("⛓️ Eᴘɪꜱᴏᴅᴇs", callback_data=f"episodes#{key}")
+            ]
+        )
     else:
         btn = []
-        btn.insert(0,[
-        InlineKeyboardButton("📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{offset}#{req}"),
-        InlineKeyboardButton("⛓️ Eᴘɪꜱᴏᴅᴇs", callback_data=f"episodes#{key}#{offset}#{req}")
-        ])
-    btn.insert(1, [
-        InlineKeyboardButton("🎬 Qᴜᴀʟɪᴛʏ", callback_data=f"qualities#{key}#{offset}#{req}"),
-        InlineKeyboardButton("📆 Yᴇᴀʀ", callback_data=f"years#{key}#{offset}#{req}"),
-    ])
-    btn.insert(2, [
-        InlineKeyboardButton("🍿 Sᴇᴀsᴏɴs", callback_data=f"seasons#{key}#{offset}#{req}"),
-        InlineKeyboardButton("♻️ Sᴇɴᴅ Aʟʟ", callback_data=batch_link)
-    ])
+        btn.insert(0, 
+            [
+                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"years#{key}"),
+                InlineKeyboardButton(f"🍿 Sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
+            ]
+        )
+        btn.insert(0, [
+            InlineKeyboardButton(f"🎬 Qᴜᴀʟɪᴛʏ",  callback_data=f"qualities#{key}"),
+            InlineKeyboardButton(f"♻️ Sᴇɴᴅ Aʟʟ", callback_data=f"sendfiles#{key}")
+            ]
+        )
+        btn.insert(0, [
+            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+            InlineKeyboardButton("⛓️ Eᴘɪꜱᴏᴅᴇs", callback_data=f"episodes#{key}")
+            ]
+        )
 
     if offset != "":
         try:
