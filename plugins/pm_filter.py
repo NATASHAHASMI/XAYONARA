@@ -355,15 +355,14 @@ async def filter_episodes_cb_handler(client: Client, query: CallbackQuery):
     temp.GETALL[key] = files
     settings = await get_settings(message.chat.id)
     pre = 'filep' if settings['file_secure'] else 'file'
-    links = ""
-    if settings["link"]:
-        btn = []
-        for file_num, file in enumerate(files, start=offset+1):
-            links += f"""<b>\n\n📗 <a href=https://t.me/{temp.U_NAME}?start=file_{query.message.chat.id}_{file.file_id}>❗️{get_size(file.file_size)}❗️ {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))} "{file_num}.</a></b>"""
-    else:
-        btn = [[
-                InlineKeyboardButton(text=f"🔗 {get_size(file.file_size)}≽ {formate_file_name(file.file_name)}", callback_data=f'files#{reqnxt}#{file.file_id}'),]
-                   for file in files
+    if settings["button"]:
+        btn = [
+            [
+                InlineKeyboardButton(
+                    text=f"🀄️{get_size(file.file_size)}🎴{' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))}", callback_data=f'{pre}#{file.file_id}'
+                ),
+            ]
+            for file in files
         ]
         btn.insert(0, 
             [
@@ -399,7 +398,6 @@ async def filter_episodes_cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton("⛓️ Eᴘɪꜱᴏᴅᴇs", callback_data=f"episodes#{key}")
             ]
         )
-
     if offset != "":
         try:
             if settings['max_btn']:
