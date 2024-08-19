@@ -323,9 +323,20 @@ async def episodes_cb_handler(client: Client, query: CallbackQuery):
 @Client.on_callback_query(filters.regex(r"^epis#"))
 async def epis_cb_handler(client: Client, query: CallbackQuery):
     _, season_number, key = query.data.split("#")
+    
+    # Convert season_number to integer for comparison
+    season_number_int = int(season_number)
+    
+    # Determine the formatting based on season number
+    def format_episode_number(num, season_num):
+        if season_num < 10:
+            return f"S0{season_num}E{str(num).zfill(2)}"
+        else:
+            return f"S{season_num}E{str(num).zfill(2)}"
+    
     # Sample episode list
-    NUMBER_OF_EPISODES_PER_SEASON = 30  # Adjust according to your data
-    episodes = [f"S{season_number}E{str(i+1).zfill(2)}" for i in range(NUMBER_OF_EPISODES_PER_SEASON)]
+    NUMBER_OF_EPISODES_PER_SEASON = 10  # Adjust according to your data
+    episodes = [format_episode_number(i + 1, season_number_int) for i in range(NUMBER_OF_EPISODES_PER_SEASON)]
 
     btn = []
     for i in range(0, len(episodes)-1, 4):
