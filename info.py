@@ -18,6 +18,7 @@ API_HASH = environ.get('API_HASH', '9f8082811c4e168f298e4574da790383')
 BOT_TOKEN = environ.get('BOT_TOKEN', "5845533149:AAG9kBcxXvMwu7HABDlGGADjWXE2cBeluIA")
 
 # Bot settings
+AUTH_CHANNEL = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('AUTH_CHANNEL', '-1001841340007 -1001779717901').split()] 
 CACHE_TIME = int(environ.get('CACHE_TIME', 300))
 USE_CAPTION_FILTER = bool(environ.get('USE_CAPTION_FILTER', True))
 
@@ -32,9 +33,9 @@ CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHAN
 auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '').split()]
 AUTH_USERS = (auth_users + ADMINS) if auth_users else []
 PREMIUM_USER = [int(user) if id_pattern.search(user) else user for user in environ.get('PREMIUM_USER', '1843754190').split()]
-auth_channel = environ.get('AUTH_CHANNEL', '-1002224137021')
+authh_channel = environ.get('AUTHH_CHANNEL', '-1002224137021')
 auth_grp = environ.get('AUTH_GROUP')
-AUTH_CHANNEL = int(auth_channel) if auth_channel and id_pattern.search(auth_channel) else None
+AUTHH_CHANNEL = int(authh_channel) if authh_channel and id_pattern.search(authh_channel) else None
 AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
 support_chat_id = environ.get('SUPPORT_CHAT_ID', '-1002071170793')
 reqst_channel = environ.get('REQST_CHANNEL_ID', '')
