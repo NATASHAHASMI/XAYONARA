@@ -350,7 +350,7 @@ async def filter_episodes_cb_handler(client: Client, query: CallbackQuery):
 
     files, offset, total_results = await get_search_results(chat_id, search, offset=0, filter=True)
     if not files:
-        await query.answer("sᴏʀʀʏ {episode.title()} ɴᴏᴛ ғᴏᴜɴᴅ ғᴏʀ {search}", show_alert=1)
+        await query.answer("🚫 ɴᴏ ꜰɪʟᴇꜱ ᴡᴇʀᴇ ꜰᴏᴜɴᴅ 🚫", show_alert=1)
         return
     temp.GETALL[key] = files
     settings = await get_settings(message.chat.id)
@@ -2095,14 +2095,14 @@ async def auto_filter(client, msg, spoll=False):
     # reqstr = await client.get_users(reqstr1)
     
     if not spoll:
-        try:
-            await react_msg(client, message)
-        except:
-            pass
         message = msg
         if message.text.startswith("/"): return  # ignore commands
         if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
             return
+        try:
+            await react_msg(client, message)
+        except:
+            pass
         if len(message.text) < 100:
             search = message.text
             m=await message.reply_text(f"<b><pre>𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓 🔍</pre></b> `{search}` ")
