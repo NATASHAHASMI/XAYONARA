@@ -220,29 +220,6 @@
                 </div>
             </div>
         </div>
-        <footer>
-            <center>
-
-                <div class="movie-cont">
-                    <div class="movieSug">
-                        <div class="movieDets">
-
-                        </div>
-                        <div class="movieimg">
-                            <img src="">
-                        </div>
-                    </div>
-                    <div class="low-width-movie-dets">
-                        <div class="movieStsBar">
-                            <div class="movieDets-mini">
-
-                            </div>
-                        </div>
-                    </div>
-                    <button class="ranMovBtn" onclick="getDets()">Get More Movies Suggestion</button>
-                </div>
-
-            </center>
             
             <center>
                 <div class="copyright">
@@ -291,7 +268,7 @@
                     loadingScreen.classList.add("hide");
                     document.querySelector(".outer").style.display = "block"; // Show main content
                 }, 1000); // 1 seconds delay for success message
-            }, 1100); // 2 seconds delay for initial loading
+            }, 1000); // 2 seconds delay for initial loading
         });
 
         new WOW().init();
