@@ -73,15 +73,15 @@ async def start(client, message):
         else:
             gtxt = "<b>ɢᴏᴏᴅ ɴɪɢʜᴛ 🥱</b>"
         m=await message.reply_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ</i></b>")
-        await asyncio.sleep(0.3)
-        await m.edit_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ.</i></b>")
-        await asyncio.sleep(0.3)
-        await m.edit_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ..</i></b>")
-        await asyncio.sleep(0.3)
-        await m.edit_text("<b><i><pre>ꜱᴛᴀʀᴛɪɴɢ...⚡</i></b>")
-        await asyncio.sleep(0.3)
-        await m.edit_text("⚡")
         await asyncio.sleep(0.2)
+        await m.edit_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ.</i></b>")
+        await asyncio.sleep(0.2)
+        await m.edit_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ..</i></b>")
+        await asyncio.sleep(0.2)
+        await m.edit_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ..⚡</i></b>")
+        await asyncio.sleep(0.2)
+        await m.edit_text("⚡")
+        await asyncio.sleep(0.3)
         await m.delete()
         await message.reply_photo(
             photo=random.choice(PICS),
@@ -117,7 +117,8 @@ async def start(client, message):
             photo="https://telegra.ph/file/20b4aaaddb8aba646e53c.jpg",
             caption="**You are not in our channel given below so you don't get the movie file...\n\nIf you want the movie file, click on the '🍿ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ🍿' button below and join our back-up channel, then click on the '🔄 Try Again' button below...\n\nThen you will get the movie files...**",
             reply_markup=InlineKeyboardMarkup(btn),
-            parse_mode=enums.ParseMode.MARKDOWN
+            parse_mode=enums.ParseMode.MARKDOWN,
+            has_spoiler=True
             )
         return
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
@@ -132,7 +133,8 @@ async def start(client, message):
             photo=random.choice(PICS),
             caption=script.START_TXT.format(message.from_user.mention, gtxt, temp.U_NAME, temp.B_NAME),
             reply_markup=reply_markup,
-            parse_mode=enums.ParseMode.HTML
+            parse_mode=enums.ParseMode.HTML,
+            has_spoiler=True
         )
         return
     data = message.command[1]
