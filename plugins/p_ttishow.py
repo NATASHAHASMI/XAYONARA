@@ -182,8 +182,8 @@ async def get_ststs(bot, message):
     
     # React with ⚡ emoji
     try:
-        await message.react("⚡")
-    except Exception:
+        await react_msg(client, message)
+    except:
         pass
 
     # Fetch stats
