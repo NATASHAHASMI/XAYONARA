@@ -16,7 +16,7 @@ async def handwrite(_, message: Message):
     if not message.reply_to_message:
         text = message.text.split(None, 1)[1]
         m = await message.reply_text("<b>ᴘʟᴇᴀsᴇ ᴡᴀɪᴛ...</b>")
-        API = f"https://api.sdbots.tech/write?text={text}"
+        API = f"https://apis.xditya.me/write?text={text}"
         req = requests.get(API).url
         await message.reply_photo(
             photo=req,
