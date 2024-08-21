@@ -167,23 +167,50 @@ async def re_enable_chat(bot, message):
 
 @Client.on_message(filters.command('stats') & filters.incoming)
 async def get_ststs(bot, message):
-    rju = await message.reply(f'<i><b>𝙵𝙴𝚃𝙲𝙷𝙸𝙽𝙶 𝚂𝚃𝙰𝚃𝚂..</b></i>')
-    #users and chats
+    rju = await message.reply(f'<i><b>Fᴇᴛᴄʜɪɴɢ Sᴛᴀᴛꜱ</b></i>')
+    await asyncio.sleep(0.2)
+    await rju.edit('<i><b>Fᴇᴛᴄʜɪɴɢ Sᴛᴀᴛꜱ.</b></i>')
+    await asyncio.sleep(0.2)
+    await rju.edit('<i><b>Fᴇᴛᴄʜɪɴɢ Sᴛᴀᴛꜱ..🏴‍☠️</b></i>')
+    await asyncio.sleep(0.2)
+    await rju.edit('🏴‍☠️')
+
+    try:
+        await rju.react("⚡")
+    except:
+        pass
+    
+    # React with ⚡ emoji
+    try:
+        await message.react("⚡")
+    except Exception:
+        pass
+
+    # Fetch stats
     total_users = await db.total_users_count()
     totl_chats = await db.total_chat_count()
-    #primary db
     filesp = await Media.count_documents()
-    #secondary db
     totalsec = await Media2.count_documents()
-    #primary
+
     stats = await clientDB.command('dbStats')
-    used_dbSize = (stats['dataSize']/(1024*1024))+(stats['indexSize']/(1024*1024))
-    free_dbSize = 512-used_dbSize
-    #secondary
+    used_dbSize = (stats['dataSize']/(1024*1024)) + (stats['indexSize']/(1024*1024))
+    free_dbSize = 512 - used_dbSize
+
     stats2 = await clientDB2.command('dbStats')
-    used_dbSize2 = (stats2['dataSize']/(1024*1024))+(stats2['indexSize']/(1024*1024))
-    free_dbSize2 = 512-used_dbSize2
-    await rju.edit(script.STATUS_TXT.format((int(filesp)+int(totalsec)), total_users, totl_chats, filesp, round(used_dbSize, 2), round(free_dbSize, 2), totalsec, round(used_dbSize2, 2), round(free_dbSize2, 2)))
+    used_dbSize2 = (stats2['dataSize']/(1024*1024)) + (stats2['indexSize']/(1024*1024))
+    free_dbSize2 = 512 - used_dbSize2
+
+    await rju.edit(script.STATUS_TXT.format(
+        (int(filesp) + int(totalsec)),
+        total_users,
+        totl_chats,
+        filesp,
+        round(used_dbSize, 2),
+        round(free_dbSize, 2),
+        totalsec,
+        round(used_dbSize2, 2),
+        round(free_dbSize2, 2)
+    ))
 
 
 @Client.on_message(filters.command('invite') & filters.user(ADMINS))
