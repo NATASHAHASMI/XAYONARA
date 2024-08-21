@@ -22,6 +22,7 @@ import json
 import base64
 logger = logging.getLogger(__name__)
 
+channels = [-1001779717901, -1001841340007]
 BATCH_FILES = {}
 TIMEZONE = "Asia/Kolkata"
 
@@ -92,35 +93,33 @@ async def start(client, message):
         )
         return
     
-    if AUTH_CHANNEL and not await is_req_subscribed(client, message):
+    for channel in channels:
+    if channel and not await is_subscribed(client, message, channel):
         try:
-            invite_link = await client.create_chat_invite_link(int(AUTH_CHANNEL), creates_join_request=True)
+            invite_link = await client.create_chat_invite_link(int(channel), creates_join_request=True)
         except ChatAdminRequired:
-            logger.error("Make sure Bot is admin in Forcesub channel")
-            return
+            logger.error(f"Make sure Bot is admin in Forcesub channel {channel}")
+            continue
         btn = [
-            [
-                InlineKeyboardButton("🍿 Jᴏɪɴ Bᴀᴄᴋᴜᴘ Cʜᴀɴɴᴇʟ 🍿", url=invite_link.invite_link)
-            ],[
-                InlineKeyboardButton("㋡ Wʜʏ l'ᴍ Jᴏɪɴɪɴɢ ❓", callback_data='sinfo')
-            ]
+            [InlineKeyboardButton("🍿 Jᴏɪɴ Oᴜʀ Cʜᴀɴɴᴇʟ 🍿", url=invite_link.invite_link)],
+            [InlineKeyboardButton("㋡ Wʜʏ l'ᴍ Jᴏɪɴɪɴɢ ❓", callback_data='sinfo')]
         ]
-
         if message.command[1] != "subscribe":
             try:
                 kk, file_id = message.command[1].split("_", 1)
                 btn.append([InlineKeyboardButton("🔄 Tʀʏ Aɢᴀɪɴ", callback_data=f"checksub#{kk}#{file_id}")])
             except (IndexError, ValueError):
                 btn.append([InlineKeyboardButton("🔄 Tʀʏ Aɢᴀɪɴ", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
+        
         await client.send_photo(
             chat_id=message.from_user.id,
             photo="https://telegra.ph/file/20b4aaaddb8aba646e53c.jpg",
-            caption="**You are not in our channel given below so you don't get the movie file...\n\nIf you want the movie file, click on the '🍿ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ🍿' button below and join our back-up channel, then click on the '🔄 Try Again' button below...\n\nThen you will get the movie files...**",
+            caption="**You are not in our required channels so you don't get the movie file...\n\nIf you want the movie file, click on the '🍿 Join Our Channel 🍿' button below and join all required channels, then click on the '🔄 Try Again' button below...\n\nThen you will get the movie files...**",
             reply_markup=InlineKeyboardMarkup(btn),
-            parse_mode=enums.ParseMode.MARKDOWN,
-            has_spoiler=True
-            )
+            parse_mode=enums.ParseMode.MARKDOWN
+        )
         return
+
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
         buttons = [[
                     InlineKeyboardButton('👨‍🚒 ʜᴇʟᴘ', callback_data='help'),
