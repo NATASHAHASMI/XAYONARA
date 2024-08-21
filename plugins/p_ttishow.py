@@ -176,13 +176,13 @@ async def get_ststs(bot, message):
     await rju.edit('🏴‍☠️')
 
     try:
-        await rju.react("⚡")
+        await rju.react("⚡", big=True)
     except:
         pass
     
     # React with ⚡ emoji
     try:
-        await react_msg(client, message)
+        await message.react("⚡", big=True)
     except:
         pass
 
