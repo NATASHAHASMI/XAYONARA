@@ -79,14 +79,11 @@ async def start(client, message):
         await m.edit_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ..</i></b>")
         await asyncio.sleep(0.2)
         await m.edit_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ..⚡</i></b>")
+        await m.react("😇", big=True)
         await asyncio.sleep(0.2)
         await m.edit_text("⚡")
         await asyncio.sleep(0.3)
         await m.delete()
-        try:
-            await m.react("⚡")
-        except:
-            pass
         await message.reply_photo(
             photo=random.choice(PICS),
             caption=script.START_TXT.format(message.from_user.mention, gtxt, temp.U_NAME, temp.B_NAME),
