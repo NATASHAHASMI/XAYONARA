@@ -174,19 +174,14 @@ async def get_ststs(bot, message):
     await rju.edit('<i><b>Fᴇᴛᴄʜɪɴɢ Sᴛᴀᴛꜱ..🏴‍☠️</b></i>')
     await asyncio.sleep(0.2)
     await rju.edit('🏴‍☠️')
-
     try:
-        await rju.react("⚡", big=True)
+        await rju.react("⚡",big=True)
     except:
         pass
-    
-    # React with ⚡ emoji
     try:
-        await message.react("⚡", big=True)
+        await message.react("⚡",big=True)
     except:
         pass
-
-    # Fetch stats
     total_users = await db.total_users_count()
     totl_chats = await db.total_chat_count()
     filesp = await Media.count_documents()
