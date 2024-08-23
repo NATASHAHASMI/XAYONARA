@@ -2112,7 +2112,7 @@ async def auto_filter(client, msg, spoll=False):
             search = message.text
             m=await message.reply_text(f"<b><pre>𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓 🔍</pre></b> `{search}` ")
             try:
-                await m.react("👨‍💻",big=True)
+                await react_msg(client, m)
             except:
                 pass
             search = search.lower()
