@@ -2111,6 +2111,10 @@ async def auto_filter(client, msg, spoll=False):
         if len(message.text) < 100:
             search = message.text
             m=await message.reply_text(f"<b><pre>𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓 🔍</pre></b> `{search}` ")
+            try:
+                await m.react("🧑‍💻",big=True)
+            except:
+                pass
             search = search.lower()
             find = search.split(" ")
             search = ""
