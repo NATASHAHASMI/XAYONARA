@@ -55,9 +55,8 @@ class temp(object):
     IMDB_CAP = {}
 
 async def is_req_subscribed(bot, query, channels):
-    # Check if user has a pending join request
     if await db.find_join_req(query.from_user.id):
-        return True, []  # No buttons needed if the user has a join request
+        return True, []
 
     buttons = []
 
@@ -70,7 +69,7 @@ async def is_req_subscribed(bot, query, channels):
                 continue
         except UserNotParticipant:
             # If user is not a participant, add a join button
-            invite_link = chat.invite_link if chat.invite_link else 'https://t.me/joinchat/...'  # Handle if invite link is not available
+            invite_link = await client.create_chat_invite_link(int(channel_id), creates_join_request=True)
             buttons.append([InlineKeyboardButton(f'Join {chat.title}', url=invite_link)])
         except Exception as e:
             logger.exception(e)
