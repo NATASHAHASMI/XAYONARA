@@ -2,7 +2,7 @@ import re
 from os import environ,getenv
 from Script import script 
 
-id_pattern = re.compile(r'^-?\d+$.')
+id_pattern = re.compile(r'^.\d+$')
 def is_enabled(value, default):
     if value.lower() in ["true", "yes", "1", "enable", "y"]:
         return True
@@ -33,9 +33,8 @@ auth_users = [int(user) if id_pattern.search(user) else user for user in environ
 AUTH_USERS = (auth_users + ADMINS) if auth_users else []
 PREMIUM_USER = [int(user) if id_pattern.search(user) else user for user in environ.get('PREMIUM_USER', '1843754190').split()]
 auth_grp = environ.get('AUTH_GROUP')
-AUTH_CHANNEL = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('AUTH_CHANNEL', '-1002196649548 -1002158842186').split()]
-AUTH_CHANNEL = [f"-100{ch}" if ch.startswith('-') and not ch.startswith('-100') else ch for ch in AUTH_CHANNEL]
 AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
+AUTH_CHANNEL = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('AUTH_CHANNEL', '-1002158842186 -1002196649548').split()]
 support_chat_id = environ.get('SUPPORT_CHAT_ID', '-1002071170793')
 reqst_channel = environ.get('REQST_CHANNEL_ID', '')
 REQST_CHANNEL = int(reqst_channel) if reqst_channel and id_pattern.search(reqst_channel) else None
