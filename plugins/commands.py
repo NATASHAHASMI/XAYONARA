@@ -13,7 +13,7 @@ from pyrogram.types import *
 from database.ia_filterdb import Media, Media2,  get_file_details, unpack_new_file_id, get_bad_files
 from database.users_chats_db import db
 from info import CHANNELS, ADMINS, AUTH_CHANNEL, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION, CUSTOM_FILE_CAPTION, PROTECT_CONTENT, CHNL_LNK, GRP_LNK, REQST_CHANNEL, SUPPORT_CHAT_ID, SUPPORT_CHAT, MAX_B_TN, VERIFY, SHORTLINK_API, SHORTLINK_URL, TUTORIAL, IS_TUTORIAL, PREMIUM_USER
-from utils import get_settings, get_size, save_group_settings, temp, verify_user, check_token, check_verification, get_token, get_shortlink, get_tutorial, is_subscribed
+from utils import get_settings, get_size, save_group_settings, temp, verify_user, check_token, check_verification, get_token, get_shortlink, get_tutorial, is_req_subscribed
 from utils import react_msg
 from database.connections_mdb import active_connection
 # from plugins.pm_filter import ENABLE_SHORTLINK
@@ -96,37 +96,26 @@ async def start(client, message):
 
     if AUTH_CHANNEL:
         try:
-            btn = await is_subscribed(client, message, AUTH_CHANNEL)
+            btn = await is_req_subscribed(client, message, AUTH_CHANNEL)
             if btn:
                 username = (await client.get_me()).username
                 if message.command[1] != "subscribe":
-                    try:
-                        kk, file_id = message.command[1].split("_", 1)
-                        btn.append([InlineKeyboardButton("🔄 Tʀʏ Aɢᴀɪɴ", callback_data=f"checksub#{kk}#{file_id}")])
-                    except (IndexError, ValueError):
-                        btn.append([InlineKeyboardButton("🔄 Tʀʏ Aɢᴀɪɴ", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
-                
-                    # Check if the channel is private and provide a request to join link
-                    if AUTH_CHANNEL.startswith("-100"):
-                        invite_link = await client.create_chat_invite_link(int(AUTH_CHANNEL))
-                        btn.insert(0, [InlineKeyboardButton("🍿ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ🍿", url=invite_link.invite_link)])
-                    else:
-                        btn.insert(0, [InlineKeyboardButton("🍿ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ🍿", url=invite_link.invite_link)])
-                        
-                await client.send_photo(
-                    chat_id=message.from_user.id,
-                    photo="https://telegra.ph/file/20b4aaaddb8aba646e53c.jpg",
-                    caption=("**You are not in our channel given below so you don't get the movie file...\n\n"
-                             "If you want the movie file, click on the '🍿ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ🍿' button below "
-                             "and join our back-up channel, then click on the '🔄 Try Again' button below...\n\n"
-                             "Then you will get the movie files...**"),
-                    reply_markup=InlineKeyboardMarkup(btn),
-                    parse_mode=enums.ParseMode.MARKDOWN,
-                    has_spoiler=True
+                try:
+                    kk, file_id = message.command[1].split("_", 1)
+                    btn.append([InlineKeyboardButton("🔄 Tʀʏ Aɢᴀɪɴ", callback_data=f"checksub#{kk}#{file_id}")])
+                except (IndexError, ValueError):
+                    btn.append([InlineKeyboardButton("🔄 Tʀʏ Aɢᴀɪɴ", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
+            await client.send_photo(
+                chat_id=message.from_user.id,
+                photo="https://telegra.ph/file/20b4aaaddb8aba646e53c.jpg",
+                caption="**You are not in our channel given below so you don't get the movie file...\n\nIf you want the movie file, click on the '🍿ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ🍿' button below and join our back-up channel, then click on the '🔄 Try Again' button below...\n\nThen you will get the movie files...**",
+                reply_markup=InlineKeyboardMarkup(btn),
+                parse_mode=enums.ParseMode.MARKDOWN,
+                has_spoiler=True
                 )
-                return
-        except:
-            pass
+            return
+        except Exception as e:
+            print(e)
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
         buttons = [[
                     InlineKeyboardButton('👨‍🚒 ʜᴇʟᴘ', callback_data='help'),
