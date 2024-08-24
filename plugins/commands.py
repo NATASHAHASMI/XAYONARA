@@ -96,7 +96,7 @@ async def start(client, message):
 
     if AUTH_CHANNEL:
         try:
-            btn = await is_req_subscribed(client, message, AUTH_CHANNEL)
+            btn = await is_subscribed(client, message, AUTH_CHANNEL)
             if btn:
                 username = (await client.get_me()).username
                 if message.command[1] != "subscribe":
@@ -105,17 +105,28 @@ async def start(client, message):
                         btn.append([InlineKeyboardButton("🔄 Tʀʏ Aɢᴀɪɴ", callback_data=f"checksub#{kk}#{file_id}")])
                     except (IndexError, ValueError):
                         btn.append([InlineKeyboardButton("🔄 Tʀʏ Aɢᴀɪɴ", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
+                
+                    # Check if the channel is private and provide a request to join link
+                    if AUTH_CHANNEL.startswith("-100"):
+                        invite_link = await client.create_chat_invite_link(int(AUTH_CHANNEL))
+                        btn.insert(0, [InlineKeyboardButton("🍿ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ🍿", url=invite_link.invite_link)])
+                    else:
+                        btn.insert(0, [InlineKeyboardButton("🍿ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ🍿", url=f"https://t.me/{AUTH_CHANNEL.replace('-100', '')}")])
+
                 await client.send_photo(
                     chat_id=message.from_user.id,
                     photo="https://telegra.ph/file/20b4aaaddb8aba646e53c.jpg",
-                    caption="**You are not in our channel given below so you don't get the movie file...\n\nIf you want the movie file, click on the '🍿ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ🍿' button below and join our back-up channel, then click on the '🔄 Try Again' button below...\n\nThen you will get the movie files...**",
+                    caption=("**You are not in our channel given below so you don't get the movie file...\n\n"
+                             "If you want the movie file, click on the '🍿ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ🍿' button below "
+                             "and join our back-up channel, then click on the '🔄 Try Again' button below...\n\n"
+                             "Then you will get the movie files...**"),
                     reply_markup=InlineKeyboardMarkup(btn),
                     parse_mode=enums.ParseMode.MARKDOWN,
                     has_spoiler=True
                 )
                 return
         except:
-            pass 
+            pass
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
         buttons = [[
                     InlineKeyboardButton('👨‍🚒 ʜᴇʟᴘ', callback_data='help'),
