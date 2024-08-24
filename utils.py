@@ -69,7 +69,7 @@ async def is_req_subscribed(bot, query, channels):
                 return True
         except UserNotParticipant:
             invite_link = await bot.create_chat_invite_link(int(channel_id), creates_join_request=True)
-            btn.append([InlineKeyboardButton(f'Join', url=invite_link.invite_link)])
+            btn.append([InlineKeyboardButton(f'𝐉𝐎𝐈𝐍 🏴‍☠️', url=invite_link.invite_link)])
         except Exception as e:
             # Log the exception or handle it as needed
             pass
