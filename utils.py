@@ -4,7 +4,7 @@ from info import AUTH_CHANNEL, LONG_IMDB_DESCRIPTION, MAX_LIST_ELM, SHORTLINK_UR
 from imdb import Cinemagoer 
 import asyncio
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
-from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid
+from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid, UserNotParticipant
 from pyrogram import enums
 from typing import Union
 from Script import script
@@ -75,7 +75,7 @@ async def is_req_subscribed(bot, query, channels):
     # If the user is neither a member nor has sent a join request, return False
     return False
 
-async def is_req_subscribed(bot, query):
+async def is_subscribed(bot, query):
     if await db.find_join_req(query.from_user.id):
         return True
     try:
