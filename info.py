@@ -27,8 +27,6 @@ MELCOW_IMG = environ.get("MELCOW_VID", "https://graph.org/file/411ffa270f82bac09
 SPELL_IMG = environ.get("SPELL_IMG", "https://te.legra.ph/file/15c1ad448dfe472a5cbb8.jpg")
 
 # Admins, Channels & Users
-auth1_channel = environ.get('AUTH1_CHANNEL', '-1001841340007')
-AUTH1_CHANNEL = int(auth1_channel) if auth1_channel and id_pattern.search(auth1_channel) else None
 ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '1843754190 5837099475').split()]
 CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1001638006524 -1001983152794 -1001965301580 -1001638006524 -1002026546209 -1002062484191 -1001644930682 -1001756564118 -1002045252181 -1002004346552 -1002196649548').split()]
 auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '').split()]
@@ -36,7 +34,7 @@ AUTH_USERS = (auth_users + ADMINS) if auth_users else []
 PREMIUM_USER = [int(user) if id_pattern.search(user) else user for user in environ.get('PREMIUM_USER', '1843754190').split()]
 auth_grp = environ.get('AUTH_GROUP')
 AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
-AUTH_CHANNEL = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('AUTH_CHANNEL', '-1002158842186 -1002196649548').split()]
+AUTH_CHANNEL = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('AUTH_CHANNEL', '-1002158842186 -1001841340007').split()]
 support_chat_id = environ.get('SUPPORT_CHAT_ID', '-1002071170793')
 reqst_channel = environ.get('REQST_CHANNEL_ID', '')
 REQST_CHANNEL = int(reqst_channel) if reqst_channel and id_pattern.search(reqst_channel) else None
