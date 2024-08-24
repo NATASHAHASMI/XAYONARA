@@ -1,6 +1,6 @@
 import logging
 from pyrogram.errors import InputUserDeactivated, UserNotParticipant, FloodWait, UserIsBlocked, PeerIdInvalid
-from info import AUTH_CHANNEL, LONG_IMDB_DESCRIPTION, MAX_LIST_ELM, SHORTLINK_URL, SHORTLINK_API, IS_SHORTLINK, LOG_CHANNEL, TUTORIAL, GRP_LNK, CHNL_LNK, CUSTOM_FILE_CAPTION
+from info import AUTH_CHANNEL, AUTH1_CHANNEL, LONG_IMDB_DESCRIPTION, MAX_LIST_ELM, SHORTLINK_URL, SHORTLINK_API, IS_SHORTLINK, LOG_CHANNEL, TUTORIAL, GRP_LNK, CHNL_LNK, CUSTOM_FILE_CAPTION
 from imdb import Cinemagoer 
 import asyncio
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, ChatMember
@@ -24,7 +24,6 @@ from shortzy import Shortzy
 import http.client
 import json
 
-bot = Client("my_bot")
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
@@ -56,21 +55,20 @@ class temp(object):
     SETTINGS = {}
     IMDB_CAP = {}
 
-async def check_subscription_status(user_id: int) -> bool:
-    required_channels = ["@moviestudioabhi","@MYFLiiX"]  # Replace with your channels' usernames
+async def is_subscribed(bot, query):
+    if await db.find_join_req(query.from_user.id):
+        return True
+    try:
+        user = await bot.get_chat_member(AUTH1_CHANNEL, query.from_user.id)
+    except UserNotParticipant:
+        pass
+    except Exception as e:
+        logger.exception(e)
+    else:
+        if user.status != enums.ChatMemberStatus.BANNED:
+            return True
 
-    for channel in required_channels:
-        try:
-            member = await bot.get_chat_member(channel, user_id)
-            if member.status not in ['member', 'administrator', 'creator']:
-                return False
-        except Exception as e:
-            # Handle the case where the channel is private or any other error occurs
-            print(f"Error checking subscription for channel {channel}: {e}")
-            return False
-    
-    return True
-    
+    return False
 
 async def is_req_subscribed(bot, query, channels):
     # Check if the user has a pending join request
