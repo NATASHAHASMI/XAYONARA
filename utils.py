@@ -24,6 +24,7 @@ from shortzy import Shortzy
 import http.client
 import json
 
+bot = Client("my_bot")
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
