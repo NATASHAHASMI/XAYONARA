@@ -54,41 +54,22 @@ class temp(object):
     SETTINGS = {}
     IMDB_CAP = {}
 
-async def is_req_subscribed(bot, query, channels):
-    # Check if the user has already sent a join request in any of the channels
-    if await db.find_join_req(query.from_user.id):
-        return True
-
-    for channel_id in channels:
+async def is_subscribed(bot, query, channel):
+    btn = []
+    for id in channel:
+        chat = await bot.get_chat(int(id))
         try:
-            user = await bot.get_chat_member(channel_id, query.from_user.id)
+            await bot.get_chat_member(id, query.from_user.id)
         except UserNotParticipant:
-            # If user is not a participant, continue to check other channels
-            continue
+            # For private channels, generate invite link
+            if id.startswith('-100'):
+                invite_link = await bot.create_chat_invite_link(int(id))
+                btn.append([InlineKeyboardButton(f'Join {chat.title}', url=invite_link.invite_link)])
+            else:
+                btn.append([InlineKeyboardButton(f'Join {chat.title}', url=f"https://t.me/{chat.username}")])
         except Exception as e:
-            logger.exception(e)
-            continue
-        else:
-            if user.status != enums.ChatMemberStatus.BANNED:
-                return True
-
-    # If the user is neither a member nor has sent a join request, return False
-    return False
-
-async def is_subscribed(bot, query):
-    if await db.find_join_req(query.from_user.id):
-        return True
-    try:
-        user = await bot.get_chat_member(AUTH_CHANNEL, query.from_user.id)
-    except UserNotParticipant:
-        pass
-    except Exception as e:
-        logger.exception(e)
-    else:
-        if user.status != enums.ChatMemberStatus.BANNED:
-            return True
-
-    return False
+            pass
+    return btn
 
 async def is_check_admin(bot, chat_id, user_id):
     try:
