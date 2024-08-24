@@ -93,43 +93,46 @@ async def start(client, message):
             has_spoiler=True
         )
         return
-    
+
     if AUTH_CHANNEL:
         try:
             btn = await is_subscribed(client, message, AUTH_CHANNEL)
             if btn:
                 username = (await client.get_me()).username
                 if message.command[1] != "subscribe":
-                try:
-                    kk, file_id = message.command[1].split("_", 1)
-                    btn.append([InlineKeyboardButton("🔄 Tʀʏ Aɢᴀɪɴ", callback_data=f"checksub#{kk}#{file_id}")])
-                except (IndexError, ValueError):
-                    btn.append([InlineKeyboardButton("🔄 Tʀʏ Aɢᴀɪɴ", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
-            await client.send_photo(
-                chat_id=message.from_user.id,
-                photo="https://telegra.ph/file/20b4aaaddb8aba646e53c.jpg",
-                caption="**You are not in our channel given below so you don't get the movie file...\n\nIf you want the movie file, click on the '🍿ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ🍿' button below and join our back-up channel, then click on the '🔄 Try Again' button below...\n\nThen you will get the movie files...**",
-                reply_markup=InlineKeyboardMarkup(btn),
-                parse_mode=enums.ParseMode.MARKDOWN,
-                has_spoiler=True
-            )
-            return
-    if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
-        buttons = [[
-                    InlineKeyboardButton('👨‍🚒 ʜᴇʟᴘ', callback_data='help'),
-                    InlineKeyboardButton('📚 ᴀʙᴏᴜᴛ', callback_data='about')
-                ],[
-                    InlineKeyboardButton('‼️ ᴅɪꜱᴄʟᴀɪᴍᴇʀ ‼️', callback_data='disclaimer')
-                  ]]
-        reply_markup = InlineKeyboardMarkup(buttons)      
-        await message.reply_photo(
-            photo=random.choice(PICS),
-            caption=script.START_TXT.format(message.from_user.mention, gtxt, temp.U_NAME, temp.B_NAME),
-            reply_markup=reply_markup,
-            parse_mode=enums.ParseMode.HTML,
-            has_spoiler=True
-        )
-        return
+                    try:
+                        kk, file_id = message.command[1].split("_", 1)
+                        btn.append([InlineKeyboardButton("🔄 Tʀʏ Aɢᴀɪɴ", callback_data=f"checksub#{kk}#{file_id}")])
+                    except (IndexError, ValueError):
+                        btn.append([InlineKeyboardButton("🔄 Tʀʏ Aɢᴀɪɴ", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
+                await client.send_photo(
+                    chat_id=message.from_user.id,
+                    photo="https://telegra.ph/file/20b4aaaddb8aba646e53c.jpg",
+                    caption="**You are not in our channel given below so you don't get the movie file...\n\nIf you want the movie file, click on the '🍿ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ🍿' button below and join our back-up channel, then click on the '🔄 Try Again' button below...\n\nThen you will get the movie files...**",
+                    reply_markup=InlineKeyboardMarkup(btn),
+                    parse_mode=enums.ParseMode.MARKDOWN,
+                    has_spoiler=True
+                )
+                return
+        except:
+            pass 
+if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
+    buttons = [[
+                InlineKeyboardButton('👨‍🚒 ʜᴇʟᴘ', callback_data='help'),
+                InlineKeyboardButton('📚 ᴀʙᴏᴜᴛ', callback_data='about')
+            ],[
+                InlineKeyboardButton('‼️ ᴅɪꜱᴄʟᴀɪᴍᴇʀ ‼️', callback_data='disclaimer')
+              ]]
+    reply_markup = InlineKeyboardMarkup(buttons)      
+    await message.reply_photo(
+        photo=random.choice(PICS),
+        caption=script.START_TXT.format(message.from_user.mention, gtxt, temp.U_NAME, temp.B_NAME),
+        reply_markup=reply_markup,
+        parse_mode=enums.ParseMode.HTML,
+        has_spoiler=True
+    )
+    return
+
     data = message.command[1]
     try:
         pre, file_id = data.split('_', 1)
