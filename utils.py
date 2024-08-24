@@ -55,27 +55,36 @@ class temp(object):
     IMDB_CAP = {}
 
 async def is_req_subscribed(bot, query, channels):
+    # Check if the user has a pending join request
     if await db.find_join_req(query.from_user.id):
-        return True
-    
-    btn = []
-    
+        return True, []  # No buttons needed if there is a join request
+
+    buttons = []
+    all_subscribed = True
+
     for channel_id in channels:
         try:
             chat = await bot.get_chat(int(channel_id))
-            user = await bot.get_chat_member(channel_id, query.from_user.id)
+            user = await bot.get_chat_member(int(channel_id), query.from_user.id)
             
-            if user.status != enums.ChatMemberStatus.BANNED:
-                return True
+            # If the user is not a member of this channel
+            if user.status in [enums.ChatMemberStatus.BANNED, enums.ChatMemberStatus.LEFT]:
+                all_subscribed = False
+                invite_link = await bot.create_chat_invite_link(int(channel_id), creates_join_request=True)
+                buttons.append([InlineKeyboardButton(f'Join {chat.title}', url=invite_link.invite_link)])
+        
         except UserNotParticipant:
-            invite_link = await bot.create_chat_invite_link(int(channel_id), creates_join_request=True)
-            btn.append([InlineKeyboardButton(f'Join', url=invite_link.invite_link)])
+            # User is not a participant; create an invite link
+            try:
+                invite_link = await bot.create_chat_invite_link(int(channel_id), creates_join_request=True)
+                chat = await bot.get_chat(int(channel_id))
+                buttons.append([InlineKeyboardButton(f'Join {chat.title}', url=invite_link.invite_link)])
+            except Exception as e:
+                logger.exception(f"Error creating invite link for channel {channel_id}: {e}")
         except Exception as e:
-            # Log the exception or handle it as needed
-            pass
-    
-    return btn
+            logger.exception(f"Error checking membership for channel {channel_id}: {e}")
 
+    return all_subscribed, buttons
 
 async def react_msg(client, message):
     emojis = [
