@@ -116,23 +116,22 @@ async def start(client, message):
                 return
         except:
             pass 
-if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
-    buttons = [[
-                InlineKeyboardButton('👨‍🚒 ʜᴇʟᴘ', callback_data='help'),
-                InlineKeyboardButton('📚 ᴀʙᴏᴜᴛ', callback_data='about')
-            ],[
-                InlineKeyboardButton('‼️ ᴅɪꜱᴄʟᴀɪᴍᴇʀ ‼️', callback_data='disclaimer')
-              ]]
-    reply_markup = InlineKeyboardMarkup(buttons)      
-    await message.reply_photo(
-        photo=random.choice(PICS),
-        caption=script.START_TXT.format(message.from_user.mention, gtxt, temp.U_NAME, temp.B_NAME),
-        reply_markup=reply_markup,
-        parse_mode=enums.ParseMode.HTML,
-        has_spoiler=True
-    )
-    return
-
+    if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
+        buttons = [[
+                    InlineKeyboardButton('👨‍🚒 ʜᴇʟᴘ', callback_data='help'),
+                    InlineKeyboardButton('📚 ᴀʙᴏᴜᴛ', callback_data='about')
+                ],[
+                    InlineKeyboardButton('‼️ ᴅɪꜱᴄʟᴀɪᴍᴇʀ ‼️', callback_data='disclaimer')
+                  ]]
+        reply_markup = InlineKeyboardMarkup(buttons)      
+        await message.reply_photo(
+            photo=random.choice(PICS),
+            caption=script.START_TXT.format(message.from_user.mention, gtxt, temp.U_NAME, temp.B_NAME),
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML,
+            has_spoiler=True
+        )
+        return
     data = message.command[1]
     try:
         pre, file_id = data.split('_', 1)
