@@ -30,7 +30,7 @@ async def start(client, message):
     user_id = message.from_user.id
     
     # Check if user is subscribed to the required channels
-    if not await check_subscription_status(user_id):
+    if not await is_req_subscribed(user_id):
         buttons = [
             [InlineKeyboardButton('⚔️ Join Required Channels ⚔️', url="https://t.me/Moviestudioabhi")]
         ]
