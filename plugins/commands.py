@@ -111,8 +111,8 @@ async def start(client, message):
                         invite_link = await client.create_chat_invite_link(int(AUTH_CHANNEL))
                         btn.insert(0, [InlineKeyboardButton("🍿ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ🍿", url=invite_link.invite_link)])
                     else:
-                        btn.insert(0, [InlineKeyboardButton("🍿ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ🍿", url=f"https://t.me/{AUTH_CHANNEL.replace('-100', '')}")])
-
+                        btn.insert(0, [InlineKeyboardButton("🍿ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ🍿", url=invite_link.invite_link)])
+                        
                 await client.send_photo(
                     chat_id=message.from_user.id,
                     photo="https://telegra.ph/file/20b4aaaddb8aba646e53c.jpg",
