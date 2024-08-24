@@ -3,9 +3,10 @@ from pyrogram.errors import InputUserDeactivated, UserNotParticipant, FloodWait,
 from info import AUTH_CHANNEL, LONG_IMDB_DESCRIPTION, MAX_LIST_ELM, SHORTLINK_URL, SHORTLINK_API, IS_SHORTLINK, LOG_CHANNEL, TUTORIAL, GRP_LNK, CHNL_LNK, CUSTOM_FILE_CAPTION
 from imdb import Cinemagoer 
 import asyncio
-from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, ChatMember
 from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid, UserNotParticipant
 from pyrogram import enums
+from pyrogram import Client, filters
 from typing import Union
 from Script import script
 import pytz
@@ -53,6 +54,22 @@ class temp(object):
     SHORT = {}
     SETTINGS = {}
     IMDB_CAP = {}
+
+async def check_subscription_status(user_id: int) -> bool:
+    required_channels = ["@moviestudioabhi","@MYFLiiX"]  # Replace with your channels' usernames
+
+    for channel in required_channels:
+        try:
+            member = await bot.get_chat_member(channel, user_id)
+            if member.status not in ['member', 'administrator', 'creator']:
+                return False
+        except Exception as e:
+            # Handle the case where the channel is private or any other error occurs
+            print(f"Error checking subscription for channel {channel}: {e}")
+            return False
+    
+    return True
+    
 
 async def is_req_subscribed(bot, query, channels):
     # Check if the user has a pending join request
