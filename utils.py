@@ -54,29 +54,29 @@ class temp(object):
     SETTINGS = {}
     IMDB_CAP = {}
 
-async def is_subscribed(bot, query, channel):
-    btn = []
-    for id in channel:
-        chat = await bot.get_chat(int(id))
-        try:
-            await bot.get_chat_member(id, query.from_user.id)
-        except UserNotParticipant:
-            # For private channels, generate invite link
-            if id.startswith('-100'):
-                invite_link = await bot.create_chat_invite_link(int(id))
-                btn.append([InlineKeyboardButton(f'Join {chat.title}', url=invite_link.invite_link)])
-            else:
-                btn.append([InlineKeyboardButton(f'Join {chat.title}', url=f"https://t.me/{chat.username}")])
-        except Exception as e:
-            pass
-    return btn
+async def is_req_subscribed(bot, query, channels):
+    # Check if user has a pending join request
+    if await db.find_join_req(query.from_user.id):
+        return True, []  # No buttons needed if the user has a join request
 
-async def is_check_admin(bot, chat_id, user_id):
-    try:
-        member = await bot.get_chat_member(chat_id, user_id)
-        return member.status in [enums.ChatMemberStatus.ADMINISTRATOR, enums.ChatMemberStatus.OWNER]
-    except:
-        return False
+    buttons = []
+
+    for channel_id in channels:
+        try:
+            chat = await bot.get_chat(int(channel_id))
+            user = await bot.get_chat_member(channel_id, query.from_user.id)
+            # If user is a member, no button needed for this channel
+            if user.status not in ['banned', 'left']:
+                continue
+        except UserNotParticipant:
+            # If user is not a participant, add a join button
+            invite_link = chat.invite_link if chat.invite_link else 'https://t.me/joinchat/...'  # Handle if invite link is not available
+            buttons.append([InlineKeyboardButton(f'Join {chat.title}', url=invite_link)])
+        except Exception as e:
+            logger.exception(e)
+            continue
+
+    return False, buttons
 
 async def react_msg(client, message):
     emojis = [
@@ -111,18 +111,6 @@ async def react_msg(client, message):
         "🆒",
         "😘",
         "😎",
-    ]
-    rnd_emoji = random.choice(emojis)
-    await client.send_reaction(
-        chat_id=message.chat.id, message_id=message.id, emoji=rnd_emoji, big=True
-    )
-    return
-
-async def react_message(client, message):
-    emojis = [
-        "👨‍💻",
-        "👨‍💻",
-        "👨‍💻",
     ]
     rnd_emoji = random.choice(emojis)
     await client.send_reaction(
