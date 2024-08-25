@@ -8,6 +8,7 @@ import pytz
 from datetime import datetime, timedelta, date, time
 lock = asyncio.Lock()
 
+from fuzzywuzzy import process
 from info import AUTH_CHANNEL
 from telegram import InputMediaPhoto
 from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
@@ -21,7 +22,7 @@ from info import *
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaPhoto
 from pyrogram import Client, filters, enums
 from pyrogram.errors import UserIsBlocked, MessageNotModified, PeerIdInvalid, ChatAdminRequired
-from utils import get_size, get_poster, temp, get_settings, save_group_settings, get_shortlink, get_tutorial, send_all, get_cap, react_msg, is_req_subscribed
+from utils import get_size, get_poster, temp, get_settings, save_group_settings, get_shortlink, get_tutorial, send_all, get_cap, react_msg, is_req_subscribed, imdb
 from database.users_chats_db import db
 from database.ia_filterdb import Media, Media2, get_file_details, get_search_results, get_bad_files, db as clientDB, db2 as clientDB2
 from database.filters_mdb import (
@@ -2095,64 +2096,65 @@ async def cb_handler(client: Client, query: CallbackQuery):
     await query.answer(MSG_ALRT)
 
     
+async def ai_spell_check(wrong_name):
+    async def search_movie(wrong_name):
+        search_results = imdb.search_movie(wrong_name)
+        movie_list = [movie['title'] for movie in search_results]
+        return movie_list
+    movie_list = await search_movie(wrong_name)
+    if not movie_list:
+        return
+    for _ in range(5):
+        closest_match = process.extractOne(wrong_name, movie_list)
+        if not closest_match or closest_match[1] <= 80:
+            return 
+        movie = closest_match[0]
+        files, offset, total_results = await get_search_results(movie)
+        if files:
+            return movie
+        movie_list.remove(movie)
+    return
+
+
+async def delSticker(st):
+    try:
+        await st.delete()
+    except:
+        pass
 async def auto_filter(client, msg, spoll=False):
-    curr_time = datetime.now(pytz.timezone('Asia/Kolkata')).time()
-    # reqstr1 = msg.from_user.id if msg.from_user else 0
-    # reqstr = await client.get_users(reqstr1)
-    
+    thinkStc = ''
+    thinkStc = await msg.reply_sticker(sticker=random.choice(STICKERS_IDS))
     if not spoll:
         message = msg
-        if message.text.startswith("/"): return  # ignore commands
-        if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
-            return
-        try:
-            await react_msg(client, message)
-        except:
-            pass
-        if len(message.text) < 100:
-            search = message.text
-            m=await message.reply_text(f"<b><pre>𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓 🔍</pre></b> `{search}` ")
-            try:
-                await react_msg(client, m)
-            except:
-                pass
-            search = search.lower()
-            find = search.split(" ")
-            search = ""
-            removes = ["in","upload", "series", "full", "horror", "thriller", "mystery", "print", "file"]
-            for x in find:
-                if x in removes:
-                    continue
-                else:
-                    search = search + x + " "
-            search = re.sub(r"\b(pl(i|e)*?(s|z+|ease|se|ese|(e+)s(e)?)|((send|snd|giv(e)?|gib)(\sme)?)|movie(s)?|new|latest|bro|bruh|broh|helo|that|find|dubbed|link|venum|iruka|pannunga|pannungga|anuppunga|anupunga|anuppungga|anupungga|film|undo|kitti|kitty|tharu|kittumo|kittum|movie|any(one)|with\ssubtitle(s)?)", "", search, flags=re.IGNORECASE)
-            search = re.sub(r"\s+", " ", search).strip()
-            search = search.replace("-", " ")
-            search = search.replace(":","")
-            files, offset, total_results = await get_search_results(message.chat.id ,search, offset=0, filter=True)
-            settings = await get_settings(message.chat.id)
-            if not files:
-                await m.delete()
-                if settings["spell_check"]:
-                    return await advantage_spell_chok(client, msg)
-                else:
-                    #if NO_RESULTS_MSG:
-                        #await client.send_message(
-                    return
-
-        else:
+        settings = await get_settings(message.chat.id)
+        search = message.text
+        files, offset, total_results = await get_search_results(search)
+        if not files:
+            if settings["spell_check"]:
+                await delSticker(thinkStc)
+                ai_sts = await msg.reply_text('<b>Ai is Cheking For Your Spelling. Please Wait.</b>')
+                is_misspelled = await ai_spell_check(search)
+                if is_misspelled:
+                    await ai_sts.edit(f'<b>Ai Suggested <code>{is_misspelled}</code>\nSo Im Searching for <code>{is_misspelled}</code></b>')
+                    await asyncio.sleep(2)
+                    msg.text = is_misspelled
+                    await ai_sts.delete()
+                    return await auto_filter(client, msg)
+                await delSticker(thinkStc)
+                await ai_sts.delete()
+                await advantage_spell_chok(msg)
             return
     else:
+        settings = await get_settings(msg.message.chat.id)
         message = msg.message.reply_to_message  # msg will be callback query
         search, files, offset, total_results = spoll
-        m=await message.reply_text(f"<b><pre>𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓 🔍</pre></b> `{search}` ")
-        settings = await get_settings(message.chat.id)
-        await m.delete()
-    pre = 'filep' if settings['file_secure'] else 'file'
+    if spoll:
+        await msg.message.delete()
+    req = message.from_user.id if message.from_user else 0
     key = f"{message.chat.id}-{message.id}"
-    FRESH[key] = search
-    temp.GETALL[key] = files
-    temp.SHORT[message.from_user.id] = message.chat.id
+    temp.FILES[key] = files
+    BUTTONS[key] = search
+    files_link = ""
     if settings["button"]:
         btn = [
             [
