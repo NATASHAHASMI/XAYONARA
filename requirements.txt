@@ -50,6 +50,5 @@ pyromod
 colorama
 telegraph
 PyPDF2
-
-
-  
+fuzzywuzzy
+python-Levenshtein
