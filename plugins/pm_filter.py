@@ -2158,6 +2158,72 @@ async def auto_filter(client, msg, spoll=False):
     if settings["button"]:
         btn = [
             [
+async def ai_spell_check(wrong_name):
+    async def search_movie(wrong_name):
+        search_results = imdb.search_movie(wrong_name)
+        movie_list = [movie['title'] for movie in search_results]
+        return movie_list
+    movie_list = await search_movie(wrong_name)
+    if not movie_list:
+        return
+    for _ in range(5):
+        closest_match = process.extractOne(wrong_name, movie_list)
+        if not closest_match or closest_match[1] <= 80:
+            return 
+        movie = closest_match[0]
+        files, offset, total_results = await get_search_results(movie)
+        if files:
+            return movie
+        movie_list.remove(movie)
+    return
+async def delSticker(sticker):
+    try:
+        await sticker.delete()
+    except:
+        pass
+async def auto_filter(client, msg, spoll=False , pm_mode = False):
+    st = ''
+    try:
+        st = await msg.reply_sticker(sticker=random.choice(STICKERS_IDS))
+    except:
+        pass
+    if not spoll:
+        message = msg
+        search = message.text
+        chat_id = message.chat.id
+        settings = await get_settings(chat_id , pm_mode=pm_mode)
+        files, offset, total_results = await get_search_results(search)
+        if not files:
+            if settings["spell_check"]:
+                await delSticker(st)
+                ai_sts = await msg.reply_text('<b>Ai is Cheking For Your Spelling. Please Wait.</b>')
+                is_misspelled = await ai_spell_check(search)
+                if is_misspelled:
+                    await ai_sts.edit(f'<b>Ai Suggested <code>{is_misspelled}</code>\nSo Im Searching for <code>{is_misspelled}</code></b>')
+                    await asyncio.sleep(2)
+                    msg.text = is_misspelled
+                    await ai_sts.delete()
+                    return await auto_filter(client, msg)
+                await delSticker(st)
+                await ai_sts.delete()
+                return await advantage_spell_chok(msg)
+            return
+    else:
+        settings = await get_settings(msg.message.chat.id , pm_mode=pm_mode)
+        message = msg.message.reply_to_message  # msg will be callback query
+        search, files, offset, total_results = spoll
+    req = message.from_user.id if message.from_user else 0
+    key = f"{message.chat.id}-{message.id}"
+    batch_ids = files
+    temp.FILES_ID[f"{message.chat.id}-{message.id}"] = batch_ids
+    batch_link = f"batchfiles#{message.chat.id}#{message.id}#{message.from_user.id}"
+    temp.CHAT[message.from_user.id] = message.chat.id
+    settings = await get_settings(message.chat.id , pm_mode=pm_mode)
+    del_msg = f"\n\n<b>⚠️ ᴛʜɪs ᴍᴇssᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏ ᴅᴇʟᴇᴛᴇ ᴀꜰᴛᴇʀ <code>{get_readable_time(DELETE_TIME)}</code> ᴛᴏ ᴀᴠᴏɪᴅ ᴄᴏᴘʏʀɪɢʜᴛ ɪssᴜᴇs</b>" if settings["auto_delete"] else ''
+    links = ""
+    if settings["button"]:
+        btn = [
+            [
                 InlineKeyboardButton(
                     text=f"🀄️{get_size(file.file_size)}🎴{' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))}", callback_data=f'{pre}#{file.file_id}'
                 ),
@@ -2218,6 +2284,28 @@ async def auto_filter(client, msg, spoll=False):
         btn.append(
             [InlineKeyboardButton(text="🚸 ɴᴏ ᴍᴏʀᴇ ᴘᴀɢᴇs 🚸",callback_data="pages")]
         )
+                             
+    if spoll:
+        m = await msg.message.edit(f"<b><code>{search}</code> ɪs ꜰᴏᴜɴᴅ ᴘʟᴇᴀsᴇ ᴡᴀɪᴛ ꜰᴏʀ ꜰɪʟᴇs 📫</b>")
+        await delSticker(st)
+        await asyncio.sleep(1.2)
+        await m.delete()
+
+    if offset != "":
+        BUTTONS[key] = search
+        req = message.from_user.id if message.from_user else 0
+        btn.append(
+            [InlineKeyboardButton(text=f"1/{math.ceil(int(total_results) / int(MAX_BTN))}", callback_data="pages"),
+             InlineKeyboardButton(text="ɴᴇxᴛ ⪼", callback_data=f"next_{req}_{key}_{offset}")]
+        )
+        key = f"{message.chat.id}-{message.id}"
+        BUTTONS[key] = search
+        req = message.from_user.id if message.from_user else 0
+        try:
+            offset = int(offset) 
+        except:
+            offset = int(MAX_BTN)
+                  
     imdb = await get_poster(search, file=(files[0]).file_name) if settings["imdb"] else None
     cur_time = datetime.now(pytz.timezone('Asia/Kolkata')).time()
     time_difference = timedelta(hours=cur_time.hour, minutes=cur_time.minute, seconds=(cur_time.second+(cur_time.microsecond/1000000))) - timedelta(hours=curr_time.hour, minutes=curr_time.minute, seconds=(curr_time.second+(curr_time.microsecond/1000000)))
