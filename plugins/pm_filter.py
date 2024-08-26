@@ -8,6 +8,7 @@ import pytz
 from datetime import datetime, timedelta, date, time
 lock = asyncio.Lock()
 
+from fuzzywuzzy import process
 from info import AUTH_CHANNEL
 from telegram import InputMediaPhoto
 from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
