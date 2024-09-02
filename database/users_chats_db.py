@@ -2,6 +2,8 @@ import datetime
 import pytz
 import motor.motor_asyncio
 from info import DATABASE_NAME, DATABASE_URI, IMDB, IMDB_TEMPLATE, MELCOW_NEW_USERS, P_TTI_SHOW_OFF, SINGLE_BUTTON, SPELL_CHECK_REPLY, PROTECT_CONTENT, AUTO_DELETE, MAX_BTN, AUTO_FFILTER, SHORTLINK_API, SHORTLINK_URL, IS_SHORTLINK, TUTORIAL, IS_TUTORIAL
+client = motor.motor_asyncio.AsyncIOMotorClient(DATABASE_URI)
+fsubs = client['fsubs']
 
 class Database: 
     def __init__(self, uri, database_name):
@@ -11,6 +13,22 @@ class Database:
         self.grp = self.db.groups
         self.users = self.db.uersz
         self.req = self.db.requests
+        self.grp_and_ids = fsubs.grp_and_ids
+
+    async def setFsub(self , grpID , fsubID):
+        return await self.grp_and_ids.update_one({'grpID': grpID} , {'$set': {'grpID': grpID , "fsubID": fsubID}}, upsert=True)    
+    async def getFsub(self , grpID):
+        link = await self.grp_and_ids.find_one({"grpID": grpID})
+        if link is not None:
+            return link.get("fsubID")
+        else:
+            return None
+    async def delFsub(self , grpID):
+        result =  await self.grp_and_ids.delete_one({"grpID": grpID})
+        if result.deleted_count != 0:
+            return True
+        else:
+            return False
 
     async def find_join_req(self, id):
         return bool(await self.req.find_one({'id': id}))
