@@ -1,5 +1,6 @@
 # Kanged From @TroJanZheX
 import asyncio
+import traceback
 import re
 import ast
 import math
@@ -8,6 +9,7 @@ import pytz
 from datetime import datetime, timedelta, date, time
 lock = asyncio.Lock()
 
+from .helper.checkFsub import is_user_fsub
 from info import AUTH_CHANNEL
 from telegram import InputMediaPhoto
 from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
@@ -54,6 +56,12 @@ SPELL_CHECK = {}
 
 @Client.on_message(filters.group & filters.text & filters.incoming)
 async def give_filter(client, message):
+    user_id = message.from_user.id if message.from_user else None
+    chat_id = message.chat.id
+    settings = await get_settings(chat_id)
+    ifJoinedFsub = await is_user_fsub(client,message)
+    if ifJoinedFsub == False:
+        return
     if message.chat.id != SUPPORT_CHAT_ID:
         manual = await manual_filters(client, message)
         if manual == False:
