@@ -54,7 +54,7 @@ class temp(object):
     SETTINGS = {}
     IMDB_CAP = {}
 
-async def is_subscribed(bot, query, channel):
+async def is_req_subscribed(bot, query, channel):
     btn = []
     for id in channel:
         chat = await bot.get_chat(int(id))
