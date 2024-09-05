@@ -35,10 +35,10 @@ async def start(client, message):
         buttons = [[
                     InlineKeyboardButton('⤬ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ ⤬', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
                 ],[
-                    InlineKeyboardButton('👻 ᴍᴏᴠɪᴇ ᴄʜᴀɴɴᴇʟ', url="https://t.me/Moviestudioabhi"),
-                    InlineKeyboardButton('🫨 ᴍᴏᴠɪᴇ ɢʀᴏᴜᴘ', url="https://t.me/Moviestudioabhi")
+                    InlineKeyboardButton('👻 ᴍᴏᴠɪᴇ ᴄʜᴀɴɴᴇʟ', url="https://t.me/Movie_Series_Request_Groups"),
+                    InlineKeyboardButton('🫨 ᴍᴏᴠɪᴇ ɢʀᴏᴜᴘ', url="https://t.me/Movie_Series_Request_Groups")
                 ],[
-                    InlineKeyboardButton('⚔️ ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ ⚔️', url="https://t.me/Moviestudioabhi")
+                    InlineKeyboardButton('⚔️ ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ ⚔️', url="https://t.me/Movie_Series_Request_Groups")
                   ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         m=await message.reply_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ...⚡</i></b>")
@@ -174,7 +174,7 @@ async def start(client, message):
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton('🎸 ꜱᴜᴘᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ 🎸', url=f'https://t.me/Moviestudioabhi'),
+                                InlineKeyboardButton('🎸 ꜱᴜᴘᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ 🎸', url=f'https://t.me/Movie_Series_Request_Groups'),
                             ],
                             [
                                 InlineKeyboardButton('🚀 ꜰᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ / ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ 🖥️', callback_data=f'generate_stream_link:{file_id}') #Don't change anything without contacting me @LazyDeveloperr
@@ -193,7 +193,7 @@ async def start(client, message):
                     reply_markup=InlineKeyboardMarkup(
                         [
                          [
-                          InlineKeyboardButton('🎸 ꜱᴜᴘᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ 🎸', url=f'https://t.me/Moviestudioabhi'),
+                          InlineKeyboardButton('🎸 ꜱᴜᴘᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ 🎸', url=f'https://t.me/Movie_Series_Request_Groups'),
                          ],[ 
                             InlineKeyboardButton('🚀 ꜰᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ / ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ 🖥️', callback_data=f'generate_stream_link:{file_id}') #Don't change anything without contacting me @LazyDeveloperr
                             ]
@@ -349,7 +349,7 @@ async def start(client, message):
                 reply_markup=InlineKeyboardMarkup(
                     [
                      [
-                      InlineKeyboardButton('🎸 ꜱᴜᴘᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ 🎸', url=f'https://t.me/Moviestudioabhi'),
+                      InlineKeyboardButton('🎸 ꜱᴜᴘᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ 🎸', url=f'https://t.me/Movie_Series_Request_Groups'),
                      ],
                      [
                         InlineKeyboardButton('🚀 ꜰᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ / ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ 🖥️', callback_data=f'generate_stream_link:{file_id}') #Don't change anything without contacting me @LazyDeveloperr
@@ -412,7 +412,7 @@ async def start(client, message):
                 reply_markup=InlineKeyboardMarkup(
                     [
                      [
-                      InlineKeyboardButton('🎸 ꜱᴜᴘᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ 🎸', url=f'https://t.me/Moviestudioabhi'),
+                      InlineKeyboardButton('🎸 ꜱᴜᴘᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ 🎸', url=f'https://t.me/Movie_Series_Request_Groups'),
                      ],
                      [
                         InlineKeyboardButton('🚀 ꜰᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ / ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ 🖥️', callback_data=f'generate_stream_link:{file_id}') #Don't change anything without contacting me @LazyDeveloperr
@@ -472,7 +472,7 @@ async def start(client, message):
         reply_markup=InlineKeyboardMarkup(
             [
              [
-              InlineKeyboardButton('🎸 ꜱᴜᴘᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ 🎸', url=f'https://t.me/Moviestudioabhi'),
+              InlineKeyboardButton('🎸 ꜱᴜᴘᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ 🎸', url=f'https://t.me/Movie_Series_Request_Groups'),
              ],
              [
               InlineKeyboardButton('🚀 ꜰᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ / ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ 🖥️', callback_data=f'generate_stream_link:{file_id}') #Don't change anything without contacting me @LazyDeveloperr
