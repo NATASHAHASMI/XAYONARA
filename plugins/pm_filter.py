@@ -1422,7 +1422,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             ident, kk, file_id = query.data.split("#")
             await query.answer(url=f"https://t.me/{temp.U_NAME}?start={kk}_{file_id}")
             return
-        await query.answer("Jᴏɪɴ ᴏᴜʀ Aʟʟ Bᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ ᴍᴀʜɴ! 😒", show_alert=True)
+        await query.answer("Jᴏɪɴ Aʟʟ Bᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ ᴍᴀʜɴ! 😒", show_alert=True)
     
     elif query.data == "pages":
         await query.answer()
