@@ -32,19 +32,10 @@ async def start(client, message):
     except:
         pass
     if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
-        buttons = [[
-                    InlineKeyboardButton('⤬ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ ⤬', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
-                ],[
-                    InlineKeyboardButton('👻 ᴍᴏᴠɪᴇ ᴄʜᴀɴɴᴇʟ', url="https://t.me/Movie_Series_Request_Groups"),
-                    InlineKeyboardButton('🫨 ᴍᴏᴠɪᴇ ɢʀᴏᴜᴘ', url="https://t.me/Movie_Series_Request_Groups")
-                ],[
-                    InlineKeyboardButton('⚔️ ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ ⚔️', url="https://t.me/Movie_Series_Request_Groups")
-                  ]]
-        reply_markup = InlineKeyboardMarkup(buttons)
-        m=await message.reply_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ...⚡</i></b>")
+        await message.reply_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ...⚡</i></b>")
         await asyncio.sleep(0.5)
         await m.delete()
-        await message.reply(script.GSTART_TXT.format(message.from_user.mention if message.from_user else message.chat.title, temp.U_NAME, temp.B_NAME), reply_markup=reply_markup, disable_web_page_preview=True)
+        await message.reply(script.GSTART_TXT.format(message.from_user.mention if message.from_user else message.chat.title, temp.U_NAME, temp.B_NAME), disable_web_page_preview=True)
         await asyncio.sleep(2) # 😢 https://github.com/EvamariaTG/EvaMaria/blob/master/plugins/p_ttishow.py#L17 😬 wait a bit, before checking.
         if not await db.get_chat(message.chat.id):
             total=await client.get_chat_members_count(message.chat.id)
@@ -108,7 +99,7 @@ async def start(client, message):
                 await client.send_photo(
                     chat_id=message.from_user.id,
                     photo="https://telegra.ph/file/20b4aaaddb8aba646e53c.jpg",
-                    caption="**__𝙿𝙻𝙴𝙰𝚂𝙴 𝙹𝙾𝙸𝙽 𝙼𝚈 𝙱𝙰𝙲𝙺𝚄𝙿 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 & 𝙵𝙸𝙻𝙴'𝚂 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 𝚃𝙷𝙴𝙽 𝙲𝙻𝙸𝙲𝙺 𝚃𝚁𝚈 𝙰𝙶𝙰𝙸𝙽 𝙱𝚄𝚃𝚃𝙾𝙽 𝚃𝙷𝙴𝙽 𝙱𝙾𝚃 𝚂𝙴𝙽𝙳 𝚈𝙾𝚄'𝚁 𝙵𝙸𝙻𝙴𝚂.⚠️__**",
+                    caption="**Jᴏɪɴ Aʟʟ Bᴀᴄᴋᴜᴘ Cʜᴀɴɴᴇʟꜱ Tʜᴇɴ Cʟɪᴄᴋ Tʀʏ-Aɢᴀɪɴ Bᴜᴛᴛᴏɴ Tʜᴇɴ Bᴏᴛ Sᴇɴᴅ Yᴏᴜʀ Fɪʟᴇꜱ.⚠️**",
                     reply_markup=InlineKeyboardMarkup(btn),
                     parse_mode=enums.ParseMode.MARKDOWN,
                     has_spoiler=True
