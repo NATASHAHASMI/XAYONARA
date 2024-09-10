@@ -20,7 +20,7 @@ logging.getLogger("aiohttp.web").setLevel(logging.ERROR)
 
 from pyrogram import Client, __version__
 from pyrogram.raw.all import layer
-from database.ia_filterdb import Media, Media2, choose_mediaDB, db as clientDB
+from database.ia_filterdb import Media, choose_mediaDB, db as clientDB
 from database.users_chats_db import db
 from info import SESSION, API_ID, API_HASH, BOT_TOKEN, LOG_STR, LOG_CHANNEL, PORT, SECONDDB_URI
 from utils import temp
@@ -68,19 +68,6 @@ async def Lazy_start():
     temp.BANNED_USERS = b_users
     temp.BANNED_CHATS = b_chats
     await Media.ensure_indexes()
-    await Media2.ensure_indexes()
-    stats = await clientDB.command('dbStats')
-    free_dbSize = round(512-((stats['dataSize']/(1024*1024))+(stats['indexSize']/(1024*1024))), 2)
-    if SECONDDB_URI and free_dbSize < 10:
-        tempDict["indexDB"] = SECONDDB_URI
-        logging.info(f"Since Primary DB has only {free_dbSize} MB left, Secondary DB will be used to store data.")
-    elif SECONDDB_URI is None:
-        logging.error("Missing second DB URI! Exiting...")
-        exit()
-    else:
-        logging.info(f"Since primary DB has enough space ({free_dbSize}MB) left, it will be used for storing data.")
-    await choose_mediaDB()
-
     me = await LazyPrincessBot.get_me()
     temp.ME = me.id
     temp.U_NAME = me.username
