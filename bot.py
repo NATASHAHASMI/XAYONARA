@@ -20,9 +20,9 @@ logging.getLogger("aiohttp.web").setLevel(logging.ERROR)
 
 from pyrogram import Client, __version__
 from pyrogram.raw.all import layer
-from database.ia_filterdb import Media, choose_mediaDB, db as clientDB
+from database.ia_filterdb import Media
 from database.users_chats_db import db
-from info import SESSION, API_ID, API_HASH, BOT_TOKEN, LOG_STR, LOG_CHANNEL, PORT, SECONDDB_URI
+from info import SESSION, API_ID, API_HASH, BOT_TOKEN, LOG_STR, LOG_CHANNEL, PORT
 from utils import temp
 from typing import Union, Optional, AsyncGenerator
 from pyrogram import types
@@ -37,7 +37,6 @@ from pyrogram import idle
 from lazybot import LazyPrincessBot
 from util.keepalive import ping_server
 from lazybot.clients import initialize_clients
-from sample_info import tempDict
 ON_HEROKU = True
 ppath = "plugins/*.py"
 files = glob.glob(ppath)
