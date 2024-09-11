@@ -55,12 +55,11 @@ Cʜᴇᴄᴋ Aɴᴅ Usᴀɢᴇ:
 • /search  - <code>ɢᴇᴛ ᴛʜᴇ ꜰɪʟᴍ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ ꜰʀᴏᴍ ᴠᴀʀɪᴏᴜꜱ ꜱᴏᴜʀᴄᴇꜱ.</code>"""
 
     
-    STATUS_TXT = """<b>⍟─────[ ʙᴏᴛ sᴛᴀᴛᴜ𝗌 ]─────⍟</b>\n
-<b>★ Tᴏᴛᴀʟ Fɪʟᴇs: <code>{}</code>
+    STATUS_TXT = """<b>★ Tᴏᴛᴀʟ Fɪʟᴇs: <code>{}</code>
 ★ Tᴏᴛᴀʟ Usᴇʀs: <code>{}</code>
 ★ Tᴏᴛᴀʟ Cʜᴀᴛs: <code>{}</code>
 ★ Usᴇᴅ Sᴛᴏʀᴀɢᴇ: <code>{}</code>
-★ Fʀᴇᴇ Sᴛᴏʀᴀɢᴇ: <code>{}</code></b>\n<spoiler><b>🔋 ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ - <a href='https://telegram.me/xayonara_contact_bot'>✘ 𝐚 𝐲 𝐨 𝐧 𝐚 𝐫 𝐚.</a></b></spoiler>"""
+★ Fʀᴇᴇ Sᴛᴏʀᴀɢᴇ: <code>{}</code></b>\n<b>⍟─────[ ʙᴏᴛ sᴛᴀᴛᴜ𝗌 ]─────⍟</b>"""
     
     LOG_TEXT_G = """#NewGroup
 Gʀᴏᴜᴘ = {}(<code>{}</code>)
