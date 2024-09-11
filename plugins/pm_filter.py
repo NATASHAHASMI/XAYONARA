@@ -1780,7 +1780,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 InlineKeyboardButton("🖥️ ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ", url=lazy_stream),
                 InlineKeyboardButton("🚀 ꜰᴀsᴛ ᴅᴏᴡɴʟᴏᴀᴅ", url=lazy_download)
             ],[
-                InlineKeyboardButton('⁉️ ᴄʟᴏsᴇ ⁉️', callback_data='close_data')
+                InlineKeyboardButton('⁉️ Cʟᴏsᴇ ⁉️', callback_data='close_data')
             ]
         ]
     ))
@@ -1852,7 +1852,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
     elif query.data == "about":
         buttons = [[
             InlineKeyboardButton('Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ', url=GRP_LNK),
-            InlineKeyboardButton('Oᴡɴᴇʀ', url="https://t.me/xayoonara")
+            InlineKeyboardButton('Oᴡɴᴇʀ', url="https://t.me/jairamhu")
         ],[
             InlineKeyboardButton('🏴‍☠️ Hᴏᴍᴇ', callback_data='start')
         ]]
