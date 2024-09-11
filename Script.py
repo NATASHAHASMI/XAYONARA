@@ -9,7 +9,7 @@ Jᴜꜱᴛ Sᴇɴᴅ Mᴇ Aɴʏ Mᴏᴠɪᴇꜱ & Sᴇʀɪᴇꜱ Nᴀᴍᴇ Aɴ�
 
     GSTART_TXT = """<b><i>ʜᴇʏ 😎.</i></b> <b>{}</b> <b>ɪ ᴀᴍ ᴘᴏᴡᴇʀꜰᴜʟʟ ᴍᴏᴠɪᴇꜱ & ꜱᴇʀɪᴇꜱ ᴘʀᴏᴠɪᴅᴇʀ ʙᴏᴛ ᴊᴜꜱᴛ ꜱᴇɴᴅ ᴍᴇ ᴀɴʏ ᴍᴏᴠɪᴇꜱ & ꜱᴇʀɪᴇꜱ ɴᴀᴍᴇ.</b>
 
-<spoiler><b><a href="https://i.ibb.co/NSfdfhF/Picsart-23-03-23-17-47-19-046.webp">🔋</a> ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ - <a href='https://telegram.me/xayonara_contact_bot'>✘ 𝐚 𝐲 𝐨 𝐧 𝐚 𝐫 𝐚.</a></b></spoiler>"""
+<spoiler><b><a href="https://graph.org/file/0dbd579e419854ca17146.jpg">🔋</a> ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ - <a href='https://telegram.me/xayonara_contact_bot'>✘ 𝐚 𝐲 𝐨 𝐧 𝐚 𝐫 𝐚.</a></b></spoiler>"""
    
     HELP_TXT = """<b><pre>Hᴇʏ</pre></b> {}
 <b><blockquote>Hᴇʀᴇ Is Tʜᴇ Mʏ Cᴏᴍᴍᴀɴᴅs.</blockquote></b>"""
