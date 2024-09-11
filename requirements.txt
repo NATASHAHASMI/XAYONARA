@@ -1,4 +1,4 @@
- aiogram==3.0.0b10
+ aiogram==3.13.0
  pyrofork
  tgcrypto 
  python-telegram-bot
