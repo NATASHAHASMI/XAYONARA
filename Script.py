@@ -56,7 +56,7 @@ Cʜᴇᴄᴋ Aɴᴅ Usᴀɢᴇ:
 
     
     STATUS_TXT = """<b>⍟─────[ ʙᴏᴛ sᴛᴀᴛᴜ𝗌 ]─────⍟</b>\n
-<b>★ Tᴏᴛᴀʟ Fɪʟᴇs: <code>1{}</code>
+<b>★ Tᴏᴛᴀʟ Fɪʟᴇs: <code>{}</code>
 ★ Tᴏᴛᴀʟ Usᴇʀs: <code>{}</code>
 ★ Tᴏᴛᴀʟ Cʜᴀᴛs: <code>{}</code>
 ★ Usᴇᴅ Sᴛᴏʀᴀɢᴇ: <code>{}</code>
