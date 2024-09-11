@@ -5,7 +5,6 @@ import random
 import asyncio
 import pytz
 from aiogram import Bot, Dispatcher, types
-from aiogram.types import ParseMode
 from aiogram.utils import executor
 from telegram import InputMediaPhoto
 from datetime import datetime
