@@ -48,6 +48,8 @@ DATABASE_NAME = environ.get('DATABASE_NAME', "multiverse")
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Telegram_files')
 
 # Others
+PM_SEARCH = bool(environ.get('PM_SEARCH', False))
+AI_SPELL_CHECK = bool(environ.get('AI_SPELL_CHECK', True))
 VERIFY = bool(environ.get('VERIFY', False))
 SHORTLINK_URL = environ.get('SHORTLINK_URL', '')
 SHORTLINK_API = environ.get('SHORTLINK_API', '')
