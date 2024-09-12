@@ -69,17 +69,14 @@ async def give_filter(client, message):
             try:
                 if settings['auto_ffilter']:
                     ai_search = True
-                    reply_msg = await message.reply_text(f"<pre>𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓</pre> `{message.text}` 🔍")
-                    await auto_filter(client, message.text, message, reply_msg, ai_search)
+                    await auto_filter(client, message.text, message, ai_search)
             except KeyError:
                 grpid = await active_connection(str(message.from_user.id))
                 await save_group_settings(grpid, 'auto_ffilter', True)
                 settings = await get_settings(message.chat.id)
                 if settings['auto_ffilter']:
                     ai_search = True
-                    reply_msg = await message.reply_text(f"<pre>𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓</pre> `{message.text}` 🔍")
-                    await auto_filter(client, message.text, message, reply_msg, ai_search)
-                    await reply_msg.delete()
+                    await auto_filter(client, message.text, message, ai_search)
     else: #a better logic to avoid repeated lines of code in auto_filter function
         search = message.text
         temp_files, temp_offset, total_results = await get_search_results(chat_id=message.chat.id, query=search.lower(), offset=0, filter=True)
@@ -282,9 +279,7 @@ async def advantage_spoll_choker(bot, query):
             if files:
                 k = (movie, files, offset, total_results)
                 ai_search = True
-                reply_msg = await query.message.edit_text(f"<pre>𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓</pre> `{movie}` 🔍")
-                await auto_filter(bot, movie, query, reply_msg, ai_search, k)
-                await reply_msg.delete()
+                await auto_filter(bot, movie, query, ai_search, k)
             else:
                 reqstr1 = query.from_user.id if query.from_user else 0
                 reqstr = await bot.get_users(reqstr1)
@@ -2084,7 +2079,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
     await query.answer(MSG_ALRT)
 
     
-async def auto_filter(client, name, msg, reply_msg, ai_search, spoll=False):
+async def auto_filter(client, name, msg, ai_search, spoll=False):
     curr_time = datetime.now(pytz.timezone('Asia/Kolkata')).time()
     if not spoll:
         message = msg
@@ -2093,6 +2088,7 @@ async def auto_filter(client, name, msg, reply_msg, ai_search, spoll=False):
             return
         if len(message.text) < 100:
             search = name
+            m=await message.reply_text(f"<b><pre>𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓 🔍</pre></b> `{search}` ")
             search = search.lower()
             find = search.split(" ")
             search = ""
@@ -2111,7 +2107,7 @@ async def auto_filter(client, name, msg, reply_msg, ai_search, spoll=False):
             settings = await get_settings(message.chat.id)
             if not files:
                 if settings["spell_check"]:
-                    return await advantage_spell_chok(client, name, msg, reply_msg, ai_search)
+                    return await advantage_spell_chok(client, name, msg, ai_search)
                 else:
                     return
         else:
@@ -2119,8 +2115,9 @@ async def auto_filter(client, name, msg, reply_msg, ai_search, spoll=False):
     else:
         message = msg.message.reply_to_message  # msg will be callback query
         search, files, offset, total_results = spoll
+        m=await message.reply_text(f"<b><pre>𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓 🔍</pre></b> `{search}` ")
         settings = await get_settings(message.chat.id)
-        await msg.message.delete()
+        await m.delete()
     pre = 'filep' if settings['file_secure'] else 'file'
     key = f"{message.chat.id}-{message.id}"
     FRESH[key] = search
@@ -2300,7 +2297,7 @@ async def auto_filter(client, name, msg, reply_msg, ai_search, spoll=False):
             await message.delete()
 
 
-async def advantage_spell_chok(client, name, msg, reply_msg, vj_search):
+async def advantage_spell_chok(client, name, msg, vj_search):
     mv_id = msg.id
     mv_rqst = name
     reqstr1 = msg.from_user.id if msg.from_user else 0
@@ -2341,7 +2338,6 @@ async def advantage_spell_chok(client, name, msg, reply_msg, vj_search):
     SPELL_CHECK[mv_id] = movielist
     if AI_SPELL_CHECK == True and vj_search == True:
         vj_search_new = False
-        vj_ai_msg = await reply_msg.edit_text(f"<pre>𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓</pre> `{message.text}` 🔍")
         movienamelist = []
         movienamelist += [movie.get('title') for movie in movies]
         for techvj in movienamelist:
@@ -2351,7 +2347,6 @@ async def advantage_spell_chok(client, name, msg, reply_msg, vj_search):
                 pass
             if mv_rqst.startswith(techvj[0]):
                 await auto_filter(client, techvj, msg, reply_msg, vj_search_new)
-                await vj_ai_msg.delete()
                 break
         reqst_gle = mv_rqst.replace(" ", "+")
         button = [[
