@@ -48,6 +48,7 @@ DATABASE_NAME = environ.get('DATABASE_NAME', "zonethan")
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Telegram_files')
 
 # Others
+AI_SPELL_CHECK = bool(environ.get('AI_SPELL_CHECK', True))
 VERIFY = bool(environ.get('VERIFY', False))
 SHORTLINK_URL = environ.get('SHORTLINK_URL', '')
 SHORTLINK_API = environ.get('SHORTLINK_API', '')
