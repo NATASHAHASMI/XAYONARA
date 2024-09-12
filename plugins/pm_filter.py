@@ -2118,7 +2118,7 @@ async def auto_filter(client, name, msg, reply_msg, ai_search, spoll=False):
         message = msg.message.reply_to_message  # msg will be callback query
         search, files, offset, total_results = spoll
         settings = await get_settings(message.chat.id)
-        await message.delete()
+        await msg.message.delete()
     pre = 'filep' if settings['file_secure'] else 'file'
     key = f"{message.chat.id}-{message.id}"
     FRESH[key] = search
@@ -2339,7 +2339,7 @@ async def advantage_spell_chok(client, name, msg, reply_msg, vj_search):
     SPELL_CHECK[mv_id] = movielist
     if AI_SPELL_CHECK == True and vj_search == True:
         vj_search_new = False
-        vj_ai_msg = await reply_msg.edit_text("<pre>𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓</pre> `{message.text}` 🔍")
+        vj_ai_msg = await reply_msg.edit_text("<pre>𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓</pre> `{movie}` 🔍")
         movienamelist = []
         movienamelist += [movie.get('title') for movie in movies]
         for techvj in movienamelist:
@@ -2351,6 +2351,7 @@ async def advantage_spell_chok(client, name, msg, reply_msg, vj_search):
                 await auto_filter(client, techvj, msg, reply_msg, vj_search_new)
                 break
         reqst_gle = mv_rqst.replace(" ", "+")
+        await vj_ai_msg.delete()
         button = [[
             InlineKeyboardButton("Gᴏᴏɢʟᴇ", url=f"https://www.google.com/search?q={reqst_gle}")
         ]]
