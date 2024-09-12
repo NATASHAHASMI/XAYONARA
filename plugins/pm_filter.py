@@ -52,7 +52,7 @@ BUTTONS2 = {}
 SPELL_CHECK = {}
 # ENABLE_SHORTLINK = ""
 
-@Client.on_message(filters.group & filters.text & filters.incoming)
+@Client.on_message(filters.group & filters.text & filters.incoming & filters.private)
 async def give_filter(client, message):
     if message.chat.id != SUPPORT_CHAT_ID:
         manual = await manual_filters(client, message)
