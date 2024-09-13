@@ -2098,6 +2098,7 @@ async def auto_filter(client, name, msg, reply_msg, ai_search, spoll=False):
             search = search.replace(":", "")
             search = search.replace(".", "")
             files, offset, total_results = await get_search_results(message.chat.id ,search, offset=0, filter=True)
+            await msg.delete()
             settings = await get_settings(message.chat.id)
             if not files:
                 if settings["spell_check"]:
@@ -2110,7 +2111,7 @@ async def auto_filter(client, name, msg, reply_msg, ai_search, spoll=False):
         message = msg.message.reply_to_message  # msg will be callback query
         search, files, offset, total_results = spoll
         settings = await get_settings(message.chat.id)
-        await message.delete()
+        await msg.delete()
     pre = 'filep' if settings['file_secure'] else 'file'
     key = f"{message.chat.id}-{message.id}"
     FRESH[key] = search
@@ -2330,7 +2331,7 @@ async def advantage_spell_chok(client, name, msg, reply_msg, vj_search):
     SPELL_CHECK[mv_id] = movielist
     if AI_SPELL_CHECK == True and vj_search == True:
         vj_search_new = False
-        vj_ai_msg = await reply_msg.edit_text(f"<b><i>Searching For `{search}` 🔍</i></b>")
+        vj_ai_msg = await reply_msg.edit_text(f"<b><i>Searching For `{name}` 🔍</i></b>")
         movienamelist = []
         movienamelist += [movie.get('title') for movie in movies]
         for techvj in movienamelist:
