@@ -2296,44 +2296,38 @@ async def advantage_spell_chok(client, name, msg, reply_msg, vj_search):
     reqstr1 = msg.from_user.id if msg.from_user else 0
     reqstr = await client.get_users(reqstr1)
     settings = await get_settings(msg.chat.id)
+
+    # Spell-check regex to clean the message text
     query = re.sub(
         r"\b(pl(i|e)*?(s|z+|ease|se|ese|(e+)s(e)?)|((send|snd|giv(e)?|gib)(\sme)?)|movie(s)?|new|latest|br((o|u)h?)*|^h(e|a)?(l)*(o)*|mal(ayalam)?|t(h)?amil|file|that|find|und(o)*|kit(t(i|y)?)?o(w)?|thar(u)?(o)*w?|kittum(o)*|aya(k)*(um(o)*)?|full\smovie|any(one)|with\ssubtitle(s)?)",
-        "", msg.text, flags=re.IGNORECASE)  # plis contribute some common words
+        "", msg.text, flags=re.IGNORECASE
+    )
     query = query.strip() + " movie"
+
     try:
         movies = await get_poster(mv_rqst, bulk=True)
     except Exception as e:
         logger.exception(e)
-        reqst_gle = mv_rqst.replace(" ", "+")
-        button = [[
-            InlineKeyboardButton("Gᴏᴏɢʟᴇ", url=f"https://www.google.com/search?q={reqst_gle}")
-        ]]
-        if NO_RESULTS_MSG:
-            await client.send_message(chat_id=LOG_CHANNEL, text=(script.NORSLTS.format(reqstr.id, reqstr.mention, mv_rqst)))
-        k = await reply_msg.edit_text(text=script.I_CUDNT.format(mv_rqst), reply_markup=InlineKeyboardMarkup(button))
-        await asyncio.sleep(30)
-        await k.delete()
+        await handle_no_results(client, msg, mv_rqst, reqstr, reply_msg)
         return
-    movielist = []
+
+    # If movies list is empty, handle no results
     if not movies:
-        reqst_gle = mv_rqst.replace(" ", "+")
-        button = [[
-            InlineKeyboardButton("Gᴏᴏɢʟᴇ", url=f"https://www.google.com/search?q={reqst_gle}")
-        ]]
-        if NO_RESULTS_MSG:
-            await client.send_message(chat_id=LOG_CHANNEL, text=(script.NORSLTS.format(reqstr.id, reqstr.mention, mv_rqst)))
-        k = await reply_msg.edit_text(text=script.I_CUDNT.format(mv_rqst), reply_markup=InlineKeyboardMarkup(button))
-        await asyncio.sleep(30)
-        await k.delete()
+        await handle_no_results(client, msg, mv_rqst, reqstr, reply_msg)
         return
-    movielist += [movie.get('title') for movie in movies]
+
+    # Populate the movie list with titles and titles + years
+    movielist = [movie.get('title') for movie in movies]
     movielist += [f"{movie.get('title')} {movie.get('year')}" for movie in movies]
     SPELL_CHECK[mv_id] = movielist
-    if AI_SPELL_CHECK == True and vj_search == True:
+
+    # AI Spell Check functionality
+    if AI_SPELL_CHECK and vj_search:
         vj_search_new = False
-        vj_ai_msg = await reply_msg.edit_text("<b><i>Advance Ai Try To Find Your Movie With Your Wrong Spelling.</i></b>")
-        movienamelist = []
-        movienamelist += [movie.get('title') for movie in movies]
+        vj_ai_msg = await reply_msg.edit_text("<b><i>Advance AI is trying to find your movie with the given spelling.</i></b>")
+        movienamelist = [movie.get('title') for movie in movies]
+        found_match = False  # Track if a match is found
+
         for techvj in movienamelist:
             try:
                 mv_rqst = mv_rqst.capitalize()
@@ -2341,18 +2335,26 @@ async def advantage_spell_chok(client, name, msg, reply_msg, vj_search):
                 pass
             if mv_rqst.startswith(techvj[0]):
                 await auto_filter(client, techvj, msg, reply_msg, vj_search_new)
-                break
-        reqst_gle = mv_rqst.replace(" ", "+")
-        button = [[
-            InlineKeyboardButton("Gᴏᴏɢʟᴇ", url=f"https://www.google.com/search?q={reqst_gle}")
-        ]]
-        if NO_RESULTS_MSG:
-            await client.send_message(chat_id=LOG_CHANNEL, text=(script.NORSLTS.format(reqstr.id, reqstr.mention, mv_rqst)))
-        k = await reply_msg.edit_text(text=script.I_CUDNT.format(mv_rqst), reply_markup=InlineKeyboardMarkup(button))
-        await asyncio.sleep(30)
-        await k.delete()
+                await vj_ai_msg.delete()  # Delete AI message when results are found
+                found_match = True
+                break  # Stop further processing once search is complete
+
+        if not found_match:
+            # If no match is found, show Google search button in the AI message itself
+            reqst_gle = mv_rqst.replace(" ", "+")
+            button = [[
+                InlineKeyboardButton("Gᴏᴏɢʟᴇ", url=f"https://www.google.com/search?q={reqst_gle}")
+            ]]
+            if NO_RESULTS_MSG:
+                await client.send_message(chat_id=LOG_CHANNEL, text=(script.NORSLTS.format(reqstr.id, reqstr.mention, mv_rqst)))
+            # Edit AI message to display couldn't find text instead of deleting
+            await vj_ai_msg.edit_text(text=script.I_CUDNT.format(mv_rqst), reply_markup=InlineKeyboardMarkup(button))
+            await asyncio.sleep(30)
+            await vj_ai_msg.delete()  # Now delete after displaying the final message
         return
+
     else:
+        # Create inline buttons for spell check results
         btn = [
             [
                 InlineKeyboardButton(
@@ -2378,9 +2380,7 @@ async def advantage_spell_chok(client, name, msg, reply_msg, vj_search):
             if settings['auto_delete']:
                 await asyncio.sleep(600)
                 await spell_check_del.delete()
-        else:
-            await reply_msg.delete()
-
+                
 async def manual_filters(client, message, text=False):
     settings = await get_settings(message.chat.id)
     group_id = message.chat.id
