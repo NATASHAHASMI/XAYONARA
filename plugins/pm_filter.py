@@ -2297,7 +2297,7 @@ async def advantage_spell_chok(client, name, msg, reply_msg, vj_search):
     reqstr = await client.get_users(reqstr1)
     settings = await get_settings(msg.chat.id)
 
-    # Spell-check regex to clean the message text
+    # Clean up the request string using regex
     query = re.sub(
         r"\b(pl(i|e)*?(s|z+|ease|se|ese|(e+)s(e)?)|((send|snd|giv(e)?|gib)(\sme)?)|movie(s)?|new|latest|br((o|u)h?)*|^h(e|a)?(l)*(o)*|mal(ayalam)?|t(h)?amil|file|that|find|und(o)*|kit(t(i|y)?)?o(w)?|thar(u)?(o)*w?|kittum(o)*|aya(k)*(um(o)*)?|full\smovie|any(one)|with\ssubtitle(s)?)",
         "", msg.text, flags=re.IGNORECASE
@@ -2311,12 +2311,11 @@ async def advantage_spell_chok(client, name, msg, reply_msg, vj_search):
         await handle_no_results(client, msg, mv_rqst, reqstr, reply_msg)
         return
 
-    # If movies list is empty, handle no results
+    # If no movies found, handle the no result case
     if not movies:
         await handle_no_results(client, msg, mv_rqst, reqstr, reply_msg)
         return
 
-    # Populate the movie list with titles and titles + years
     movielist = [movie.get('title') for movie in movies]
     movielist += [f"{movie.get('title')} {movie.get('year')}" for movie in movies]
     SPELL_CHECK[mv_id] = movielist
@@ -2326,7 +2325,6 @@ async def advantage_spell_chok(client, name, msg, reply_msg, vj_search):
         vj_search_new = False
         vj_ai_msg = await reply_msg.edit_text("<b><i>Advance AI is trying to find your movie with the given spelling.</i></b>")
         movienamelist = [movie.get('title') for movie in movies]
-        found_match = False  # Track if a match is found
 
         for techvj in movienamelist:
             try:
@@ -2334,52 +2332,51 @@ async def advantage_spell_chok(client, name, msg, reply_msg, vj_search):
             except:
                 pass
             if mv_rqst.startswith(techvj[0]):
+                # When a match is found, delete the AI message
                 await auto_filter(client, techvj, msg, reply_msg, vj_search_new)
-                await vj_ai_msg.delete()  # Delete AI message when results are found
-                found_match = True
-                break  # Stop further processing once search is complete
+                await vj_ai_msg.delete()  # Directly delete the AI message when results are found
+                return  # Exit after handling found results
 
-        if not found_match:
-            # If no match is found, show Google search button in the AI message itself
-            reqst_gle = mv_rqst.replace(" ", "+")
-            button = [[
-                InlineKeyboardButton("Gᴏᴏɢʟᴇ", url=f"https://www.google.com/search?q={reqst_gle}")
-            ]]
-            if NO_RESULTS_MSG:
-                await client.send_message(chat_id=LOG_CHANNEL, text=(script.NORSLTS.format(reqstr.id, reqstr.mention, mv_rqst)))
-            # Edit AI message to display couldn't find text instead of deleting
-            await vj_ai_msg.edit_text(text=script.I_CUDNT.format(mv_rqst), reply_markup=InlineKeyboardMarkup(button))
-            await asyncio.sleep(30)
-            await vj_ai_msg.delete()  # Now delete after displaying the final message
+        # If no match is found, edit AI message to display 'CUDNT_FND' or send a new message
+        reqst_gle = mv_rqst.replace(" ", "+")
+        button = [[
+            InlineKeyboardButton("Gᴏᴏɢʟᴇ", url=f"https://www.google.com/search?q={reqst_gle}")
+        ]]
+        if NO_RESULTS_MSG:
+            await client.send_message(chat_id=LOG_CHANNEL, text=(script.NORSLTS.format(reqstr.id, reqstr.mention, mv_rqst)))
+        
+        # Edit the AI message or send a new message with the 'CUDNT_FND' content
+        await vj_ai_msg.edit_text(text=script.I_CUDNT.format(mv_rqst), reply_markup=InlineKeyboardMarkup(button))
+        await asyncio.sleep(30)
+        await vj_ai_msg.delete()  # Optionally delete after showing 'CUDNT_FND' message
         return
 
-    else:
-        # Create inline buttons for spell check results
-        btn = [
-            [
-                InlineKeyboardButton(
-                    text=movie_name.strip(),
-                    callback_data=f"spol#{reqstr1}#{k}",
-                )
-            ]
-            for k, movie_name in enumerate(movielist)
+    # For non-AI or general cases
+    btn = [
+        [
+            InlineKeyboardButton(
+                text=movie_name.strip(),
+                callback_data=f"spol#{reqstr1}#{k}",
+            )
         ]
-        btn.append([InlineKeyboardButton(text="Close", callback_data=f'spol#{reqstr1}#close_spellcheck')])
-        spell_check_del = await reply_msg.edit_text(
-            text=script.CUDNT_FND.format(mv_rqst),
-            reply_markup=InlineKeyboardMarkup(btn)
-        )
-        try:
-            if settings['auto_delete']:
-                await asyncio.sleep(600)
-                await spell_check_del.delete()
-        except KeyError:
-            grpid = await active_connection(str(msg.from_user.id))
-            await save_group_settings(grpid, 'auto_delete', True)
-            settings = await get_settings(msg.chat.id)
-            if settings['auto_delete']:
-                await asyncio.sleep(600)
-                await spell_check_del.delete()
+        for k, movie_name in enumerate(movielist)
+    ]
+    btn.append([InlineKeyboardButton(text="Close", callback_data=f'spol#{reqstr1}#close_spellcheck')])
+    spell_check_del = await reply_msg.edit_text(
+        text=script.CUDNT_FND.format(mv_rqst),
+        reply_markup=InlineKeyboardMarkup(btn)
+    )
+    try:
+        if settings['auto_delete']:
+            await asyncio.sleep(600)
+            await spell_check_del.delete()
+    except KeyError:
+        grpid = await active_connection(str(msg.from_user.id))
+        await save_group_settings(grpid, 'auto_delete', True)
+        settings = await get_settings(msg.chat.id)
+        if settings['auto_delete']:
+            await asyncio.sleep(600)
+            await spell_check_del.delete()
                 
 async def manual_filters(client, message, text=False):
     settings = await get_settings(message.chat.id)
