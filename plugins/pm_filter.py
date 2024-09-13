@@ -2098,7 +2098,6 @@ async def auto_filter(client, name, msg, reply_msg, ai_search, spoll=False):
             search = search.replace(":", "")
             search = search.replace(".", "")
             files, offset, total_results = await get_search_results(message.chat.id ,search, offset=0, filter=True)
-            await reply_msg.delete()
             settings = await get_settings(message.chat.id)
             if not files:
                 if settings["spell_check"]:
@@ -2111,6 +2110,7 @@ async def auto_filter(client, name, msg, reply_msg, ai_search, spoll=False):
         message = msg.message.reply_to_message  # msg will be callback query
         search, files, offset, total_results = spoll
         settings = await get_settings(message.chat.id)
+        await reply_msg.delete()
         await msg.delete()
     pre = 'filep' if settings['file_secure'] else 'file'
     key = f"{message.chat.id}-{message.id}"
@@ -2341,13 +2341,13 @@ async def advantage_spell_chok(client, name, msg, reply_msg, vj_search):
                 pass
             if mv_rqst.startswith(techvj[0]):
                 await auto_filter(client, techvj, msg, reply_msg, vj_search_new)
-                await reply_msg.delete()
                 break
         reqst_gle = mv_rqst.replace(" ", "+")
         button = [[
             InlineKeyboardButton("Gᴏᴏɢʟᴇ", url=f"https://www.google.com/search?q={reqst_gle}")
         ]]
         if NO_RESULTS_MSG:
+            await reply_msg.delete()
             await client.send_message(chat_id=LOG_CHANNEL, text=(script.NORSLTS.format(reqstr.id, reqstr.mention, mv_rqst)))
         k=await message.reply_text(text=script.I_CUDNT.format(mv_rqst), reply_markup=InlineKeyboardMarkup(button))
         await asyncio.sleep(30)
