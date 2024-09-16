@@ -1,4 +1,5 @@
 python-telegram-bot
+asyncio
 pyrofork
 tgcrypto 
 requests 
