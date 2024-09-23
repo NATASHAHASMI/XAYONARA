@@ -37,3 +37,5 @@ dnspython==2.3.0
 ffmpeg-python>=0.2.0
 pyromod==1.5
 git+https://github.com/Joelkb/cinemagoer
+fuzzywuzzy
+python-Levenshtein
