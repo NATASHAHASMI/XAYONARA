@@ -59,8 +59,8 @@ async def give_filter(client, message):
         manual = await manual_filters(client, message)
         if manual == False:
             settings = await get_settings(message.chat.id)
-            try:
-                if settings['auto_ffilter']:
+                    try:
+                        if settings['auto_ffilter']:
                             await auto_filter(client, message)
                     except KeyError:
                         grpid = await active_connection(str(message.from_user.id))
