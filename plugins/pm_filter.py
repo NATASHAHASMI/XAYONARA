@@ -2076,7 +2076,8 @@ async def auto_filter(client, msg, spoll=False):
                 return
             if len(message.text) < 100:
                 search = message.text
-                m=await message.reply_sticker(sticker="CAACAgIAAxkBAAEVugJljpdfkszexOUZu8hPjuPKty8ZmAACdxgAAqPjKEmMVSFmXGLogR4E")
+                m=await message.reply_sticker(sticker="CAACAgIAAxkBAAEVugJljpdfkszexOUZu8hPjuPKty8ZmAACdxgAAqPjKEmMVSFmXGLogR4E",
+                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🅿︎🅻︎🅴︎🅰︎🆂︎🅴︎  🆆︎🅰︎🅸︎🆃︎", url=CHNL_LNK)]]))
                 search = search.lower()
                 find = search.split(" ")
                 search = ""
@@ -2115,77 +2116,78 @@ async def auto_filter(client, msg, spoll=False):
         else:
             message = msg.message.reply_to_message  # msg will be callback query
             search, files, offset, total_results = spoll
-            m=await message.reply_sticker(sticker="CAACAgIAAxkBAAEVugJljpdfkszexOUZu8hPjuPKty8ZmAACdxgAAqPjKEmMVSFmXGLogR4E")
+            m=await message.reply_sticker(sticker="CAACAgIAAxkBAAEVugJljpdfkszexOUZu8hPjuPKty8ZmAACdxgAAqPjKEmMVSFmXGLogR4E",
+            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🅿︎🅻︎🅴︎🅰︎🆂︎🅴︎  🆆︎🅰︎🅸︎🆃︎", url=CHNL_LNK)]]))
             settings = await get_settings(message.chat.id)
-        key = f"{message.chat.id}-{message.id}"
-        temp.GETALL[key] = files
-        temp.SEND_ALL_TEMP[message.from_user.id] = files
-        temp.KEYWORD[message.from_user.id] = search
-        temp.SHORT[message.from_user.id] = message.chat.id
-        pre = 'filep' if settings['file_secure'] else 'file'
-        if settings["button"]:
-            btn = [
-                [
-                    InlineKeyboardButton(
-                        text=f"🀄️{get_size(file.file_size)}🎴{' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))}", callback_data=f'{pre}#{file.file_id}'
-                    ),
-                ]
-                for file in files
+            await m.delete()
+    pre = 'filep' if settings['file_secure'] else 'file'
+    key = f"{message.chat.id}-{message.id}"
+    FRESH[key] = search
+    temp.GETALL[key] = files
+    temp.SHORT[message.from_user.id] = message.chat.id
+    if settings["button"]:
+        btn = [
+            [
+                InlineKeyboardButton(
+                    text=f"🀄️{get_size(file.file_size)}🎴{' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))}", callback_data=f'{pre}#{file.file_id}'
+                ),
             ]
-            btn.insert(0, 
-                [
-                    InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"years#{key}"),
-                    InlineKeyboardButton(f"🍿 Sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
-                ]
-            )
-            btn.insert(0, [
-                InlineKeyboardButton(f"🎬 Qᴜᴀʟɪᴛʏ", callback_data=f"qualities#{key}"),
-                InlineKeyboardButton(f"♻️ Sᴇɴᴅ Aʟʟ", callback_data=f"sendfiles#{key}")
-                ]
-            )
-            btn.insert(0, [
-                InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
-                InlineKeyboardButton("⛓️ Eᴘɪꜱᴏᴅᴇs", callback_data=f"episodes#{key}")
-                ]
-            )
-        else:
-            btn = []
-            btn.insert(0, 
-                [
-                    InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"years#{key}"),
-                    InlineKeyboardButton(f"🍿 Sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
-                ]
-            )
-            btn.insert(0, [
-                InlineKeyboardButton(f"🎬 Qᴜᴀʟɪᴛʏ", callback_data=f"qualities#{key}"),
-                InlineKeyboardButton(f"♻️ Sᴇɴᴅ Aʟʟ", callback_data=f"sendfiles#{key}")
-                ]
-            )
-            btn.insert(0, [
-                InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
-                InlineKeyboardButton("⛓️ Eᴘɪꜱᴏᴅᴇs", callback_data=f"episodes#{key}")
-                ]
-            )
-        if offset != "":
-            req = message.from_user.id if message.from_user else 0
-            try:
-                if settings['max_btn']:
-                    btn.append(
-                        [InlineKeyboardButton("𝐏𝐀𝐆𝐄", callback_data="pages"), InlineKeyboardButton(text=f"1/{math.ceil(int(total_results)/10)}",callback_data="pages"), InlineKeyboardButton(text="𝐍𝐄𝐗𝐓 ➪",callback_data=f"next_{req}_{key}_{offset}")]
-                    )
-                else:
-                    btn.append(
-                        [InlineKeyboardButton("𝐏𝐀𝐆𝐄", callback_data="pages"), InlineKeyboardButton(text=f"1/{math.ceil(int(total_results)/int(MAX_B_TN))}",callback_data="pages"), InlineKeyboardButton(text="𝐍𝐄𝐗𝐓 ➪",callback_data=f"next_{req}_{key}_{offset}")]
-                    )
-            except KeyError:
-                await save_group_settings(message.chat.id, 'max_btn', True)
+            for file in files
+        ]
+        btn.insert(0, 
+            [
+                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"years#{key}"),
+                InlineKeyboardButton(f"🍿 Sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
+            ]
+        )
+        btn.insert(0, [
+            InlineKeyboardButton(f"🎬 Qᴜᴀʟɪᴛʏ", callback_data=f"qualities#{key}"),
+            InlineKeyboardButton(f"♻️ Sᴇɴᴅ Aʟʟ", callback_data=f"sendfiles#{key}")
+            ]
+        )
+        btn.insert(0, [
+            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+            InlineKeyboardButton("⛓️ Eᴘɪꜱᴏᴅᴇs", callback_data=f"episodes#{key}")
+            ]
+        )
+    else:
+        btn = []
+        btn.insert(0, 
+            [
+                InlineKeyboardButton(f"📆 Yᴇᴀʀ", callback_data=f"years#{key}"),
+                InlineKeyboardButton(f"🍿 Sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
+            ]
+        )
+        btn.insert(0, [
+            InlineKeyboardButton(f"🎬 Qᴜᴀʟɪᴛʏ", callback_data=f"qualities#{key}"),
+            InlineKeyboardButton(f"♻️ Sᴇɴᴅ Aʟʟ", callback_data=f"sendfiles#{key}")
+            ]
+        )
+        btn.insert(0, [
+            InlineKeyboardButton(f"📰 Lᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+            InlineKeyboardButton("⛓️ Eᴘɪꜱᴏᴅᴇs", callback_data=f"episodes#{key}")
+            ]
+        )
+    if offset != "":
+        req = message.from_user.id if message.from_user else 0
+        try:
+            if settings['max_btn']:
                 btn.append(
                     [InlineKeyboardButton("𝐏𝐀𝐆𝐄", callback_data="pages"), InlineKeyboardButton(text=f"1/{math.ceil(int(total_results)/10)}",callback_data="pages"), InlineKeyboardButton(text="𝐍𝐄𝐗𝐓 ➪",callback_data=f"next_{req}_{key}_{offset}")]
                 )
-        else:
+            else:
+                btn.append(
+                    [InlineKeyboardButton("𝐏𝐀𝐆𝐄", callback_data="pages"), InlineKeyboardButton(text=f"1/{math.ceil(int(total_results)/int(MAX_B_TN))}",callback_data="pages"), InlineKeyboardButton(text="𝐍𝐄𝐗𝐓 ➪",callback_data=f"next_{req}_{key}_{offset}")]
+                )
+        except KeyError:
+            await save_group_settings(message.chat.id, 'max_btn', True)
             btn.append(
-                [InlineKeyboardButton(text="🚸 ɴᴏ ᴍᴏʀᴇ ᴘᴀɢᴇs 🚸",callback_data="pages")]
+                [InlineKeyboardButton("𝐏𝐀𝐆𝐄", callback_data="pages"), InlineKeyboardButton(text=f"1/{math.ceil(int(total_results)/10)}",callback_data="pages"), InlineKeyboardButton(text="𝐍𝐄𝐗𝐓 ➪",callback_data=f"next_{req}_{key}_{offset}")]
             )
+    else:
+        btn.append(
+            [InlineKeyboardButton(text="🚸 ɴᴏ ᴍᴏʀᴇ ᴘᴀɢᴇs 🚸",callback_data="pages")]
+        )
     imdb = await get_poster(search, file=(files[0]).file_name) if settings["imdb"] else None
     cur_time = datetime.now(pytz.timezone('Asia/Kolkata')).time()
     time_difference = timedelta(hours=cur_time.hour, minutes=cur_time.minute, seconds=(cur_time.second+(cur_time.microsecond/1000000))) - timedelta(hours=curr_time.hour, minutes=curr_time.minute, seconds=(curr_time.second+(curr_time.microsecond/1000000)))
