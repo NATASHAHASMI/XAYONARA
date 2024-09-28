@@ -2065,61 +2065,58 @@ async def ai_spell_check(chat_id, wrong_name):
         print('Got error while searching movie in ai_spell_check', e)
     
 async def auto_filter(client, msg, spoll=False):
-    try:
-        curr_time = datetime.now(pytz.timezone('Asia/Kolkata')).time()
-        #reqstr1 = msg.from_user.id
-        #reqstr = await client.get_users(reqstr1)
-        if not spoll:
-            message = msg
-            if message.text.startswith("/"): return  # ignore commands
-            if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
-                return
-            if len(message.text) < 100:
-                search = message.text
-                m=await message.reply_sticker(sticker="CAACAgIAAxkBAAEVugJljpdfkszexOUZu8hPjuPKty8ZmAACdxgAAqPjKEmMVSFmXGLogR4E",
-                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🅿︎🅻︎🅴︎🅰︎🆂︎🅴︎  🆆︎🅰︎🅸︎🆃︎", url=CHNL_LNK)]]))
-                search = search.lower()
-                find = search.split(" ")
-                search = ""
-                removes = ["in","upload", "series", "full", "horror", "thriller", "mystery", "print", "file", "send", "chahiye", "chiye", "movi", "movie", "bhejo", "dijiye", "jaldi", "hd", "bollywood", "hollywood", "south", "karo"]
-                for x in find:
-                    if x in removes:
-                        continue
-                    else:
-                        search = search + x + " "
-                search = re.sub(r"\b(pl(i|e)*?(s|z+|ease|se|ese|(e+)s(e)?)|((send|snd|giv(e)?|gib)(\sme)?)|movie(s)?|new|latest|bro|bruh|broh|helo|that|find|dubbed|link|venum|iruka|pannunga|pannungga|anuppunga|anupunga|anuppungga|anupungga|film|undo|kitti|kitty|tharu|kittumo|kittum|movie|any(one)|with\ssubtitle(s)?)", "", search, flags=re.IGNORECASE)
-                search = re.sub(r"\s+", " ", search).strip()
-                search = search.replace("-", " ")
-                search = search.replace(":","")
-                files, offset, total_results = await get_search_results(message.chat.id ,search, offset=0, filter=True)
-                settings = await get_settings(message.chat.id)
-                if not files:
-                    await m.delete()
-                    if settings["spell_check"]:
-                        ai_sts = await message.reply_text('<b>Ai is Cheking For Your Spelling. Please Wait.</b>')
-                        is_misspelled = await ai_spell_check(chat_id = message.chat.id,wrong_name=search)
-                        if is_misspelled:
-                            await ai_sts.edit(f'<b>Ai Suggested <code>{is_misspelled}</code>\nSo Im Searching for <code>{is_misspelled}</code></b>')
-                            await asyncio.sleep(2)
-                            message.text = is_misspelled
-                            await ai_sts.delete()
-                            return await auto_filter(client, message)
-                        await ai_sts.delete()
-                        return await advantage_spell_chok(client, message)
-                    else:
-                        # if NO_RESULTS_MSG:
-                            # total=await client.get_chat_members_count(message.chat.id)
-                            # await client.send_message(chat_id=LOG_CHANNEL, text=(script.NORSLTS.format(message.chat.title, message.chat.id, total, temp.B_NAME, reqstr.mention, search)))
-                        return
-            else:
-                return
-        else:
-            message = msg.message.reply_to_message  # msg will be callback query
-            search, files, offset, total_results = spoll
-            m=await message.reply_sticker(sticker="CAACAgIAAxkBAAEVugJljpdfkszexOUZu8hPjuPKty8ZmAACdxgAAqPjKEmMVSFmXGLogR4E",
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🅿︎🅻︎🅴︎🅰︎🆂︎🅴︎  🆆︎🅰︎🅸︎🆃︎", url=CHNL_LNK)]]))
+    curr_time = datetime.now(pytz.timezone('Asia/Kolkata')).time()
+    #reqstr1 = msg.from_user.id
+    #reqstr = await client.get_users(reqstr1)
+    if not spoll:
+        message = msg
+        if message.text.startswith("/"): return  # ignore commands
+        if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
+            return
+        if len(message.text) < 100:
+            search = message.text
+            m=await message.reply_sticker(sticker="CAACAgIAAxkBAAEVugJljpdfkszexOUZu8hPjuPKty8ZmAACdxgAAqPjKEmMVSFmXGLogR4E")
+            search = search.lower()
+            find = search.split(" ")
+            search = ""
+            removes = ["in","upload", "series", "full", "horror", "thriller", "mystery", "print", "file", "send", "chahiye", "chiye", "movi", "movie", "bhejo", "dijiye", "jaldi", "hd", "bollywood", "hollywood", "south", "karo"]
+            for x in find:
+                if x in removes:
+                    continue
+                else:
+                    search = search + x + " "
+            search = re.sub(r"\b(pl(i|e)*?(s|z+|ease|se|ese|(e+)s(e)?)|((send|snd|giv(e)?|gib)(\sme)?)|movie(s)?|new|latest|bro|bruh|broh|helo|that|find|dubbed|link|venum|iruka|pannunga|pannungga|anuppunga|anupunga|anuppungga|anupungga|film|undo|kitti|kitty|tharu|kittumo|kittum|movie|any(one)|with\ssubtitle(s)?)", "", search, flags=re.IGNORECASE)
+            search = re.sub(r"\s+", " ", search).strip()
+            search = search.replace("-", " ")
+            search = search.replace(":","")
+            files, offset, total_results = await get_search_results(message.chat.id ,search, offset=0, filter=True)
             settings = await get_settings(message.chat.id)
-            await m.delete()
+            if not files:
+                await m.delete()
+                if settings["spell_check"]:
+                    ai_sts = await message.reply_text('<b>Ai is Cheking For Your Spelling. Please Wait.</b>')
+                    is_misspelled = await ai_spell_check(chat_id = message.chat.id,wrong_name=search)
+                    if is_misspelled:
+                        await ai_sts.edit(f'<b>Ai Suggested <code>{is_misspelled}</code>\nSo Im Searching for <code>{is_misspelled}</code></b>')
+                        await asyncio.sleep(2)
+                        message.text = is_misspelled
+                        await ai_sts.delete()
+                        return await auto_filter(client, message)
+                    await ai_sts.delete()
+                    return await advantage_spell_chok(client, message)
+                else:
+                    # if NO_RESULTS_MSG:
+                        # total=await client.get_chat_members_count(message.chat.id)
+                        # await client.send_message(chat_id=LOG_CHANNEL, text=(script.NORSLTS.format(message.chat.title, message.chat.id, total, temp.B_NAME, reqstr.mention, search)))
+                    return
+        else:
+            return
+    else:
+        message = msg.message.reply_to_message  # msg will be callback query
+        search, files, offset, total_results = spoll
+        m=await message.reply_sticker(sticker="CAACAgIAAxkBAAEVugJljpdfkszexOUZu8hPjuPKty8ZmAACdxgAAqPjKEmMVSFmXGLogR4E")
+        settings = await get_settings(message.chat.id)
+        await m.delete()
     pre = 'filep' if settings['file_secure'] else 'file'
     key = f"{message.chat.id}-{message.id}"
     FRESH[key] = search
