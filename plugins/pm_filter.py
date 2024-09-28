@@ -21,7 +21,7 @@ from info import *
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaPhoto
 from pyrogram import Client, filters, enums
 from pyrogram.errors import UserIsBlocked, MessageNotModified, PeerIdInvalid, ChatAdminRequired
-from utils import get_size, get_poster, temp, get_settings, save_group_settings, get_shortlink, get_tutorial, send_all, get_cap, react_msg, is_req_subscribed
+from utils import get_size, get_poster, temp, get_settings, save_group_settings, get_shortlink, get_tutorial, send_all, get_cap, react_msg, is_req_subscribed, imdb
 from database.users_chats_db import db
 from database.ia_filterdb import Media, get_file_details, get_search_results, get_bad_files
 from database.filters_mdb import (
@@ -36,6 +36,7 @@ from database.gfilters_mdb import (
 )
 
 import logging
+from fuzzywuzzy import process
 from urllib.parse import quote_plus
 from util.file_properties import get_name, get_hash, get_media_file_size
 
@@ -2056,7 +2057,27 @@ async def cb_handler(client: Client, query: CallbackQuery):
             await query.message.edit_reply_markup(reply_markup)
     await query.answer(MSG_ALRT)
 
-    
+async def ai_spell_check(chat_id, wrong_name):
+    try:  
+        async def search_movie(wrong_name):
+            search_results = imdb.search_movie(wrong_name)
+            movie_list = [movie['title'] for movie in search_results]
+            return movie_list
+        movie_list = await search_movie(wrong_name)
+        if not movie_list:
+            return
+        for _ in range(5):
+            closest_match = process.extractOne(wrong_name, movie_list)
+            if not closest_match or closest_match[1] <= 80:
+                return 
+            movie = closest_match[0]
+            files, offset, total_results = await get_search_results(chat_id=chat_id, query=movie)
+            if files:
+                return movie
+            movie_list.remove(movie)
+        return
+    except Exception as e:
+        print('Got error while searching movie in ai_spell_check', e)    
 async def auto_filter(client, msg, spoll=False):
     curr_time = datetime.now(pytz.timezone('Asia/Kolkata')).time()
     # reqstr1 = msg.from_user.id if msg.from_user else 0
@@ -2074,10 +2095,6 @@ async def auto_filter(client, msg, spoll=False):
         if len(message.text) < 100:
             search = message.text
             m=await message.reply_text(f"<b><pre>𝑺𝒆𝒂𝒓𝒄𝒉𝒊𝒏𝒈 𝑭𝒐𝒓 🔍</pre></b> `{search}` ")
-            try:
-                await react_msg(client, m)
-            except:
-                pass
             search = search.lower()
             find = search.split(" ")
             search = ""
@@ -2096,7 +2113,16 @@ async def auto_filter(client, msg, spoll=False):
             if not files:
                 await m.delete()
                 if settings["spell_check"]:
-                    return await advantage_spell_chok(client, msg)
+                    ai_sts = await message.reply_text('<b>Ai is Cheking For Your Spelling. Please Wait.</b>')
+                        is_misspelled = await ai_spell_check(chat_id = message.chat.id,wrong_name=search)
+                        if is_misspelled:
+                            await ai_sts.edit(f'<b>Ai Suggested <code>{is_misspelled}</code>\nSo Im Searching for <code>{is_misspelled}</code></b>')
+                            await asyncio.sleep(2)
+                            message.text = is_misspelled
+                            await ai_sts.delete()
+                            return await auto_filter(client, message)
+                        await ai_sts.delete()
+                        return await advantage_spell_chok(client, message)
                 else:
                     #if NO_RESULTS_MSG:
                         #await client.send_message(
