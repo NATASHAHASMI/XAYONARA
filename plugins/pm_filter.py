@@ -55,22 +55,27 @@ SPELL_CHECK = {}
 
 @Client.on_message(filters.group & filters.text & filters.incoming)
 async def give_filter(client, message):
-    if message.chat.id != SUPPORT_CHAT_ID:
-        manual = await manual_filters(client, message)
-        if manual == False:
+    try:
+        if message.chat.id != SUPPORT_CHAT_ID:
             settings = await get_settings(message.chat.id)
-                    try:
-                        if settings['auto_ffilter']:
-                            await auto_filter(client, message)
-                    except KeyError:
-                        grpid = await active_connection(str(message.from_user.id))
-                        await save_group_settings(grpid, 'auto_ffilter', True)
-                        settings = await get_settings(message.chat.id)
-                        if settings['auto_ffilter']:
-                            await auto_filter(client, message)
-        else: #a better logic to avoid repeated lines of code in auto_filter function
+            
+            # Check if auto_filter is enabled, if not, enable it
+            if not settings.get('auto_ffilter', False):
+                grpid = await active_connection(str(message.from_user.id))
+                await save_group_settings(grpid, 'auto_ffilter', True)
+                settings = await get_settings(message.chat.id)  # Re-fetch settings after update
+
+            # Call auto_filter if enabled
+            if settings.get('auto_ffilter', False):
+                await auto_filter(client, message)
+
+        else:
+            # Handle support group logic here
             search = message.text
-            temp_files, temp_offset, total_results = await get_search_results(chat_id=message.chat.id, query=search.lower(), offset=0, filter=True)
+            temp_files, temp_offset, total_results = await get_search_results(
+                chat_id=message.chat.id, query=search.lower(), offset=0, filter=True
+            )
+
             if total_results == 0:
                 return
             else:
