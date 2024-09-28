@@ -2399,7 +2399,7 @@ async def advantage_spell_chok(client, msg):
         btn.append([InlineKeyboardButton(text="Close", callback_data=f'spol#{reqstr1}#close_spellcheck')])
         spell_check_del = await msg.reply_photo(
             photo=(SPELL_IMG),
-            caption=(script.CUDNT_FND.format(mv_rqst)),
+            caption=(script.CUDNT_FND),
             reply_markup=InlineKeyboardMarkup(btn)
         )
         try:
@@ -2463,19 +2463,19 @@ async def advantage_spell_chok(client, msg):
         btn.append([InlineKeyboardButton(text="Close", callback_data=f'spol#{reqstr1}#close_spellcheck')])
         spell_check_del = await msg.reply_photo(
             photo=(SPELL_IMG),
-            caption=(script.CUDNT_FND.format(mv_rqst)),
+            caption=(script.CUDNT_FND),
             reply_markup=InlineKeyboardMarkup(btn)
         )
         try:
             if settings['auto_delete']:
-                await asyncio.sleep(600)
+                await asyncio.sleep(60)
                 await spell_check_del.delete()
         except KeyError:
                 grpid = await active_connection(str(msg.from_user.id))
                 await save_group_settings(grpid, 'auto_delete', True)
                 settings = await get_settings(msg.chat.id)
                 if settings['auto_delete']:
-                    await asyncio.sleep(600)
+                    await asyncio.sleep(60)
                     await spell_check_del.delete()
 
 
