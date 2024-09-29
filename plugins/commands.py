@@ -41,7 +41,7 @@ async def start(client, message):
                     InlineKeyboardButton('⚔️ ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ ⚔️', url="https://t.me/Moviestudioabhi")
                   ]]
         reply_markup = InlineKeyboardMarkup(buttons)
-        m=await message.reply_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ...⚡</i></b>")
+        m=await message.reply_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ..🏴‍☠️</i></b>")
         await asyncio.sleep(0.5)
         await m.delete()
         await message.reply(script.GSTART_TXT.format(message.from_user.mention if message.from_user else message.chat.title, temp.U_NAME, temp.B_NAME), reply_markup=reply_markup, disable_web_page_preview=True)
@@ -80,9 +80,9 @@ async def start(client, message):
         await m.react("⚡",big=True)
         await asyncio.sleep(0.2)
         await m.edit_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ..⚡</i></b>")
-        await m.react("😇",big=True)
+        await m.react("😈",big=True)
         await asyncio.sleep(0.2)
-        await m.edit_text("⚡")
+        await m.edit_text("🏴‍☠️")
         await asyncio.sleep(0.3)
         await m.delete()
         await message.reply_photo(
@@ -108,7 +108,7 @@ async def start(client, message):
                 await client.send_photo(
                     chat_id=message.from_user.id,
                     photo="https://telegra.ph/file/20b4aaaddb8aba646e53c.jpg",
-                    caption="**__𝙿𝙻𝙴𝙰𝚂𝙴 𝙹𝙾𝙸𝙽 𝙼𝚈 𝙱𝙰𝙲𝙺𝚄𝙿 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 & 𝙵𝙸𝙻𝙴'𝚂 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 𝚃𝙷𝙴𝙽 𝙲𝙻𝙸𝙲𝙺 𝚃𝚁𝚈 𝙰𝙶𝙰𝙸𝙽 𝙱𝚄𝚃𝚃𝙾𝙽 𝚃𝙷𝙴𝙽 𝙱𝙾𝚃 𝚂𝙴𝙽𝙳 𝚈𝙾𝚄'𝚁 𝙵𝙸𝙻𝙴𝚂.⚠️__**",
+                    caption="**__𝙿𝙻𝙴𝙰𝚂𝙴 𝙹𝙾𝙸𝙽 𝙼𝚈 𝙱𝙰𝙲𝙺𝚄𝙿 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 𝚃𝙷𝙴𝙽 𝙲𝙻𝙸𝙲𝙺 𝚃𝚁𝚈 𝙰𝙶𝙰𝙸𝙽 𝙱𝚄𝚃𝚃𝙾𝙽 𝚃𝙷𝙴𝙽 𝙱𝙾𝚃 𝚂𝙴𝙽𝙳 𝚈𝙾𝚄'𝚁 𝙵𝙸𝙻𝙴𝚂.⚠️__**",
                     reply_markup=InlineKeyboardMarkup(btn),
                     parse_mode=enums.ParseMode.MARKDOWN,
                     has_spoiler=True
