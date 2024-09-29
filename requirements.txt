@@ -29,5 +29,6 @@ pyshorteners
 pyromod
 colorama
 
+fuzzywuzzy
 rapidfuzz
 python-Levenshtein
