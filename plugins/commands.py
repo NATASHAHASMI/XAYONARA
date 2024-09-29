@@ -68,9 +68,9 @@ async def start(client, message):
         await m.react("⚡",big=True)
         await asyncio.sleep(0.2)
         await m.edit_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ..⚡</i></b>")
-        await m.react("😇",big=True)
+        await m.react("😈",big=True)
         await asyncio.sleep(0.2)
-        await m.edit_text("⚡")
+        await m.edit_text("🏴‍☠️")
         await asyncio.sleep(0.3)
         await m.delete()
         await message.reply_photo(
