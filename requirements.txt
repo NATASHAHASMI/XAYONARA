@@ -1,4 +1,5 @@
 git+https://github.com/safarideveloper/pyrogram
+python-telegram-bot
 umongo
 tgcrypto
 pymongo[srv]==3.12.3
