@@ -83,6 +83,10 @@ async def is_check_admin(bot, chat_id, user_id):
     except:
         return False
 
+async def delayed_delete(Bot, message, delay):
+    await asyncio.sleep(delay)
+    await Bot.delete_messages(chat_id=message.chat.id, message_ids=message.id)
+
 async def react_msg(client, message):
     emojis = [
         "👍",
