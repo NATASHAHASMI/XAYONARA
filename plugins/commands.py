@@ -108,7 +108,7 @@ async def start(client, message):
                 await client.send_photo(
                     chat_id=message.from_user.id,
                     photo="https://telegra.ph/file/20b4aaaddb8aba646e53c.jpg",
-                    caption="**__𝙿𝙻𝙴𝙰𝚂𝙴 𝙹𝙾𝙸𝙽 𝙼𝚈 𝙱𝙰𝙲𝙺𝚄𝙿 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 𝚃𝙷𝙴𝙽 𝙲𝙻𝙸𝙲𝙺 𝚃𝚁𝚈 𝙰𝙶𝙰𝙸𝙽 𝙱𝚄𝚃𝚃𝙾𝙽 𝚃𝙷𝙴𝙽 𝙱𝙾𝚃 𝚂𝙴𝙽𝙳 𝚈𝙾𝚄'𝚁 𝙵𝙸𝙻𝙴𝚂.⚠️__**",
+                    caption="**Jᴏɪɴ Aʟʟ Bᴀᴄᴋᴜᴘ Cʜᴀɴɴᴇʟꜱ Tʜᴇɴ Cʟɪᴄᴋ Tʀʏ-Aɢᴀɪɴ Bᴜᴛᴛᴏɴ Bᴏᴛ Sᴇɴᴅ Yᴏᴜʀ Fɪʟᴇꜱ.⚠️**",
                     reply_markup=InlineKeyboardMarkup(btn),
                     parse_mode=enums.ParseMode.MARKDOWN,
                     has_spoiler=True
