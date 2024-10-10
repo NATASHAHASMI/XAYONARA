@@ -1406,11 +1406,11 @@ async def cb_handler(client: Client, query: CallbackQuery):
     
     elif query.data.startswith("checksub"):
         if AUTH_CHANNEL and not await is_req_subscribed(client, query, AUTH_CHANNEL):
-            await query.answer("Jᴏɪɴ Bᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ ᴍᴀʜɴ! 😒", show_alert=True)
+            ident, kk, file_id = query.data.split("#")
+            await query.answer(url=f"https://t.me/{temp.U_NAME}?start={kk}_{file_id}")
             return
-        ident, kk, file_id = query.data.split("#")
-        await query.answer(url=f"https://t.me/{temp.U_NAME}?start={kk}_{file_id}")
-    
+        await query.answer("Jᴏɪɴ ᴏᴜʀ Bᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ ᴍᴀʜɴ! 😒", show_alert=True)
+        
     elif query.data == "pages":
         await query.answer()
     
