@@ -347,11 +347,13 @@ async def start(client, message):
                 )
             )
             filesarr.append(msg)
-        k = await client.send_sticker(sticker="CAACAgUAAxkBAAEKRaNk_u0HQXLjZfHrRgkjcseNmvrK_gACJwEAAsiUZBTiPWKAkUSmmjAE")
+        k = await client.send_message(chat_id = message.from_user.id, text=f"<b>❗️ <u>ɪᴍᴘᴏʀᴛᴀɴᴛ</u> ❗️</b>\n\n<b>ᴛʜᴇꜱᴇ ꜰɪʟᴇꜱ ᴡɪʟʟ ʙᴇ ᴅᴇʟᴇᴛᴇᴅ ɪɴ</b> <b><u>10 ᴍɪɴᴜᴛᴇꜱ</u> </b><b>(Dᴜᴇ Tᴏ Cᴏᴘʏʀɪɢʜᴛ Iꜱꜱᴜᴇꜱ).</b>\n\n<b><i>📌 ᴘʟᴇᴀꜱᴇ ꜰᴏʀᴡᴀʀᴅ ᴛʜᴇꜱᴇ ꜰɪʟᴇꜱ ᴛᴏ ꜱᴀᴠᴇᴅ ᴍᴀꜱꜱᴀɢᴇ ᴀɴᴅ ꜱᴛᴀʀᴛ ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ.</i></b>")
+        await k.react("👨‍💻",big=True)
         await asyncio.sleep(600)
         for x in filesarr:
             await x.delete()
-        await k.edit_sticker(sticker="CAACAgUAAxkBAAEKRaFk_uzdXo_uugN0YeogUUimYNKHsgACPAUAAm2DsFTEKVYFc4R6LTAE")
+        await k.edit_text("<b>ʏᴏᴜʀ ꜰɪʟᴇꜱ ᴀʀᴇ ᴅᴇʟᴇᴛᴇᴅ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ !\nᴘʟᴇᴀꜱᴇ ꜱᴇᴀʀᴄʜ ᴀɢᴀɪɴ.</b>")
+        await k.react("🤝",big=True)
         return    
         
     elif data.startswith("files"):
@@ -420,12 +422,14 @@ async def start(client, message):
                     return
             await msg.edit_caption(f_caption)
             btn = [[
-                InlineKeyboardButton("Get File Again", callback_data=f'delfile#{file_id}')
+                InlineKeyboardButton("🎗️ ɢᴇᴛ ꜰɪʟᴇ ᴀɢᴀɪɴ 🎗️", callback_data=f'delfile#{file_id}')
             ]]
-            k = await msg.reply(sticker="CAACAgUAAxkBAAEKRaNk_u0HQXLjZfHrRgkjcseNmvrK_gACJwEAAsiUZBTiPWKAkUSmmjAE",quote=True)
+            k = await client.send_message(chat_id = message.from_user.id, text=f"<b>❗️ <u>ɪᴍᴘᴏʀᴛᴀɴᴛ</u> ❗️</b>\n\n<b>ᴛʜɪꜱ ꜰɪʟᴇ ᴡɪʟʟ ʙᴇ ᴅᴇʟᴇᴛᴇᴅ ɪɴ</b> <b><u>10 ᴍɪɴᴜᴛᴇꜱ</u> </b><b>(Dᴜᴇ Tᴏ Cᴏᴘʏʀɪɢʜᴛ Iꜱꜱᴜᴇꜱ).</b>\n\n<b><i>📌 ᴘʟᴇᴀꜱᴇ ꜰᴏʀᴡᴀʀᴅ ᴛʜɪꜱ ꜰɪʟᴇ ᴛᴏ ꜱᴀᴠᴇᴅ ᴍᴀꜱꜱᴀɢᴇ ᴀɴᴅ ꜱᴛᴀʀᴛ ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ.</i></b>")
+            await k.react("👨‍💻",big=True)
             await asyncio.sleep(600)
             await msg.delete()
-            await k.edit_sticker(sticker="CAACAgUAAxkBAAEKRaNk_u0HQXLjZfHrRgkjcseNmvrK_gACJwEAAsiUZBTiPWKAkUSmmjAE",reply_markup=InlineKeyboardMarkup(btn))
+            await k.edit_text("<b>Yᴏᴜʀ Fɪʟᴇ Iꜱ Sᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ Dᴇʟᴇᴛᴇᴅ !!\n\nᴄʟɪᴄᴋ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ᴛᴏ ɢᴇᴛ ʏᴏᴜʀ ᴅᴇʟᴇᴛᴇᴅ ꜰɪʟᴇ.👇</b>",reply_markup=InlineKeyboardMarkup(btn))
+            await k.react("🤝",big=True)
             return
         except:
             pass
@@ -469,44 +473,51 @@ async def start(client, message):
         )
     )
     btn = [[
-        InlineKeyboardButton("Get File Again", callback_data=f'delfile#{file_id}')
+        InlineKeyboardButton("🎗️ ɢᴇᴛ ꜰɪʟᴇ ᴀɢᴀɪɴ 🎗️", callback_data=f'delfile#{file_id}')
     ]]
-    k = await msg.reply(sticker="CAACAgUAAxkBAAEKRaNk_u0HQXLjZfHrRgkjcseNmvrK_gACJwEAAsiUZBTiPWKAkUSmmjAE",quote=True)
+    k = await client.send_message(chat_id = message.from_user.id, text=f"<b>❗️ <u>ɪᴍᴘᴏʀᴛᴀɴᴛ</u> ❗️</b>\n\n<b>ᴛʜɪꜱ ꜰɪʟᴇ ᴡɪʟʟ ʙᴇ ᴅᴇʟᴇᴛᴇᴅ ɪɴ</b> <b><u>10 ᴍɪɴᴜᴛᴇꜱ</u> </b><b>(Dᴜᴇ Tᴏ Cᴏᴘʏʀɪɢʜᴛ Iꜱꜱᴜᴇꜱ).</b>\n\n<b><i>📌 ᴘʟᴇᴀꜱᴇ ꜰᴏʀᴡᴀʀᴅ ᴛʜɪꜱ ꜰɪʟᴇ ᴛᴏ ꜱᴀᴠᴇᴅ ᴍᴀꜱꜱᴀɢᴇ ᴀɴᴅ ꜱᴛᴀʀᴛ ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ.</i></b>")
+    await k.react("👨‍💻",big=True)
     await asyncio.sleep(600)
     await msg.delete()
-    await k.edit_sticker(sticker="CAACAgUAAxkBAAEKRaNk_u0HQXLjZfHrRgkjcseNmvrK_gACJwEAAsiUZBTiPWKAkUSmmjAE",reply_markup=InlineKeyboardMarkup(btn))
+    await k.edit_text("<b>Yᴏᴜʀ Fɪʟᴇ Iꜱ Sᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ Dᴇʟᴇᴛᴇᴅ !!\n\nᴄʟɪᴄᴋ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ᴛᴏ ɢᴇᴛ ʏᴏᴜʀ ᴅᴇʟᴇᴛᴇᴅ ꜰɪʟᴇ.👇</b>",reply_markup=InlineKeyboardMarkup(btn))
+    await k.react("🤝",big=True)
     return   
 
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
 async def channel_info(bot, message):
-           
     """Send basic information of channel"""
-    if isinstance(CHANNELS, (int, str)):
-        channels = [CHANNELS]
-    elif isinstance(CHANNELS, list):
-        channels = CHANNELS
-    else:
-        raise ValueError("Unexpected type of CHANNELS")
-
-    text = '📑 **Indexed channels/groups**\n'
-    for channel in channels:
-        chat = await bot.get_chat(channel)
-        if chat.username:
-            text += '\n@' + chat.username
+    try:
+        if isinstance(CHANNELS, (int, str)):
+            channels = [CHANNELS]
+        elif isinstance(CHANNELS, list):
+            channels = CHANNELS
         else:
-            text += '\n' + chat.title or chat.first_name
+            raise ValueError("Unexpected type of CHANNELS")
 
-    text += f'\n\n**Total:** {len(CHANNELS)}'
+        text = '📑 **Indexed channels/groups**\n'
+        for channel in channels:
+            try:
+                chat = await bot.get_chat(channel)
+                if chat.username:
+                    text += '\n@' + chat.username
+                else:
+                    text += '\n' + (chat.title or chat.first_name)
+            except Exception as e:
+                text += f"\nError fetching info for {channel}: {e}"
 
-    if len(text) < 4096:
-        await message.reply(text)
-    else:
-        file = 'Indexed channels.txt'
-        with open(file, 'w') as f:
-            f.write(text)
-        await message.reply_document(file)
-        os.remove(file)
+        text += f'\n\n**Total:** {len(channels)}'
 
+        if len(text) < 4096:
+            await message.reply(text)
+        else:
+            file = 'Indexed channels.txt'
+            with open(file, 'w') as f:
+                f.write(text)
+            await message.reply_document(file)
+            os.remove(file)
+
+    except Exception as e:
+        await message.reply(f"Error: {e}")
 
 @Client.on_message(filters.command('logs') & filters.user(ADMINS))
 async def log_file(bot, message):
