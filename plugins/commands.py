@@ -434,7 +434,7 @@ async def start(client, message):
                     return
             await msg.edit_caption(f_caption)
             btn = [[
-                InlineKeyboardButton("🎀 ɢᴇᴛ ꜰɪʟᴇ ᴀɢᴀɪɴ 🎀", callback_data=f'delfile#{file_id}')
+                InlineKeyboardButton("🎗️ ɢᴇᴛ ꜰɪʟᴇ ᴀɢᴀɪɴ 🎗️", callback_data=f'delfile#{file_id}')
             ]]
             k = await client.send_message(chat_id = message.from_user.id, text=f"<b>❗️ <u>ɪᴍᴘᴏʀᴛᴀɴᴛ</u> ❗️</b>\n\n<b>ᴛʜɪꜱ ꜰɪʟᴇ ᴡɪʟʟ ʙᴇ ᴅᴇʟᴇᴛᴇᴅ ɪɴ</b> <b><u>10 ᴍɪɴᴜᴛᴇꜱ</u> </b><b>(Dᴜᴇ Tᴏ Cᴏᴘʏʀɪɢʜᴛ Iꜱꜱᴜᴇꜱ).</b>\n\n<b><i>📌 ᴘʟᴇᴀꜱᴇ ꜰᴏʀᴡᴀʀᴅ ᴛʜɪꜱ ꜰɪʟᴇ ᴛᴏ ꜱᴀᴠᴇᴅ ᴍᴀꜱꜱᴀɢᴇ ᴀɴᴅ ꜱᴛᴀʀᴛ ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ.</i></b>")
             await k.react("👨‍💻",big=True)
@@ -485,7 +485,7 @@ async def start(client, message):
         )
     )
     btn = [[
-        InlineKeyboardButton("🎀 ɢᴇᴛ ꜰɪʟᴇ ᴀɢᴀɪɴ 🎀", callback_data=f'delfile#{file_id}')
+        InlineKeyboardButton("🎗️ ɢᴇᴛ ꜰɪʟᴇ ᴀɢᴀɪɴ 🎗️", callback_data=f'delfile#{file_id}')
     ]]
     k = await client.send_message(chat_id = message.from_user.id, text=f"<b>❗️ <u>ɪᴍᴘᴏʀᴛᴀɴᴛ</u> ❗️</b>\n\n<b>ᴛʜɪꜱ ꜰɪʟᴇ ᴡɪʟʟ ʙᴇ ᴅᴇʟᴇᴛᴇᴅ ɪɴ</b> <b><u>10 ᴍɪɴᴜᴛᴇꜱ</u> </b><b>(Dᴜᴇ Tᴏ Cᴏᴘʏʀɪɢʜᴛ Iꜱꜱᴜᴇꜱ).</b>\n\n<b><i>📌 ᴘʟᴇᴀꜱᴇ ꜰᴏʀᴡᴀʀᴅ ᴛʜɪꜱ ꜰɪʟᴇ ᴛᴏ ꜱᴀᴠᴇᴅ ᴍᴀꜱꜱᴀɢᴇ ᴀɴᴅ ꜱᴛᴀʀᴛ ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ.</i></b>")
     await k.react("👨‍💻",big=True)
