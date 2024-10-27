@@ -29,7 +29,7 @@ SPELL_IMG = environ.get("SPELL_IMG", "https://te.legra.ph/file/15c1ad448dfe472a5
 
 # Admins, Channels & Users
 ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '1843754190 5837099475 1116930593 1270043632 5357825929 1667104725').split()]
-CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1001638006524 -1001983152794 -1001965301580 -1001638006524 -1002026546209 -1002062484191 -1001644930682 -1001756564118 -1002045252181 -1002004346552 -1002196649548 -1002020224599').split()]
+CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1001638006524 -1001983152794 -1001965301580 -1001638006524 -1002026546209 -1002062484191 -1001644930682 -1001756564118 -1002045252181 -1002004346552 -1002196649548 -1002020224599 -1002203416179').split()]
 auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '').split()]
 AUTH_USERS = (auth_users + ADMINS) if auth_users else []
 PREMIUM_USER = [int(user) if id_pattern.search(user) else user for user in environ.get('PREMIUM_USER', '1843754190').split()]
