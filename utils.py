@@ -61,7 +61,6 @@ async def is_req_subscribed(bot, query, channel):
         try:
             await bot.get_chat_member(id, query.from_user.id)
         except UserNotParticipant:
-            btn.append([InlineKeyboardButton(f'Jᴏɪɴ Bᴀᴄᴋᴜᴘ', url="https://t.me/+mzhkyZUCrhJhZjA1")])
             btn.append([InlineKeyboardButton(f'Jᴏɪɴ {chat.title}', url=chat.invite_link)])
         except Exception as e:
             pass
