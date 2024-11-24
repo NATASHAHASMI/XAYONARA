@@ -54,20 +54,24 @@ class temp(object):
     SETTINGS = {}
     IMDB_CAP = {}
 
-async def is_req_subscribed(bot, query):
+async def is_req_subscribed(bot, query, channels):
     if await db.find_join_req(query.from_user.id):
         return True
-    try:
-        user = await bot.get_chat_member(AUTH_CHANNEL, query.from_user.id)
-    except UserNotParticipant:
-        pass
-    except Exception as e:
-        logger.exception(e)
-    else:
-        if user.status != enums.ChatMemberStatus.BANNED:
-            return True
-
-    return False
+    btn = []
+    for channel_id in channels:
+        chat = await bot.get_chat(int(id))
+        try:
+            chat = await bot.get_chat(int(channel_id))
+            user = await bot.get_chat_member(channel_id, query.from_user.id)
+            
+            if user.status != enums.ChatMemberStatus.BANNED:
+                return True
+        except UserNotParticipant:
+            invite_link = await bot.create_chat_invite_link(int(channel_id), creates_join_request=True)
+            btn.append([InlineKeyboardButton(f'Jᴏɪɴ {chat.title}', url=invite_link.invite_link)])
+        except Exception as e:
+            pass
+    return btn
 
 async def react_msg(client, message):
     emojis = [
