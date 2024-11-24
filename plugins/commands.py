@@ -95,28 +95,34 @@ async def start(client, message):
         return
 
     if AUTH_CHANNEL and not await is_req_subscribed(client, message):
-    try:
-        invite_link = await client.create_chat_invite_link(int(AUTH_CHANNEL), creates_join_request=True)
-    except ChatAdminRequired:
-        logger.error("Make sure Bot is admin in Forcesub channel")
-        return
-    
-    try:
-        kk, file_id = message.command[1].split("_", 1)
-        btn = [[InlineKeyboardButton("🔄 Tʀʏ Aɢᴀɪɴ", callback_data=f"checksub#{kk}#{file_id}")]]
-    except (IndexError, ValueError):
-        btn = [[InlineKeyboardButton("🔄 Tʀʏ Aɢᴀɪɴ", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")]]
-    
-    await client.send_photo(
+        try:
+            invite_link = await client.create_chat_invite_link(int(AUTH_CHANNEL), creates_join_request=True)
+        except ChatAdminRequired:
+            logger.error("Make sure Bot is admin in Forcesub channel")
+            return
+        btn = [
+            [
+                InlineKeyboardButton("🍿 Jᴏɪɴ Bᴀᴄᴋᴜᴘ Cʜᴀɴɴᴇʟ 🍿", url=invite_link.invite_link)
+            ],[
+                InlineKeyboardButton("㋡ Wʜʏ l'ᴍ Jᴏɪɴɪɴɢ ❓", callback_data='sinfo')
+            ]
+        ]
+
+        if message.command[1] != "subscribe":
+            try:
+                kk, file_id = message.command[1].split("_", 1)
+                btn.append([InlineKeyboardButton("🔄 Tʀʏ Aɢᴀɪɴ", callback_data=f"checksub#{kk}#{file_id}")])
+            except (IndexError, ValueError):
+                btn.append([InlineKeyboardButton("🔄 Tʀʏ Aɢᴀɪɴ", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
+        await client.send_photo(
         chat_id=message.from_user.id,
         photo="https://telegra.ph/file/20b4aaaddb8aba646e53c.jpg",
         caption="**Jᴏɪɴ Aʟʟ Bᴀᴄᴋᴜᴘ Cʜᴀɴɴᴇʟꜱ Tʜᴇɴ Cʟɪᴄᴋ Tʀʏ-Aɢᴀɪɴ Bᴜᴛᴛᴏɴ Bᴏᴛ Sᴇɴᴅ Yᴏᴜʀ Fɪʟᴇꜱ.⚠️**",
         reply_markup=InlineKeyboardMarkup(btn),
         parse_mode=enums.ParseMode.MARKDOWN,
         has_spoiler=True
-    )
-    return
- 
+        )
+        return
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
         buttons = [[
                     InlineKeyboardButton('👨‍🚒 ʜᴇʟᴘ', callback_data='help'),
