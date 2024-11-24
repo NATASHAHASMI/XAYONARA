@@ -54,15 +54,21 @@ class temp(object):
     SETTINGS = {}
     IMDB_CAP = {}
 
-async def is_req_subscribed(bot, query, channel):
+async def is_req_subscribed(bot, query, channels):
+    if await db.find_join_req(query.from_user.id):
+        return True
     btn = []
-    for id in channel:
+    for channel_id in channels:
         chat = await bot.get_chat(int(id))
         try:
-            await bot.get_chat_member(id, query.from_user.id)
+            chat = await bot.get_chat(int(channel_id))
+            user = await bot.get_chat_member(channel_id, query.from_user.id)
+            
+            if user.status != enums.ChatMemberStatus.BANNED:
+                return True
         except UserNotParticipant:
-            btn.append([InlineKeyboardButton(f'Jᴏɪɴ Bᴀᴄᴋᴜᴘ', url="https://t.me/+mzhkyZUCrhJhZjA1")])
-            btn.append([InlineKeyboardButton(f'Jᴏɪɴ {chat.title}', url=chat.invite_link)])
+            invite_link = await bot.create_chat_invite_link(int(channel_id), creates_join_request=True)
+            btn.append([InlineKeyboardButton(f'Jᴏɪɴ {chat.title}', url=invite_link.invite_link)])
         except Exception as e:
             pass
     return btn
