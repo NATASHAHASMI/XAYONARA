@@ -94,28 +94,35 @@ async def start(client, message):
         )
         return
 
-    if AUTH_CHANNEL:
+    if AUTH_CHANNEL and not await is_req_subscribed(client, message):
         try:
-            btn = await is_req_subscribed(client, message, AUTH_CHANNEL)
-            if btn:
-                username = (await client.get_me()).username
-                if message.command[1] != "subscribe":
-                    try:
-                        kk, file_id = message.command[1].split("_", 1)
-                        btn.append([InlineKeyboardButton("🔄 Tʀʏ Aɢᴀɪɴ", callback_data=f"checksub#{kk}#{file_id}")])
-                    except (IndexError, ValueError):
-                        btn.append([InlineKeyboardButton("🔄 Tʀʏ Aɢᴀɪɴ", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
-                await client.send_photo(
-                    chat_id=message.from_user.id,
-                    photo="https://telegra.ph/file/20b4aaaddb8aba646e53c.jpg",
-                    caption="**__𝙿𝙻𝙴𝙰𝚂𝙴 𝙹𝙾𝙸𝙽 𝙼𝚈 𝙱𝙰𝙲𝙺𝚄𝙿 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 𝚃𝙷𝙴𝙽 𝙲𝙻𝙸𝙲𝙺 𝚃𝚁𝚈 𝙰𝙶𝙰𝙸𝙽 𝙱𝚄𝚃𝚃𝙾𝙽 𝙱𝙾𝚃 𝚂𝙴𝙽𝙳 𝚈𝙾𝚄'𝚁 𝙵𝙸𝙻𝙴𝚂.⚠️__**",
-                    reply_markup=InlineKeyboardMarkup(btn),
-                    parse_mode=enums.ParseMode.MARKDOWN,
-                    has_spoiler=True
-                    )
-                return
-        except:
-            pass
+            invite_link = await client.create_chat_invite_link(int(AUTH_CHANNEL), creates_join_request=True)
+        except ChatAdminRequired:
+            logger.error("Make sure Bot is admin in Forcesub channel")
+            return
+        btn = [
+            [
+                InlineKeyboardButton(
+                    "📌 ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ 📌", url=invite_link.invite_link
+                )
+            ]
+        ]
+
+        if message.command[1] != "subscribe":
+            try:
+                kk, file_id = message.command[1].split("_", 1)
+                btn.append([InlineKeyboardButton("↻ Tʀʏ Aɢᴀɪɴ", callback_data=f"checksub#{kk}#{file_id}")])
+            except (IndexError, ValueError):
+                btn.append([InlineKeyboardButton("↻ Tʀʏ Aɢᴀɪɴ", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
+        await client.send_photo(
+            chat_id=message.from_user.id,
+            photo="https://telegra.ph/file/20b4aaaddb8aba646e53c.jpg",
+            caption="**__𝙿𝙻𝙴𝙰𝚂𝙴 𝙹𝙾𝙸𝙽 𝙼𝚈 𝙱𝙰𝙲𝙺𝚄𝙿 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 𝚃𝙷𝙴𝙽 𝙲𝙻𝙸𝙲𝙺 𝚃𝚁𝚈 𝙰𝙶𝙰𝙸𝙽 𝙱𝚄𝚃𝚃𝙾𝙽 𝙱𝙾𝚃 𝚂𝙴𝙽𝙳 𝚈𝙾𝚄'𝚁 𝙵𝙸𝙻𝙴𝚂.⚠️__**",
+            reply_markup=InlineKeyboardMarkup(btn),
+            parse_mode=enums.ParseMode.MARKDOWN,
+            has_spoiler=True
+            )
+        return
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
         buttons = [[
                     InlineKeyboardButton('👨‍🚒 ʜᴇʟᴘ', callback_data='help'),
