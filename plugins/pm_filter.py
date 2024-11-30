@@ -1393,7 +1393,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await query.answer(url=f"https://telegram.me/{temp.U_NAME}?start=file_{file_id}")
     
     elif query.data.startswith("checksub"):
-        if AUTH_CHANNEL and not await is_req_subscribed(client, query, AUTH_CHANNEL):
+        if AUTH_CHANNEL and not await is_req_subscribed(client, query):
             ident, kk, file_id = query.data.split("#")
             await query.answer(url=f"https://t.me/{temp.U_NAME}?start={kk}_{file_id}")
             return
